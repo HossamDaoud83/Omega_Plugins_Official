@@ -1,0 +1,320 @@
+{
+  "$schema": "Omega Unified Branding Configuration v1.0",
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-16",
+  "company": {
+    "name": "Omega Consulting",
+    "shortName": "Omega",
+    "tagline": "Strategic Advisory Services",
+    "confidentialityNotice": "Omega Consulting | CONFIDENTIAL"
+  },
+
+  "assets": {
+    "logos": {
+      "full": "assets/logos/omega-logo-full.png",
+      "alt": "assets/logos/omega-logo-alt.png"
+    },
+    "dimensions": {
+      "logoWidth": 0.77,
+      "logoHeight": 0.77,
+      "logoWidthPx": 55,
+      "logoHeightPx": 55,
+      "logoWidthEMU": 694690
+    }
+  },
+
+  "colors": {
+    "primary": {
+      "hex": "#1B4F72",
+      "hexNoHash": "1B4F72",
+      "rgb": { "r": 27, "g": 79, "b": 114 },
+      "rgbNormalized": { "r": 0.106, "g": 0.310, "b": 0.447 },
+      "argb": "FF1B4F72"
+    },
+    "white": {
+      "hex": "#FFFFFF",
+      "hexNoHash": "FFFFFF",
+      "argb": "FFFFFFFF"
+    },
+    "black": {
+      "hex": "#000000",
+      "hexNoHash": "000000",
+      "argb": "FF000000"
+    },
+    "gray": {
+      "hex": "#666666",
+      "hexNoHash": "666666",
+      "argb": "FF666666"
+    },
+    "lightGray": {
+      "hex": "#F8FBFD",
+      "hexNoHash": "F8FBFD",
+      "argb": "FFF8FBFD"
+    },
+    "tableAltRow": null,
+    "tableCellBorder": {
+      "hex": "#9CC2E5",
+      "hexNoHash": "9CC2E5",
+      "argb": "FF9CC2E5"
+    },
+    "bodyText": {
+      "hex": "#333333",
+      "hexNoHash": "333333",
+      "argb": "FF333333"
+    },
+    "status": {
+      "critical": {
+        "hex": "#CC0000",
+        "hexNoHash": "CC0000",
+        "argb": "FFCC0000",
+        "background": "FFCCCC",
+        "label": "Critical"
+      },
+      "high": {
+        "hex": "#FF8C00",
+        "hexNoHash": "FF8C00",
+        "argb": "FFFF8C00",
+        "background": "FFECD9",
+        "label": "High"
+      },
+      "medium": {
+        "hex": "#FFD700",
+        "hexNoHash": "FFD700",
+        "argb": "FFFFD700",
+        "background": "FFF8E1",
+        "label": "Medium"
+      },
+      "low": {
+        "hex": "#228B22",
+        "hexNoHash": "228B22",
+        "argb": "FF228B22",
+        "background": "DFF0D8",
+        "label": "Low"
+      },
+      "complete": {
+        "hex": "#228B22",
+        "hexNoHash": "228B22",
+        "argb": "FF228B22",
+        "background": "DFF0D8",
+        "label": "Complete"
+      },
+      "inProgress": {
+        "hex": "#FF8C00",
+        "hexNoHash": "FF8C00",
+        "argb": "FFFF8C00",
+        "background": "FFECD9",
+        "label": "In Progress"
+      },
+      "blocked": {
+        "hex": "#CC0000",
+        "hexNoHash": "CC0000",
+        "argb": "FFCC0000",
+        "background": "FFCCCC",
+        "label": "Blocked"
+      },
+      "pending": {
+        "hex": "#666666",
+        "hexNoHash": "666666",
+        "argb": "FF666666",
+        "background": "F0F0F0",
+        "label": "Pending"
+      }
+    }
+  },
+
+  "typography": {
+    "fonts": {
+      "heading": "Arial Black",
+      "body": "Arial",
+      "fallback": "Helvetica, sans-serif"
+    },
+    "sizes": {
+      "title": { "pt": 24, "docxHalfPt": 48 },
+      "heading1": { "pt": 18, "docxHalfPt": 36 },
+      "heading2": { "pt": 14, "docxHalfPt": 28 },
+      "heading3": { "pt": 12, "docxHalfPt": 24 },
+      "body": { "pt": 12, "docxHalfPt": 24 },
+      "small": { "pt": 9, "docxHalfPt": 18 },
+      "footer": { "pt": 9, "docxHalfPt": 18 },
+      "tableHeader": { "pt": 10.5, "docxHalfPt": 21 },
+      "tableBody": { "pt": 10, "docxHalfPt": 20 }
+    },
+    "lineSpacing": 1.15
+  },
+
+  "layout": {
+    "page": {
+      "size": "A4",
+      "margins": {
+        "inches": { "top": 1, "right": 1, "bottom": 1, "left": 1 },
+        "twips": { "top": 1440, "right": 1440, "bottom": 1440, "left": 1440 },
+        "points": { "top": 72, "right": 72, "bottom": 72, "left": 72 }
+      }
+    },
+    "slide": {
+      "width": 10,
+      "height": 7.5,
+      "safeMargin": 0.5
+    },
+    "header": {
+      "logoPosition": { "x": 72, "y": 25 },
+      "lineStartX": 135,
+      "lineY": 50,
+      "textX": 145,
+      "textY": 38,
+      "textWidth": 378
+    },
+    "footer": {
+      "lineY": 770,
+      "textY": 780
+    }
+  },
+
+  "tables": {
+    "headerBackground": "104E70",
+    "headerTextColor": "FFFFFF",
+    "borderColor": "9CC2E5",
+    "borderWidth": 1,
+    "altRowBackground": null,
+    "cellPadding": { "horizontal": 10, "vertical": 8 },
+
+    "docxStyles": {
+      "_comment": "Omega Table Style - Dark Teal header (#104E70), Light Blue borders (#9CC2E5)",
+
+      "tableProperties": {
+        "width": { "type": "pct", "value": "100%" },
+        "borders": {
+          "type": "single",
+          "color": "9CC2E5",
+          "size": 4
+        }
+      },
+
+      "headerRow": {
+        "repeatHeader": true,
+        "cell": {
+          "width": { "type": "dxa", "value": 2000 },
+          "borders": {
+            "top": { "type": "single", "color": "9CC2E5", "size": 4 },
+            "left": { "type": "single", "color": "9CC2E5", "size": 4 },
+            "bottom": { "type": "single", "color": "9CC2E5", "size": 4 },
+            "right": { "type": "single", "color": "9CC2E5", "size": 4 }
+          },
+          "shading": { "fill": "104E70", "type": "solid" }
+        },
+        "text": {
+          "bold": true,
+          "color": "FFFFFF",
+          "fontSize": { "halfPoints": 21, "points": 10.5 },
+          "font": "Arial",
+          "alignment": "center"
+        },
+        "spacing": { "before": 120, "after": 120 }
+      },
+
+      "dataRow": {
+        "_comment": "Data rows - white background, light blue borders, left col bold/left, right col regular/center",
+        "cell": {
+          "borders": {
+            "top": { "type": "single", "color": "9CC2E5", "size": 4 },
+            "left": { "type": "single", "color": "9CC2E5", "size": 4 },
+            "bottom": { "type": "single", "color": "9CC2E5", "size": 4 },
+            "right": { "type": "single", "color": "9CC2E5", "size": 4 }
+          },
+          "shading": { "fill": "FFFFFF", "type": "solid" }
+        },
+        "leftColumn": {
+          "bold": true,
+          "alignment": "left"
+        },
+        "rightColumn": {
+          "bold": false,
+          "alignment": "center"
+        },
+        "text": {
+          "color": "333333",
+          "fontSize": { "halfPoints": 20, "points": 10 },
+          "font": "Arial"
+        },
+        "spacing": { "before": 80, "after": 80 }
+      },
+
+      "cellBorderColor": "9CC2E5"
+    },
+
+    "colorPalette": {
+      "headerBg": "#104E70",
+      "headerText": "#FFFFFF",
+      "rowBg": "#FFFFFF",
+      "cellBorder": "#9CC2E5",
+      "bodyText": "#333333"
+    }
+  },
+
+  "documents": {
+    "types": {
+      "docx": {
+        "extension": ".docx",
+        "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "library": "docx",
+        "script": "scripts/omega-document-generator.js"
+      },
+      "pdf": {
+        "extension": ".pdf",
+        "mimeType": "application/pdf",
+        "library": "pdfkit",
+        "script": "scripts/omega-document-generator.js"
+      },
+      "xlsx": {
+        "extension": ".xlsx",
+        "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "library": "exceljs",
+        "script": "scripts/omega-document-generator.js"
+      },
+      "pptx": {
+        "extension": ".pptx",
+        "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "library": "pptxgenjs",
+        "script": "scripts/omega-document-generator.js"
+      }
+    },
+    "namingConvention": "{client}_{deliverable}_{version}_{date}.{ext}",
+    "outputDirectory": "05_Deliverables_Final"
+  },
+
+  "templates": {
+    "report": {
+      "sections": ["cover", "toc", "executive_summary", "content", "recommendations", "appendix"],
+      "requiredFields": ["title", "date", "author", "classification"]
+    },
+    "presentation": {
+      "slides": ["title", "agenda", "content", "summary", "next_steps"],
+      "requiredFields": ["title", "date", "presenter"]
+    },
+    "letter": {
+      "sections": ["header", "recipient", "subject", "body", "signature"],
+      "requiredFields": ["recipient", "subject", "date", "sender"]
+    }
+  },
+
+  "libraries": {
+    "required": {
+      "docx": "^9.0.0",
+      "pdfkit": "^0.16.0",
+      "exceljs": "^4.4.0",
+      "pptxgenjs": "^3.12.0"
+    },
+    "optional": {
+      "mammoth": "^1.8.0",
+      "pdf-parse": "^1.1.1",
+      "sharp": "^0.33.0"
+    }
+  },
+
+  "automation": {
+    "preSessionCheck": true,
+    "autoApplyBranding": true,
+    "validateBeforeSave": true,
+    "generateMetadata": true
+  }
+}

@@ -1,0 +1,32 @@
+# Dev artifacts that must never ship in the distribution.
+# The sync script strips these too — this is belt-and-suspenders.
+
+# Node / JS
+node_modules/
+.next/
+dist/
+build/
+.turbo/
+.cache/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Per-project / runtime state
+.brain/
+*.db
+*.sqlite
+*.sqlite3
+*.log
+
+# Secrets — must never reach a public repo
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db

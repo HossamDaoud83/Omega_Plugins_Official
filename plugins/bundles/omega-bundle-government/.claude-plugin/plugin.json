@@ -1,0 +1,24 @@
+{
+  "$schema": "https://claude.com/schemas/plugin.json",
+  "name": "omega-bundle-government",
+  "version": "1.0.0",
+  "description": "Government / public-sector engagements — core + kg-enhance + gov service-line + government industry vocab (e-gov, policy, transparency, citizen services).",
+  "author": {
+    "name": "Omega Consulting",
+    "url": "https://omega-consulting.local"
+  },
+  "homepage": "https://github.com/HossamDaoud83/Omega_Plugins_Official",
+  "license": "MIT",
+  "keywords": [
+    "consulting",
+    "omega",
+    "bundle",
+    "meta-plugin"
+  ],
+  "dependencies": [
+    "omega-core",
+    "omega-kg-enhance",
+    "omega-gov",
+    "omega-ind-government"
+  ]
+}

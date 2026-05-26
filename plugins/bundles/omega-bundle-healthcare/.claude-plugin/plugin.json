@@ -1,0 +1,25 @@
+{
+  "$schema": "https://claude.com/schemas/plugin.json",
+  "name": "omega-bundle-healthcare",
+  "version": "1.0.0",
+  "description": "Healthcare engagements — core + kg-enhance + finance + hlt service-line + healthcare industry vocab (HIS/EMR/HIPAA/HL7-FHIR).",
+  "author": {
+    "name": "Omega Consulting",
+    "url": "https://omega-consulting.local"
+  },
+  "homepage": "https://github.com/HossamDaoud83/Omega_Plugins_Official",
+  "license": "MIT",
+  "keywords": [
+    "consulting",
+    "omega",
+    "bundle",
+    "meta-plugin"
+  ],
+  "dependencies": [
+    "omega-core",
+    "omega-kg-enhance",
+    "omega-finance",
+    "omega-hlt",
+    "omega-ind-healthcare"
+  ]
+}

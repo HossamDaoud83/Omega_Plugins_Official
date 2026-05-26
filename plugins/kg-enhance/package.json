@@ -1,0 +1,9 @@
+{
+  "name": "@omega/kg-enhance",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Omega omega-kg-enhance plugin",
+  "scripts": {
+    "test": "node tests/run-all.js"
+  }
+}

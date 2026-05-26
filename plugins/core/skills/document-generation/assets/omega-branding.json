@@ -1,0 +1,93 @@
+{
+  "brand": {
+    "name": "Omega Consulting",
+    "shortName": "Omega"
+  },
+  "colors": {
+    "primary": "#1B4F72",
+    "primaryRGB": {
+      "r": 27,
+      "g": 79,
+      "b": 114
+    },
+    "tableHeader": "#1B4F72",
+    "tableHeaderRGB": {
+      "r": 27,
+      "g": 79,
+      "b": 114
+    },
+    "tableBorder": "#1B4F72",
+    "accent": "#1B4F72",
+    "text": "#000000",
+    "white": "#FFFFFF"
+  },
+  "fonts": {
+    "heading": {
+      "family": "Arial Black",
+      "fallback": "Arial, Helvetica, sans-serif"
+    },
+    "body": {
+      "family": "Arial",
+      "fallback": "Helvetica, sans-serif"
+    },
+    "sizes": {
+      "title": 24,
+      "heading1": 18,
+      "heading2": 14,
+      "heading3": 12,
+      "body": 11,
+      "caption": 9,
+      "presentationBody": 18
+    }
+  },
+  "document": {
+    "margins": {
+      "top": 1,
+      "bottom": 1,
+      "left": 1,
+      "right": 1,
+      "unit": "inch"
+    },
+    "lineSpacing": 1.15,
+    "header": {
+      "includeTitle": true,
+      "includeDate": true,
+      "includeLogo": true,
+      "logoPosition": "right"
+    },
+    "footer": {
+      "includePageNumber": true,
+      "pageNumberPosition": "center",
+      "includeConfidentiality": true,
+      "confidentialityText": "Confidential - Omega Consulting"
+    }
+  },
+  "table": {
+    "headerBackground": "#1B4F72",
+    "headerTextColor": "#FFFFFF",
+    "headerFontWeight": "bold",
+    "borderColor": "#1B4F72",
+    "borderWidth": 1,
+    "borderStyle": "solid",
+    "cellPadding": 5,
+    "alternateRowColor": "#F8FBFD"
+  },
+  "elements": {
+    "keyTerms": {
+      "color": "#1B4F72",
+      "fontWeight": "bold"
+    },
+    "definitions": {
+      "color": "#1B4F72",
+      "fontStyle": "italic"
+    },
+    "highlights": {
+      "backgroundColor": "#D4E6F1",
+      "textColor": "#1B4F72"
+    },
+    "links": {
+      "color": "#1B4F72",
+      "textDecoration": "underline"
+    }
+  }
+}

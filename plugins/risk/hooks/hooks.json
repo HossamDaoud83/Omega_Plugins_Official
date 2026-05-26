@@ -1,0 +1,22 @@
+{
+  "$schema": "https://claude.com/schemas/hooks.json",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/control-check.js",
+            "timeout": 5000
+          },
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/bcm-coverage.js",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  }
+}

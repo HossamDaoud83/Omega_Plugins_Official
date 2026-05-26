@@ -1,0 +1,22 @@
+{
+  "$schema": "https://claude.com/schemas/plugin.json",
+  "name": "omega-ind-realestate",
+  "version": "1.0.0",
+  "description": "Property, building, lease, REIT, cap rate.",
+  "author": {
+    "name": "Omega Consulting",
+    "url": "https://omega-consulting.local"
+  },
+  "homepage": "https://github.com/HossamDaoud83/Omega_Consulting_Template_v1",
+  "license": "MIT",
+  "keywords": [
+    "consulting",
+    "omega",
+    "ind-realestate"
+  ],
+  "components": {
+    "commands": "commands/",
+    "agents": "agents/",
+    "skills": "skills/"
+  }
+}

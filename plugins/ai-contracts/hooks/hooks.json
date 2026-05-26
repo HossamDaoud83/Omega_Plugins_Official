@@ -1,0 +1,17 @@
+{
+  "$schema": "https://claude.com/schemas/hooks.json",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "(tool == \"Edit\" || tool == \"Write\") && (tool_input.file_path matches \"extracted-clauses\" || tool_input.file_path matches \"clause-review\" || tool_input.file_path matches \"contract-review\")",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/clause-confidence.js",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  }
+}

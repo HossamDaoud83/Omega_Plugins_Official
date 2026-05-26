@@ -1,0 +1,21 @@
+{
+  "$schema": "https://claude.com/schemas/hooks.json",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/status-pack-weekly.js",
+            "timeout": 5000
+          },
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/raid-stale.js",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  }
+}

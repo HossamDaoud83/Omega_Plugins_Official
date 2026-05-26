@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --omega-primary: #1B4F72;
+  --omega-deep:    #0F2E47;
+  --omega-teal:    #0EA5A4;
+  --omega-violet:  #7C3AED;
+  --omega-amber:   #F59E0B;
+  --omega-rose:    #E11D48;
+  --omega-emerald: #10B981;
+  --omega-sky:     #0EA5E9;
+  --omega-critical:#CC0000;
+  --omega-high:    #FF8C00;
+  --omega-complete:#228B22;
+  --omega-alt-row: #F8FBFD;
+  --omega-page:    #F6F8FB;
+  --omega-border:  #E6EAF0;
+  --omega-ink:     #0F172A;
+  --omega-muted:   #64748B;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--omega-ink);
+  background-color: var(--omega-page);
+  background-image:
+    radial-gradient(at 12% 8%,  rgba(14,165,164,0.10) 0px, transparent 45%),
+    radial-gradient(at 88% 12%, rgba(124,58,237,0.10) 0px, transparent 50%),
+    radial-gradient(at 50% 92%, rgba(27,79,114,0.10) 0px, transparent 45%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv11', 'ss01', 'ss03';
+}
+
+code, pre, .font-mono {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Legacy aliases — preserved so existing utility classes still work */
+.text-omega-primary  { color: var(--omega-primary); }
+.bg-omega-primary    { background: var(--omega-primary); }
+.border-omega-border { border-color: var(--omega-border); }
+.hover\:border-omega-primary:hover { border-color: var(--omega-primary); }
+
+/* Reusable design primitives */
+.glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+}
+
+.card {
+  background: #FFFFFF;
+  border: 1px solid var(--omega-border);
+  border-radius: 14px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.04);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.card-interactive:hover {
+  transform: translateY(-2px);
+  border-color: rgba(27, 79, 114, 0.35);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 32px -8px rgba(15, 23, 42, 0.12);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #1B4F72 0%, #0EA5A4 55%, #7C3AED 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.accent-bar {
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--omega-primary), var(--omega-teal), var(--omega-violet));
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #1B4F72 0%, #0EA5A4 100%);
+  box-shadow: 0 6px 18px -6px rgba(27, 79, 114, 0.55);
+  transition: transform 150ms ease, box-shadow 150ms ease, filter 150ms ease;
+}
+.btn-primary:hover { transform: translateY(-1px); filter: brightness(1.05); box-shadow: 0 10px 24px -6px rgba(27, 79, 114, 0.6); }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.chip-dot { width: 6px; height: 6px; border-radius: 999px; display: inline-block; }
+
+.nav-link {
+  position: relative;
+  padding: 0.4rem 0.1rem;
+  color: var(--omega-muted);
+  font-weight: 500;
+  transition: color 150ms ease;
+}
+.nav-link:hover { color: var(--omega-primary); }
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--omega-primary), var(--omega-teal));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms ease;
+}
+.nav-link:hover::after { transform: scaleX(1); }

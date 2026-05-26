@@ -1,0 +1,23 @@
+{
+  "$schema": "https://claude.com/schemas/plugin.json",
+  "name": "omega-ind-hospitality",
+  "version": "1.0.0",
+  "description": "Hospitality — RevPAR, F&B operations, brand standards, guest experience.",
+  "author": {
+    "name": "Omega Consulting",
+    "url": "https://omega-consulting.local"
+  },
+  "homepage": "https://github.com/HossamDaoud83/Omega_Consulting_Template_v1",
+  "license": "MIT",
+  "keywords": [
+    "consulting",
+    "omega",
+    "industry",
+    "hospitality"
+  ],
+  "components": {
+    "commands": "commands/",
+    "agents": "agents/",
+    "skills": "skills/"
+  }
+}

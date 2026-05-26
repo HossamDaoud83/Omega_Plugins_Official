@@ -1,0 +1,908 @@
+{
+  "$schema": "https://claude.com/schemas/marketplace.json",
+  "name": "omega-plugins",
+  "displayName": "Omega Consulting — Consulting Plugins",
+  "description": "Composable plugin platform for AI-native business consulting. Foundation, service-line, industry, and capability plugins for delivering Omega engagements.",
+  "homepage": "https://github.com/HossamDaoud83/Omega_Consulting_Template_v1",
+  "license": "MIT",
+  "owner": {
+    "name": "Omega Consulting",
+    "url": "https://omega-consulting.local"
+  },
+  "version": "4.0.0-alpha.0",
+  "_status": "Phases 1–3 published. Brain + AGUI + cross-platform adapters land in Phases 4–6.",
+  "plugins": [
+    {
+      "name": "omega-core",
+      "source": "./plugins/core",
+      "category": "foundation",
+      "version": "1.0.0",
+      "description": "Universal consulting engagement management — session lifecycle, executable quality gates, document generation, branding, frameworks, knowledge brain.",
+      "tier": "featured"
+    },
+    {
+      "name": "omega-finance",
+      "source": "./plugins/finance",
+      "category": "capability",
+      "version": "1.0.0",
+      "description": "Project finance and bankability — tornado, Monte Carlo, spider, scenario, break-even analyses.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "featured"
+    },
+    {
+      "name": "omega-aai",
+      "source": "./plugins/aai",
+      "category": "service-line",
+      "version": "1.0.0",
+      "description": "Agentic AI & Intelligent Automation — RPA/IPA, multi-agent systems, automation ROI.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "standard"
+    },
+    {
+      "name": "omega-aig",
+      "source": "./plugins/aig",
+      "category": "service-line",
+      "version": "1.0.0",
+      "description": "AI Governance — ISO 42001, AI ethics, model risk, bias testing.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "featured"
+    },
+    {
+      "name": "omega-coe",
+      "source": "./plugins/coe",
+      "category": "service-line",
+      "version": "1.0.0",
+      "description": "Competency Center — KPIs, BI dashboards, data architecture, COE operating models.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "standard"
+    },
+    {
+      "name": "omega-dig",
+      "source": "./plugins/dig",
+      "category": "service-line",
+      "version": "1.0.0",
+      "description": "Digital Transformation — strategic roadmaps, maturity, change management, business cases.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "featured"
+    },
+    {
+      "name": "omega-edu",
+      "source": "./plugins/edu",
+      "category": "service-line",
+      "version": "1.0.0",
+      "description": "Education Solutions — K-12 to higher ed, curriculum, accreditation, FERPA.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "standard"
+    },
+    {
+      "name": "omega-esi",
+      "source": "./plugins/esi",
+      "category": "service-line",
+      "version": "1.0.0",
+      "description": "Enterprise Systems Integration — APIs, architecture review, migration, cutover.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "standard"
+    },
+    {
+      "name": "omega-gov",
+      "source": "./plugins/gov",
+      "category": "service-line",
+      "version": "1.0.0",
+      "description": "Government & Public Sector — e-government, policy, transparency, citizen services.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "standard"
+    },
+    {
+      "name": "omega-hlt",
+      "source": "./plugins/hlt",
+      "category": "service-line",
+      "version": "1.0.0",
+      "description": "Healthcare Digital Solutions — clinical workflow, HL7/FHIR, HIPAA.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "standard"
+    },
+    {
+      "name": "omega-iso",
+      "source": "./plugins/iso",
+      "category": "service-line",
+      "version": "1.0.0",
+      "description": "ISO Certification — gap analysis, audit prep (9001/27001/42001/14001/45001/22301).",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "standard"
+    },
+    {
+      "name": "omega-mar",
+      "source": "./plugins/mar",
+      "category": "service-line",
+      "version": "1.0.0",
+      "description": "Maritime Industry Solutions — port operations, IMO/MARPOL/SOLAS, BOT/PPP.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "standard"
+    },
+    {
+      "name": "omega-str",
+      "source": "./plugins/str",
+      "category": "service-line",
+      "version": "1.0.0",
+      "description": "Corporate Business Advisory — market intelligence, financial modeling, ops, org design, M&A.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "standard"
+    },
+    {
+      "name": "omega-ind-healthcare",
+      "source": "./plugins/ind-healthcare",
+      "category": "industry",
+      "version": "1.0.0",
+      "description": "Healthcare industry — HIS, HIPAA, clinical, HL7/FHIR.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "standard"
+    },
+    {
+      "name": "omega-ind-maritime",
+      "source": "./plugins/ind-maritime",
+      "category": "industry",
+      "version": "1.0.0",
+      "description": "Maritime industry — ports, vessels, IMO/MARPOL/SOLAS.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "specialized"
+    },
+    {
+      "name": "omega-ind-education",
+      "source": "./plugins/ind-education",
+      "category": "industry",
+      "version": "1.0.0",
+      "description": "Education industry — K-12, higher ed, accreditation, LMS.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "standard"
+    },
+    {
+      "name": "omega-ind-government",
+      "source": "./plugins/ind-government",
+      "category": "industry",
+      "version": "1.0.0",
+      "description": "Government / public sector — e-gov, policy, transparency.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "standard"
+    },
+    {
+      "name": "omega-ind-finserv",
+      "source": "./plugins/ind-finserv",
+      "category": "industry",
+      "version": "1.0.0",
+      "description": "Financial services — banking, insurance, fintech, AML, fraud.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "standard"
+    },
+    {
+      "name": "omega-ind-manufacturing",
+      "source": "./plugins/ind-manufacturing",
+      "category": "industry",
+      "version": "1.0.0",
+      "description": "Manufacturing — production, supply chain, quality, MES.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "standard"
+    },
+    {
+      "name": "omega-ind-retail",
+      "source": "./plugins/ind-retail",
+      "category": "industry",
+      "version": "1.0.0",
+      "description": "Retail — omnichannel, POS, inventory, customer.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "specialized"
+    },
+    {
+      "name": "omega-ind-energy",
+      "source": "./plugins/ind-energy",
+      "category": "industry",
+      "version": "1.0.0",
+      "description": "Energy & utilities — renewables, grid, oil & gas.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "specialized"
+    },
+    {
+      "name": "omega-ind-realestate",
+      "source": "./plugins/ind-realestate",
+      "category": "industry",
+      "version": "1.0.0",
+      "description": "Real estate — property, building, lease, REIT, cap rate.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "specialized"
+    },
+    {
+      "name": "omega-ind-telecom",
+      "source": "./plugins/ind-telecom",
+      "category": "industry",
+      "version": "1.0.0",
+      "description": "Telecommunications — 5G, OSS/BSS, ARPU, churn.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "specialized"
+    },
+    {
+      "name": "omega-kg-enhance",
+      "source": "./plugins/kg-enhance",
+      "category": "capability",
+      "version": "1.0.0",
+      "description": "Knowledge brain enhancement (markdown-first) — document ingestion, version tracking, fact-check, bilingual entity resolution.",
+      "dependencies": [
+        "omega-core"
+      ],
+      "tier": "featured"
+    },
+    {
+      "name": "omega-cyber",
+      "source": "./plugins/cyber",
+      "category": "capability",
+      "tier": "featured",
+      "version": "1.0.0",
+      "description": "Cybersecurity advisory, ISO 27001 readiness, threat modeling, secure-by-design reviews.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-data",
+      "source": "./plugins/data",
+      "category": "capability",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "Data strategy, architecture, governance, lineage, classification, MDM.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-esg",
+      "source": "./plugins/esg",
+      "category": "capability",
+      "tier": "featured",
+      "version": "1.0.0",
+      "description": "ESG strategy, sustainability reporting, carbon accounting, CSRD/GRI/SASB alignment.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-risk",
+      "source": "./plugins/risk",
+      "category": "capability",
+      "tier": "featured",
+      "version": "1.0.0",
+      "description": "Enterprise risk management, ERM frameworks, control mapping, BCP/DR.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-ops",
+      "source": "./plugins/ops",
+      "category": "capability",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "Operational excellence, lean six sigma, value stream mapping, process redesign.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-supply",
+      "source": "./plugins/supply",
+      "category": "capability",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "Supply chain strategy, sourcing, logistics, supplier risk, S&OP.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-cloud",
+      "source": "./plugins/cloud",
+      "category": "capability",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "Cloud strategy, FinOps, migration, well-architected reviews, multi-cloud governance.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-pmo",
+      "source": "./plugins/pmo",
+      "category": "capability",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "PMO setup, portfolio governance, program management, RAID, status pack automation.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-people",
+      "source": "./plugins/people",
+      "category": "capability",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "Org design, talent strategy, change management, culture transformation, workforce planning.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-cx",
+      "source": "./plugins/cx",
+      "category": "capability",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "Customer experience, journey mapping, VoC analytics, NPS programs, service blueprinting.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-ai-research",
+      "source": "./plugins/ai-research",
+      "category": "capability",
+      "tier": "featured",
+      "version": "1.0.0",
+      "description": "AI-assisted secondary research with source triangulation and citation chains.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-ai-dd",
+      "source": "./plugins/ai-dd",
+      "category": "capability",
+      "tier": "featured",
+      "version": "1.0.0",
+      "description": "AI-assisted due diligence — data room ingest, red-flag extraction, redaction-on-export.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-ai-contracts",
+      "source": "./plugins/ai-contracts",
+      "category": "capability",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "AI contract review — clause extraction, risk scoring, confidence-gated exports.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-ai-regs",
+      "source": "./plugins/ai-regs",
+      "category": "capability",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "AI regulatory tracking — gazette/circular monitoring, freshness gating, jurisdiction tags.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-ai-translate",
+      "source": "./plugins/ai-translate",
+      "category": "capability",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "AI bilingual deliverables — domain glossary enforcement, AR/EN parity checks.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-ai-personas",
+      "source": "./plugins/ai-personas",
+      "category": "capability",
+      "tier": "specialized",
+      "version": "1.0.0",
+      "description": "AI persona synthesis — interview clusters, journey personas, evidence-anchored quotes.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-ind-pharma",
+      "source": "./plugins/ind-pharma",
+      "category": "industry",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "Pharma & life sciences — GxP, clinical trials, pharmacovigilance, regulatory filings.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-ind-construction",
+      "source": "./plugins/ind-construction",
+      "category": "industry",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "Construction & EPC — project controls, BIM, schedule risk, claims, contracts.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-ind-hospitality",
+      "source": "./plugins/ind-hospitality",
+      "category": "industry",
+      "tier": "specialized",
+      "version": "1.0.0",
+      "description": "Hospitality — RevPAR, F&B operations, brand standards, guest experience.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-ind-logistics",
+      "source": "./plugins/ind-logistics",
+      "category": "industry",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "Logistics & 3PL — fleet, warehousing, last-mile, freight, port operations.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-ind-mining",
+      "source": "./plugins/ind-mining",
+      "category": "industry",
+      "tier": "specialized",
+      "version": "1.0.0",
+      "description": "Mining & metals — ore reserves, mine planning, ESG license to operate, tailings.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-ind-agritech",
+      "source": "./plugins/ind-agritech",
+      "category": "industry",
+      "tier": "specialized",
+      "version": "1.0.0",
+      "description": "Agriculture & agritech — crop economics, irrigation, food traceability, climate-smart agriculture.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-ind-media",
+      "source": "./plugins/ind-media",
+      "category": "industry",
+      "tier": "specialized",
+      "version": "1.0.0",
+      "description": "Media & entertainment — content economics, streaming, rights, ad tech.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-ind-nonprofit",
+      "source": "./plugins/ind-nonprofit",
+      "category": "industry",
+      "tier": "specialized",
+      "version": "1.0.0",
+      "description": "Nonprofit & NGO — grant management, theory of change, donor reporting, monitoring & evaluation.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-ind-publicsafety",
+      "source": "./plugins/ind-publicsafety",
+      "category": "industry",
+      "tier": "specialized",
+      "version": "1.0.0",
+      "description": "Public safety — police, fire/EMS, emergency management, command-and-control.",
+      "dependencies": [
+        "omega-core"
+      ]
+    },
+    {
+      "name": "omega-bundle-all",
+      "source": "./plugins/bundles/omega-bundle-all",
+      "category": "bundle",
+      "tier": "specialized",
+      "version": "1.0.0",
+      "description": "All 49 Omega plugins — foundation, capability, AI-native, every service-line and industry. Very heavy load (~40k context tokens). Use only for multi-service-line engagements.",
+      "dependencies": [
+        "omega-core",
+        "omega-finance",
+        "omega-kg-enhance",
+        "omega-aai",
+        "omega-aig",
+        "omega-coe",
+        "omega-dig",
+        "omega-edu",
+        "omega-esi",
+        "omega-gov",
+        "omega-hlt",
+        "omega-iso",
+        "omega-mar",
+        "omega-str",
+        "omega-cyber",
+        "omega-data",
+        "omega-esg",
+        "omega-risk",
+        "omega-ops",
+        "omega-supply",
+        "omega-cloud",
+        "omega-pmo",
+        "omega-people",
+        "omega-cx",
+        "omega-ai-research",
+        "omega-ai-dd",
+        "omega-ai-contracts",
+        "omega-ai-regs",
+        "omega-ai-translate",
+        "omega-ai-personas",
+        "omega-ind-education",
+        "omega-ind-energy",
+        "omega-ind-finserv",
+        "omega-ind-government",
+        "omega-ind-healthcare",
+        "omega-ind-manufacturing",
+        "omega-ind-maritime",
+        "omega-ind-realestate",
+        "omega-ind-retail",
+        "omega-ind-telecom",
+        "omega-ind-pharma",
+        "omega-ind-construction",
+        "omega-ind-hospitality",
+        "omega-ind-logistics",
+        "omega-ind-mining",
+        "omega-ind-agritech",
+        "omega-ind-media",
+        "omega-ind-nonprofit",
+        "omega-ind-publicsafety"
+      ]
+    },
+    {
+      "name": "omega-bundle-healthcare",
+      "source": "./plugins/bundles/omega-bundle-healthcare",
+      "category": "bundle",
+      "tier": "featured",
+      "version": "1.0.0",
+      "description": "Healthcare engagements — core + kg-enhance + finance + hlt service-line + healthcare industry vocab (HIS/EMR/HIPAA/HL7-FHIR).",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-finance",
+        "omega-hlt",
+        "omega-ind-healthcare"
+      ]
+    },
+    {
+      "name": "omega-bundle-maritime",
+      "source": "./plugins/bundles/omega-bundle-maritime",
+      "category": "bundle",
+      "tier": "specialized",
+      "version": "1.0.0",
+      "description": "Maritime engagements — core + kg-enhance + finance + maritime service-line + maritime industry vocab (port/vessel/IMO/MARPOL/SOLAS, BOT/PPP).",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-finance",
+        "omega-mar",
+        "omega-ind-maritime"
+      ]
+    },
+    {
+      "name": "omega-bundle-education",
+      "source": "./plugins/bundles/omega-bundle-education",
+      "category": "bundle",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "Education engagements — core + kg-enhance + edu service-line + education industry vocab (K-12, higher ed, accreditation, FERPA, LMS).",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-edu",
+        "omega-ind-education"
+      ]
+    },
+    {
+      "name": "omega-bundle-government",
+      "source": "./plugins/bundles/omega-bundle-government",
+      "category": "bundle",
+      "tier": "featured",
+      "version": "1.0.0",
+      "description": "Government / public-sector engagements — core + kg-enhance + gov service-line + government industry vocab (e-gov, policy, transparency, citizen services).",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-gov",
+        "omega-ind-government"
+      ]
+    },
+    {
+      "name": "omega-bundle-banking",
+      "source": "./plugins/bundles/omega-bundle-banking",
+      "category": "bundle",
+      "tier": "featured",
+      "version": "1.0.0",
+      "description": "Banking / financial-services engagements — core + kg-enhance + finance + AIG service-line (governance is critical) + finserv industry vocab (banking, insurance, fintech, AML, fraud).",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-finance",
+        "omega-aig",
+        "omega-ind-finserv"
+      ]
+    },
+    {
+      "name": "omega-bundle-energy",
+      "source": "./plugins/bundles/omega-bundle-energy",
+      "category": "bundle",
+      "tier": "specialized",
+      "version": "1.0.0",
+      "description": "Energy & utilities engagements — core + kg-enhance + finance + energy industry vocab (renewables, grid, oil & gas).",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-finance",
+        "omega-ind-energy"
+      ]
+    },
+    {
+      "name": "omega-bundle-manufacturing",
+      "source": "./plugins/bundles/omega-bundle-manufacturing",
+      "category": "bundle",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "Manufacturing engagements — core + kg-enhance + COE service-line (operational KPIs/dashboards) + manufacturing industry vocab (production, supply chain, quality, MES).",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-coe",
+        "omega-ind-manufacturing"
+      ]
+    },
+    {
+      "name": "omega-bundle-retail",
+      "source": "./plugins/bundles/omega-bundle-retail",
+      "category": "bundle",
+      "tier": "specialized",
+      "version": "1.0.0",
+      "description": "Retail engagements — core + kg-enhance + COE service-line + retail industry vocab (omnichannel, POS, inventory, customer).",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-coe",
+        "omega-ind-retail"
+      ]
+    },
+    {
+      "name": "omega-bundle-realestate",
+      "source": "./plugins/bundles/omega-bundle-realestate",
+      "category": "bundle",
+      "tier": "specialized",
+      "version": "1.0.0",
+      "description": "Real estate engagements — core + kg-enhance + finance (cap rate, REIT modeling) + real estate industry vocab (property, building, lease).",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-finance",
+        "omega-ind-realestate"
+      ]
+    },
+    {
+      "name": "omega-bundle-telecom",
+      "source": "./plugins/bundles/omega-bundle-telecom",
+      "category": "bundle",
+      "tier": "specialized",
+      "version": "1.0.0",
+      "description": "Telecommunications engagements — core + kg-enhance + ESI service-line (systems integration) + telecom industry vocab (5G, OSS/BSS, ARPU, churn).",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-esi",
+        "omega-ind-telecom"
+      ]
+    },
+    {
+      "name": "omega-bundle-ai-governance",
+      "source": "./plugins/bundles/omega-bundle-ai-governance",
+      "category": "bundle",
+      "tier": "featured",
+      "version": "1.0.0",
+      "description": "AI Governance engagements (any industry) — core + kg-enhance + AIG service-line + ISO certification + AAI (agentic AI tooling). Industry plugin added separately based on client domain.",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-aig",
+        "omega-iso",
+        "omega-aai"
+      ]
+    },
+    {
+      "name": "omega-bundle-digital-transformation",
+      "source": "./plugins/bundles/omega-bundle-digital-transformation",
+      "category": "bundle",
+      "tier": "featured",
+      "version": "1.0.0",
+      "description": "Digital transformation engagements (any industry) — core + kg-enhance + finance + DIG + ESI (integration) + STR (corporate strategy). Industry plugin added separately.",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-finance",
+        "omega-dig",
+        "omega-esi",
+        "omega-str"
+      ]
+    },
+    {
+      "name": "omega-bundle-cybersecurity",
+      "source": "./plugins/bundles/omega-bundle-cybersecurity",
+      "category": "bundle",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "Cybersecurity engagements — core + kg-enhance + cyber + ISO 27001 readiness + ERM/risk frameworks.",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-cyber",
+        "omega-iso",
+        "omega-risk"
+      ]
+    },
+    {
+      "name": "omega-bundle-esg",
+      "source": "./plugins/bundles/omega-bundle-esg",
+      "category": "bundle",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "ESG & sustainability engagements — core + kg-enhance + finance + esg + str (strategy linkage).",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-finance",
+        "omega-esg",
+        "omega-str"
+      ]
+    },
+    {
+      "name": "omega-bundle-pmo-delivery",
+      "source": "./plugins/bundles/omega-bundle-pmo-delivery",
+      "category": "bundle",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "PMO and program delivery engagements — core + kg-enhance + pmo + risk + dig (transformation glue).",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-pmo",
+        "omega-risk",
+        "omega-dig"
+      ]
+    },
+    {
+      "name": "omega-bundle-supply-chain",
+      "source": "./plugins/bundles/omega-bundle-supply-chain",
+      "category": "bundle",
+      "tier": "specialized",
+      "version": "1.0.0",
+      "description": "Supply chain transformation — core + kg-enhance + finance + supply + ops + manufacturing industry vocab.",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-finance",
+        "omega-supply",
+        "omega-ops",
+        "omega-ind-manufacturing"
+      ]
+    },
+    {
+      "name": "omega-bundle-life-sciences",
+      "source": "./plugins/bundles/omega-bundle-life-sciences",
+      "category": "bundle",
+      "tier": "specialized",
+      "version": "1.0.0",
+      "description": "Life sciences engagements — core + kg-enhance + finance + iso + cyber + pharma industry vocab (GxP, clinical trials).",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-finance",
+        "omega-iso",
+        "omega-cyber",
+        "omega-ind-pharma"
+      ]
+    },
+    {
+      "name": "omega-bundle-data-platform",
+      "source": "./plugins/bundles/omega-bundle-data-platform",
+      "category": "bundle",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "Data platform engagements — core + kg-enhance + data + cloud + coe (KPIs/dashboards).",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-data",
+        "omega-cloud",
+        "omega-coe"
+      ]
+    },
+    {
+      "name": "omega-bundle-ai-native",
+      "source": "./plugins/bundles/omega-bundle-ai-native",
+      "category": "bundle",
+      "tier": "standard",
+      "version": "1.0.0",
+      "description": "AI-native consulting toolkit — core + kg-enhance + ai-research + ai-dd + ai-contracts + ai-regs.",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-ai-research",
+        "omega-ai-dd",
+        "omega-ai-contracts",
+        "omega-ai-regs"
+      ]
+    },
+    {
+      "name": "omega-bundle-construction",
+      "source": "./plugins/bundles/omega-bundle-construction",
+      "category": "bundle",
+      "tier": "specialized",
+      "version": "1.0.0",
+      "description": "Construction & EPC engagements — core + kg-enhance + finance + construction industry vocab + pmo.",
+      "dependencies": [
+        "omega-core",
+        "omega-kg-enhance",
+        "omega-finance",
+        "omega-ind-construction",
+        "omega-pmo"
+      ]
+    }
+  ]
+}

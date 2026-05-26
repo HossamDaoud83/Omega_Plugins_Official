@@ -1,0 +1,316 @@
+{
+  "skill_name": "Omega-Consultation-Budget",
+  "version": "1.0",
+  "last_updated": "2026-02-02",
+  "currency": "USD",
+
+  "hourly_rates": {
+    "description": "Hourly rates by role and market tier (USD)",
+    "mena_market": {
+      "partner_director": { "low": 200, "standard": 275, "premium": 350 },
+      "senior_consultant": { "low": 140, "standard": 175, "premium": 220 },
+      "consultant": { "low": 100, "standard": 125, "premium": 160 },
+      "analyst": { "low": 70, "standard": 90, "premium": 115 },
+      "subject_matter_expert": { "low": 200, "standard": 275, "premium": 350 }
+    },
+    "egypt_market": {
+      "partner_director": { "low": 150, "standard": 225, "premium": 300 },
+      "senior_consultant": { "low": 100, "standard": 150, "premium": 190 },
+      "consultant": { "low": 75, "standard": 100, "premium": 135 },
+      "analyst": { "low": 50, "standard": 75, "premium": 100 },
+      "subject_matter_expert": { "low": 150, "standard": 225, "premium": 300 }
+    },
+    "international": {
+      "partner_director": { "low": 350, "standard": 500, "premium": 700 },
+      "senior_consultant": { "low": 220, "standard": 325, "premium": 450 },
+      "consultant": { "low": 150, "standard": 225, "premium": 300 },
+      "analyst": { "low": 100, "standard": 150, "premium": 200 },
+      "subject_matter_expert": { "low": 350, "standard": 500, "premium": 700 }
+    }
+  },
+
+  "daily_rates": {
+    "description": "Daily rates (8-hour equivalent)",
+    "mena_market": {
+      "partner_director": { "low": 1600, "standard": 2200, "premium": 2800 },
+      "senior_consultant": { "low": 1120, "standard": 1400, "premium": 1760 },
+      "consultant": { "low": 800, "standard": 1000, "premium": 1280 },
+      "analyst": { "low": 560, "standard": 720, "premium": 920 }
+    }
+  },
+
+  "hours_by_deliverable_type": {
+    "description": "Estimated hours per role by deliverable type",
+    "document_analysis": {
+      "partner": 2, "senior_consultant": 4, "consultant": 8, "analyst": 16, "sme": 0,
+      "total": 30
+    },
+    "gap_analysis": {
+      "partner": 1, "senior_consultant": 2, "consultant": 4, "analyst": 4, "sme": 0,
+      "total": 11
+    },
+    "formal_letter_report": {
+      "partner": 1, "senior_consultant": 2, "consultant": 2, "analyst": 2, "sme": 0,
+      "total": 7
+    },
+    "financial_model": {
+      "partner": 8, "senior_consultant": 20, "consultant": 30, "analyst": 40, "sme": 16,
+      "total": 114
+    },
+    "risk_assessment": {
+      "partner": 4, "senior_consultant": 12, "consultant": 16, "analyst": 20, "sme": 8,
+      "total": 60
+    },
+    "strategic_recommendation": {
+      "partner": 6, "senior_consultant": 10, "consultant": 8, "analyst": 8, "sme": 4,
+      "total": 36
+    },
+    "bid_proposal_preparation": {
+      "partner": 8, "senior_consultant": 16, "consultant": 24, "analyst": 32, "sme": 8,
+      "total": 88
+    },
+    "process_design": {
+      "partner": 4, "senior_consultant": 10, "consultant": 16, "analyst": 12, "sme": 4,
+      "total": 46
+    },
+    "training_workshop": {
+      "partner": 4, "senior_consultant": 8, "consultant": 8, "analyst": 4, "sme": 4,
+      "total": 28
+    },
+    "implementation_support": {
+      "partner": 6, "senior_consultant": 16, "consultant": 24, "analyst": 20, "sme": 8,
+      "total": 74
+    }
+  },
+
+  "value_based_percentages": {
+    "description": "Fee as percentage of project value by service type",
+    "feasibility_study": { "low": 0.10, "standard": 0.15, "high": 0.25 },
+    "due_diligence": { "low": 0.15, "standard": 0.25, "high": 0.40 },
+    "transaction_advisory": { "low": 0.20, "standard": 0.35, "high": 0.50 },
+    "full_bid_support": { "low": 0.25, "standard": 0.40, "high": 0.60 },
+    "strategy_consulting": { "low": 0.05, "standard": 0.10, "high": 0.15 },
+    "implementation_support": { "low": 0.15, "standard": 0.25, "high": 0.35 },
+    "iso_certification": { "low": 0.02, "standard": 0.04, "high": 0.06 },
+    "bot_ppp_advisory": { "low": 0.35, "standard": 0.50, "high": 0.85 }
+  },
+
+  "fixed_fee_by_phase": {
+    "description": "Base fees by phase and project size tier (USD)",
+    "project_size_tiers": {
+      "small": { "min": 0, "max": 10000000, "label": "Small (<$10M)" },
+      "medium": { "min": 10000000, "max": 50000000, "label": "Medium ($10-50M)" },
+      "large": { "min": 50000000, "max": 200000000, "label": "Large ($50-200M)" },
+      "mega": { "min": 200000000, "max": null, "label": "Mega (>$200M)" }
+    },
+    "phases": {
+      "discovery": { "small": 8000, "medium": 15000, "large": 25000, "mega": 40000 },
+      "analysis": { "small": 15000, "medium": 35000, "large": 60000, "mega": 100000 },
+      "recommendations": { "small": 5000, "medium": 10000, "large": 18000, "mega": 30000 },
+      "implementation": { "small": 10000, "medium": 20000, "large": 35000, "mega": 60000 },
+      "bid_preparation": { "small": 8000, "medium": 20000, "large": 35000, "mega": 55000 }
+    }
+  },
+
+  "complexity_multipliers": {
+    "description": "Multipliers based on engagement complexity factors",
+    "technical_complexity": {
+      "simple": 0.8,
+      "standard": 1.0,
+      "high": 1.2,
+      "very_high": 1.5
+    },
+    "stakeholder_count": {
+      "few": { "max": 5, "multiplier": 0.8 },
+      "moderate": { "max": 10, "multiplier": 1.0 },
+      "many": { "max": 20, "multiplier": 1.2 },
+      "complex": { "max": null, "multiplier": 1.5 }
+    },
+    "data_availability": {
+      "all_available": 0.8,
+      "mostly_available": 1.0,
+      "gaps_exist": 1.2,
+      "major_gaps": 1.5
+    },
+    "timeline_pressure": {
+      "relaxed": 0.9,
+      "normal": 1.0,
+      "tight": 1.15,
+      "urgent": 1.3
+    },
+    "geographic_scope": {
+      "single_site": 0.9,
+      "regional": 1.0,
+      "national": 1.15,
+      "international": 1.3
+    }
+  },
+
+  "effort_points": {
+    "description": "Effort points by deliverable type and complexity",
+    "base_rate_per_point": 1000,
+    "deliverable_types": {
+      "analysis_report": { "simple": 3, "standard": 5, "complex": 8, "very_complex": 12 },
+      "financial_model": { "simple": 8, "standard": 12, "complex": 18, "very_complex": 25 },
+      "risk_assessment": { "simple": 4, "standard": 7, "complex": 10, "very_complex": 15 },
+      "strategy_document": { "simple": 5, "standard": 8, "complex": 12, "very_complex": 18 },
+      "implementation_plan": { "simple": 6, "standard": 10, "complex": 15, "very_complex": 22 },
+      "training_program": { "simple": 3, "standard": 5, "complex": 8, "very_complex": 12 },
+      "bid_package": { "simple": 8, "standard": 12, "complex": 18, "very_complex": 25 }
+    },
+    "duration_factors": {
+      "rush": { "max_weeks": 4, "factor": 1.2 },
+      "standard": { "max_weeks": 8, "factor": 1.0 },
+      "comfortable": { "max_weeks": 12, "factor": 0.95 },
+      "extended": { "max_weeks": null, "factor": 0.9 }
+    }
+  },
+
+  "comparable_engagements": {
+    "description": "Reference engagements for comparable pricing (anonymized)",
+    "maritime_sector": [
+      {
+        "type": "Port Feasibility Study",
+        "region": "Egypt",
+        "project_value": 45000000,
+        "fee_charged": 72000,
+        "fee_percentage": 0.16,
+        "duration_weeks": 10,
+        "year": 2024
+      },
+      {
+        "type": "Dry Port BOT Advisory",
+        "region": "MENA",
+        "project_value": 60000000,
+        "fee_charged": 95000,
+        "fee_percentage": 0.16,
+        "duration_weeks": 12,
+        "year": 2024
+      },
+      {
+        "type": "Container Terminal Feasibility",
+        "region": "Africa",
+        "project_value": 120000000,
+        "fee_charged": 180000,
+        "fee_percentage": 0.15,
+        "duration_weeks": 16,
+        "year": 2023
+      },
+      {
+        "type": "Logistics Zone Development",
+        "region": "Egypt",
+        "project_value": 30000000,
+        "fee_charged": 55000,
+        "fee_percentage": 0.18,
+        "duration_weeks": 8,
+        "year": 2024
+      },
+      {
+        "type": "Maritime Strategy",
+        "region": "Gulf",
+        "project_value": 80000000,
+        "fee_charged": 110000,
+        "fee_percentage": 0.14,
+        "duration_weeks": 10,
+        "year": 2025
+      }
+    ]
+  },
+
+  "adjustment_factors": {
+    "description": "Adjustment multipliers for comparable pricing",
+    "market_adjustments": {
+      "egypt_vs_gulf": { "min": 0.70, "max": 0.85 },
+      "egypt_vs_international": { "min": 0.60, "max": 0.75 },
+      "local_vs_international_firm": { "min": 0.70, "max": 0.85 }
+    },
+    "client_relationship": {
+      "new_client": 1.0,
+      "repeat_client": 0.90,
+      "strategic_account": 0.85
+    },
+    "competitive_situation": {
+      "competitive_bid": { "min": 0.85, "max": 0.95 },
+      "limited_competition": { "min": 0.95, "max": 1.05 },
+      "sole_source": { "min": 1.00, "max": 1.15 }
+    },
+    "timeline_adjustments": {
+      "expedited": { "min": 1.10, "max": 1.30 },
+      "normal": 1.0,
+      "extended": { "min": 0.90, "max": 0.95 }
+    },
+    "scope_adjustments": {
+      "reduced_scope": { "min": 0.70, "max": 0.90 },
+      "full_scope": 1.0,
+      "expanded_scope": { "min": 1.10, "max": 1.30 }
+    }
+  },
+
+  "risk_premiums": {
+    "description": "Risk premium percentages to add to base fee",
+    "risk_severity_premiums": {
+      "critical_risk": 0.02,
+      "high_risk": 0.01,
+      "medium_risk": 0.005,
+      "low_risk": 0.002
+    },
+    "engagement_risk_factors": {
+      "new_market_geography": 0.05,
+      "government_client": 0.03,
+      "tight_deadline": 0.05,
+      "missing_data_blockers": 0.03,
+      "currency_risk_egp": 0.02,
+      "political_instability": 0.03,
+      "regulatory_uncertainty": 0.02,
+      "complex_stakeholder_environment": 0.02
+    }
+  },
+
+  "overhead_and_expenses": {
+    "overhead_percentage": {
+      "low": 0.20,
+      "standard": 0.25,
+      "high": 0.30
+    },
+    "expense_percentage": {
+      "local_engagement": 0.05,
+      "regional_travel": 0.08,
+      "international_travel": 0.12
+    }
+  },
+
+  "payment_structures": {
+    "milestone_based": {
+      "discovery": 0.20,
+      "analysis": 0.35,
+      "recommendations": 0.15,
+      "implementation": 0.30
+    },
+    "progress_based": {
+      "kickoff": 0.25,
+      "midpoint": 0.35,
+      "draft_delivery": 0.25,
+      "final_acceptance": 0.15
+    },
+    "success_fee_rates": {
+      "bid_won": { "min": 0.005, "max": 0.010 },
+      "cost_savings_achieved": { "min": 0.05, "max": 0.15 },
+      "revenue_increase": { "min": 0.03, "max": 0.10 }
+    }
+  },
+
+  "service_line_modifiers": {
+    "description": "Fee modifiers by Omega service line",
+    "MAR": { "name": "Maritime", "modifier": 1.0, "notes": "Standard maritime rates" },
+    "DIG": { "name": "Digital Transformation", "modifier": 1.1, "notes": "Premium for tech expertise" },
+    "AIG": { "name": "AI Governance", "modifier": 1.2, "notes": "Specialized AI expertise premium" },
+    "AAI": { "name": "Agentic AI", "modifier": 1.25, "notes": "Cutting-edge technology premium" },
+    "COE": { "name": "Competency Center", "modifier": 1.0, "notes": "Standard rates" },
+    "ESI": { "name": "Enterprise Integration", "modifier": 1.05, "notes": "Technical complexity" },
+    "EDU": { "name": "Education", "modifier": 0.9, "notes": "Budget-conscious sector" },
+    "HLT": { "name": "Healthcare", "modifier": 1.1, "notes": "Compliance complexity" },
+    "GOV": { "name": "Government", "modifier": 0.85, "notes": "Public sector rates" },
+    "STR": { "name": "Strategy", "modifier": 1.15, "notes": "Senior expertise required" },
+    "ISO": { "name": "ISO Certification", "modifier": 0.95, "notes": "Standardized approach" }
+  }
+}

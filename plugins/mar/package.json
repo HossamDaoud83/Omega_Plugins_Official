@@ -1,0 +1,9 @@
+{
+  "name": "@omega/mar",
+  "version": "4.0.0-alpha.0",
+  "private": true,
+  "description": "Omega omega-mar plugin",
+  "scripts": {
+    "test": "node tests/run-all.js"
+  }
+}

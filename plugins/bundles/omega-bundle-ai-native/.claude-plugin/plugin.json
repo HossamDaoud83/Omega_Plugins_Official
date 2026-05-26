@@ -1,0 +1,26 @@
+{
+  "$schema": "https://claude.com/schemas/plugin.json",
+  "name": "omega-bundle-ai-native",
+  "version": "1.0.0",
+  "description": "AI-native consulting toolkit — core + kg-enhance + ai-research + ai-dd + ai-contracts + ai-regs.",
+  "author": {
+    "name": "Omega Consulting",
+    "url": "https://omega-consulting.local"
+  },
+  "homepage": "https://github.com/HossamDaoud83/Omega_Plugins_Official",
+  "license": "MIT",
+  "keywords": [
+    "consulting",
+    "omega",
+    "bundle",
+    "meta-plugin"
+  ],
+  "dependencies": [
+    "omega-core",
+    "omega-kg-enhance",
+    "omega-ai-research",
+    "omega-ai-dd",
+    "omega-ai-contracts",
+    "omega-ai-regs"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://claude.com/schemas/plugin.json",
+  "name": "omega-finance",
+  "version": "1.0.0",
+  "description": "Omega Consulting — Financial Analysis & Project Finance. Analyst foundation (accounting, three-statement, ratios, amortization) plus banking-grade bankability suite (tornado, Monte Carlo, spider, scenario, break-even) for infrastructure and feasibility work.",
+  "author": {
+    "name": "Omega Consulting",
+    "url": "https://omega-consulting.local"
+  },
+  "homepage": "https://github.com/HossamDaoud83/Omega_Consulting_Template_v1",
+  "license": "MIT",
+  "keywords": [
+    "consulting",
+    "omega",
+    "financial-analysis",
+    "accounting",
+    "financial-statements",
+    "ratio-analysis",
+    "amortization",
+    "project-finance",
+    "sensitivity-analysis",
+    "monte-carlo",
+    "bankability",
+    "infrastructure"
+  ],
+  "components": {
+    "commands": "commands/",
+    "agents": "agents/",
+    "skills": "skills/"
+  }
+}

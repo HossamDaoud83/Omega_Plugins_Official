@@ -1,0 +1,24 @@
+{
+  "$schema": "https://claude.com/schemas/plugin.json",
+  "name": "omega-bundle-telecom",
+  "version": "1.0.0",
+  "description": "Telecommunications engagements — core + kg-enhance + ESI service-line (systems integration) + telecom industry vocab (5G, OSS/BSS, ARPU, churn).",
+  "author": {
+    "name": "Omega Consulting",
+    "url": "https://omega-consulting.local"
+  },
+  "homepage": "https://github.com/HossamDaoud83/Omega_Plugins_Official",
+  "license": "MIT",
+  "keywords": [
+    "consulting",
+    "omega",
+    "bundle",
+    "meta-plugin"
+  ],
+  "dependencies": [
+    "omega-core",
+    "omega-kg-enhance",
+    "omega-esi",
+    "omega-ind-telecom"
+  ]
+}

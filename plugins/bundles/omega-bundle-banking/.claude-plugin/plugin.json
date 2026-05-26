@@ -1,0 +1,25 @@
+{
+  "$schema": "https://claude.com/schemas/plugin.json",
+  "name": "omega-bundle-banking",
+  "version": "1.0.0",
+  "description": "Banking / financial-services engagements — core + kg-enhance + finance + AIG service-line (governance is critical) + finserv industry vocab (banking, insurance, fintech, AML, fraud).",
+  "author": {
+    "name": "Omega Consulting",
+    "url": "https://omega-consulting.local"
+  },
+  "homepage": "https://github.com/HossamDaoud83/Omega_Plugins_Official",
+  "license": "MIT",
+  "keywords": [
+    "consulting",
+    "omega",
+    "bundle",
+    "meta-plugin"
+  ],
+  "dependencies": [
+    "omega-core",
+    "omega-kg-enhance",
+    "omega-finance",
+    "omega-aig",
+    "omega-ind-finserv"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://claude.com/schemas/plugin.json",
+  "name": "omega-bundle-supply-chain",
+  "version": "1.0.0",
+  "description": "Supply chain transformation — core + kg-enhance + finance + supply + ops + manufacturing industry vocab.",
+  "author": {
+    "name": "Omega Consulting",
+    "url": "https://omega-consulting.local"
+  },
+  "homepage": "https://github.com/HossamDaoud83/Omega_Plugins_Official",
+  "license": "MIT",
+  "keywords": [
+    "consulting",
+    "omega",
+    "bundle",
+    "meta-plugin"
+  ],
+  "dependencies": [
+    "omega-core",
+    "omega-kg-enhance",
+    "omega-finance",
+    "omega-supply",
+    "omega-ops",
+    "omega-ind-manufacturing"
+  ]
+}

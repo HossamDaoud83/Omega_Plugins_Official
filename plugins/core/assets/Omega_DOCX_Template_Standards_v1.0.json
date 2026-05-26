@@ -1,0 +1,655 @@
+{
+  "$schema": "Omega DOCX Template Standards",
+  "version": "1.1.0",
+  "created": "2026-02-04",
+  "lastUpdated": "2026-02-04",
+  "templateName": "Omega DOCX Template - Feasibility Study Standards",
+  "description": "Complete formatting template for generating professional Omega documents using docx library. Based on Omega Feasibility Study Formatting Standards v1.0. Optimized for executive business documents (not academic). v1.1.0 adds table captions, figure captions, repeating headers, and Word style integration.",
+  "documentType": "Executive Business Document",
+  "library": "docx (npm package)",
+
+  "colors": {
+    "description": "Omega brand colors - use WITHOUT # prefix for docx library",
+    "PRIMARY": {
+      "hex": "1B4F72",
+      "hexWithHash": "#1B4F72",
+      "usage": ["Headings (H1, H2, H3)", "Key insight accent bars", "Document accents"],
+      "docxFormat": "1B4F72"
+    },
+    "DARK_TEAL": {
+      "hex": "104E70",
+      "hexWithHash": "#104E70",
+      "usage": ["Table header backgrounds", "Secondary accents"],
+      "docxFormat": "104E70"
+    },
+    "LIGHT_BLUE": {
+      "hex": "9CC2E5",
+      "hexWithHash": "#9CC2E5",
+      "usage": ["Table borders", "Subtle dividers"],
+      "docxFormat": "9CC2E5"
+    },
+    "WHITE": {
+      "hex": "FFFFFF",
+      "hexWithHash": "#FFFFFF",
+      "usage": ["Table header text", "Backgrounds"],
+      "docxFormat": "FFFFFF"
+    },
+    "BODY_TEXT": {
+      "hex": "333333",
+      "hexWithHash": "#333333",
+      "usage": ["Body paragraphs", "Table content", "Default text"],
+      "docxFormat": "333333"
+    },
+    "REFERENCE_BLUE": {
+      "hex": "0066CC",
+      "hexWithHash": "#0066CC",
+      "usage": ["Source citations", "References after tables/figures"],
+      "docxFormat": "0066CC"
+    },
+    "CAPTION_GRAY": {
+      "hex": "666666",
+      "hexWithHash": "#666666",
+      "usage": ["Figure captions", "Table captions"],
+      "docxFormat": "666666"
+    },
+    "LIGHT_BG": {
+      "hex": "F8FBFD",
+      "hexWithHash": "#F8FBFD",
+      "usage": ["Alternating table rows", "Key insight box backgrounds"],
+      "docxFormat": "F8FBFD"
+    }
+  },
+
+  "typography": {
+    "font": {
+      "primary": "Arial",
+      "fallback": ["Helvetica", "sans-serif"]
+    },
+    "sizes": {
+      "note": "docx library uses half-points. 12pt = 24 halfPt",
+      "CHAPTER_TITLE": {
+        "pt": 16,
+        "halfPt": 32,
+        "usage": "Chapter headings (H1)",
+        "weight": "bold",
+        "color": "PRIMARY"
+      },
+      "SECTION_HEADING": {
+        "pt": 14,
+        "halfPt": 28,
+        "usage": "Section headings (H2)",
+        "weight": "bold",
+        "color": "PRIMARY"
+      },
+      "SUBSECTION_HEADING": {
+        "pt": 12,
+        "halfPt": 24,
+        "usage": "Subsection headings (H3)",
+        "weight": "bold",
+        "color": "PRIMARY"
+      },
+      "BODY_TEXT": {
+        "pt": 12,
+        "halfPt": 24,
+        "usage": "Regular paragraphs",
+        "weight": "normal",
+        "color": "BODY_TEXT",
+        "alignment": "justified"
+      },
+      "TABLE_HEADER": {
+        "pt": 11,
+        "halfPt": 22,
+        "usage": "Table header cells",
+        "weight": "bold",
+        "color": "WHITE",
+        "alignment": "center"
+      },
+      "TABLE_BODY": {
+        "pt": 11,
+        "halfPt": 22,
+        "usage": "Table body cells",
+        "weight": "normal",
+        "color": "BODY_TEXT",
+        "alignment": "firstColumnLeft_othersCenter"
+      },
+      "CAPTION": {
+        "pt": 10,
+        "halfPt": 20,
+        "usage": "Figure and table captions",
+        "weight": "normal",
+        "style": "italic",
+        "color": "CAPTION_GRAY"
+      },
+      "REFERENCE": {
+        "pt": 10,
+        "halfPt": 20,
+        "usage": "Source citations after tables/figures",
+        "weight": "normal",
+        "style": "italic",
+        "color": "REFERENCE_BLUE"
+      },
+      "KEY_INSIGHT_LABEL": {
+        "pt": 9,
+        "halfPt": 18,
+        "usage": "KEY INSIGHT label",
+        "weight": "bold",
+        "color": "PRIMARY"
+      },
+      "KEY_INSIGHT_TITLE": {
+        "pt": 13,
+        "halfPt": 26,
+        "usage": "Key insight title",
+        "weight": "bold",
+        "color": "BODY_TEXT"
+      },
+      "KEY_INSIGHT_CONTENT": {
+        "pt": 12,
+        "halfPt": 24,
+        "usage": "Key insight body text",
+        "weight": "normal",
+        "color": "BODY_TEXT",
+        "alignment": "justified"
+      },
+      "HEADER_FOOTER": {
+        "pt": 9,
+        "halfPt": 18,
+        "usage": "Headers and footers",
+        "weight": "normal",
+        "color": "BODY_TEXT"
+      }
+    },
+    "spacing": {
+      "lineSpacing": {
+        "default": 276,
+        "description": "1.15 line spacing in twips (276 = 1.15 * 240)"
+      },
+      "paragraphSpacing": {
+        "after": 200,
+        "description": "Standard spacing after paragraphs in twips"
+      },
+      "headingSpacingBefore": {
+        "H1": 400,
+        "H2": 300,
+        "H3": 240
+      },
+      "headingSpacingAfter": 200
+    },
+    "alignment": {
+      "bodyText": "AlignmentType.JUSTIFIED",
+      "headings": "AlignmentType.LEFT",
+      "captions": "AlignmentType.CENTER",
+      "tableHeaders": "AlignmentType.CENTER",
+      "tableFirstColumn": "AlignmentType.LEFT",
+      "tableOtherColumns": "AlignmentType.CENTER"
+    }
+  },
+
+  "tables": {
+    "style": "Omega Professional",
+    "headers": {
+      "background": "DARK_TEAL",
+      "backgroundType": "ShadingType.CLEAR",
+      "textColor": "WHITE",
+      "textSize": 22,
+      "textWeight": "bold",
+      "alignment": "center",
+      "verticalAlign": "VerticalAlign.CENTER",
+      "padding": {
+        "before": 60,
+        "after": 60
+      },
+      "borders": {
+        "size": 8,
+        "style": "BorderStyle.SINGLE",
+        "color": "LIGHT_BLUE"
+      }
+    },
+    "body": {
+      "backgroundEven": "transparent",
+      "backgroundOdd": "LIGHT_BG",
+      "backgroundType": "ShadingType.CLEAR",
+      "textColor": "BODY_TEXT",
+      "textSize": 22,
+      "textWeight": "normal",
+      "alignmentFirstColumn": "left",
+      "alignmentOtherColumns": "center",
+      "verticalAlign": "VerticalAlign.CENTER",
+      "padding": {
+        "before": 40,
+        "after": 40
+      },
+      "borders": {
+        "size": 4,
+        "style": "BorderStyle.SINGLE",
+        "color": "LIGHT_BLUE"
+      }
+    },
+    "width": {
+      "size": 100,
+      "type": "WidthType.PERCENTAGE"
+    },
+    "alternatingRows": true,
+    "alternatingRowStartIndex": 1
+  },
+
+  "keyInsightBox": {
+    "style": "Minimalist Left Accent Bar",
+    "design": {
+      "leftAccentBar": {
+        "width": 32,
+        "widthDescription": "4pt border = 32 twips (8 twips per point)",
+        "color": "PRIMARY",
+        "style": "BorderStyle.SINGLE"
+      },
+      "background": "LIGHT_BG",
+      "backgroundType": "ShadingType.CLEAR",
+      "leftIndent": 600,
+      "leftIndentDescription": "25pt = 600 twips"
+    },
+    "structure": [
+      {
+        "element": "label",
+        "text": "KEY INSIGHT",
+        "size": 18,
+        "weight": "bold",
+        "color": "PRIMARY",
+        "spacing": {
+          "before": 200,
+          "after": 100
+        }
+      },
+      {
+        "element": "title",
+        "size": 26,
+        "weight": "bold",
+        "color": "BODY_TEXT",
+        "spacing": {
+          "after": 80
+        }
+      },
+      {
+        "element": "content",
+        "size": 24,
+        "weight": "normal",
+        "color": "BODY_TEXT",
+        "alignment": "justified",
+        "spacing": {
+          "after": 200
+        }
+      }
+    ]
+  },
+
+  "textNormalization": {
+    "description": "Unicode character replacements for text normalization",
+    "replacements": [
+      {
+        "unicode": "\\u2014",
+        "character": "—",
+        "name": "em-dash",
+        "replaceTo": "-"
+      },
+      {
+        "unicode": "\\u2013",
+        "character": "–",
+        "name": "en-dash",
+        "replaceTo": "-"
+      },
+      {
+        "unicode": "\\u201C",
+        "character": "\"",
+        "name": "left double quotation mark",
+        "replaceTo": "\""
+      },
+      {
+        "unicode": "\\u201D",
+        "character": "\"",
+        "name": "right double quotation mark",
+        "replaceTo": "\""
+      },
+      {
+        "unicode": "\\u2018",
+        "character": "'",
+        "name": "left single quotation mark",
+        "replaceTo": "'"
+      },
+      {
+        "unicode": "\\u2019",
+        "character": "'",
+        "name": "right single quotation mark",
+        "replaceTo": "'"
+      },
+      {
+        "unicode": "\\u2026",
+        "character": "...",
+        "name": "ellipsis",
+        "replaceTo": "..."
+      },
+      {
+        "unicode": "\\u00A0",
+        "character": " ",
+        "name": "non-breaking space",
+        "replaceTo": " "
+      }
+    ],
+    "functionPattern": "function fixText(text) {\n  if (!text) return '';\n  return text\n    .replace(/[\\u2014]/g, '-')\n    .replace(/[\\u2013]/g, '-')\n    .replace(/[\\u201C\\u201D]/g, '\"')\n    .replace(/[\\u2018\\u2019]/g, \"'\")\n    .replace(/\\u2026/g, '...')\n    .replace(/\\u00A0/g, ' ');\n}"
+  },
+
+  "bulletLists": {
+    "level": 0,
+    "spacing": {
+      "after": 100,
+      "line": 276
+    },
+    "textSize": 24,
+    "textColor": "BODY_TEXT",
+    "font": "Arial"
+  },
+
+  "references": {
+    "format": "Source: {citation}",
+    "size": 20,
+    "style": "italic",
+    "color": "REFERENCE_BLUE",
+    "spacing": {
+      "before": 80,
+      "after": 240
+    },
+    "placement": "Immediately after table or figure"
+  },
+
+  "captions": {
+    "tables": {
+      "format": "Table {sequence}: {title}",
+      "example": "Table 3: Capital Investment Summary",
+      "position": "above",
+      "size": 20,
+      "style": "normal",
+      "weight": "bold",
+      "color": "CAPTION_GRAY",
+      "alignment": "left",
+      "spacing": {
+        "before": 200,
+        "after": 100
+      },
+      "implementation": "Use auto-incrementing tableCounter variable",
+      "codePattern": "let tableCounter = 0;\n\nfunction createTableCaption(text) {\n    tableCounter++;\n    return new Paragraph({\n        spacing: { before: 200, after: 100 },\n        children: [\n            new TextRun({\n                text: `Table ${tableCounter}: ${fixText(text)}`,\n                bold: true,\n                size: 20,\n                color: COLORS.CAPTION_GRAY,\n                font: 'Arial'\n            })\n        ]\n    });\n}"
+    },
+    "figures": {
+      "format": "Figure {sequence}: {title}",
+      "example": "Figure 1: 5-Year Revenue Projections",
+      "position": "below",
+      "size": 20,
+      "style": "italic",
+      "weight": "normal",
+      "color": "CAPTION_GRAY",
+      "alignment": "center",
+      "spacing": {
+        "before": 100,
+        "after": 200
+      },
+      "implementation": "Use auto-incrementing figureCounter variable",
+      "codePattern": "let figureCounter = 0;\n\nfunction createFigureCaption(text) {\n    figureCounter++;\n    return new Paragraph({\n        alignment: AlignmentType.CENTER,\n        spacing: { before: 100, after: 200 },\n        children: [\n            new TextRun({\n                text: `Figure ${figureCounter}: ${fixText(text)}`,\n                italic: true,\n                size: 20,\n                color: COLORS.CAPTION_GRAY,\n                font: 'Arial'\n            })\n        ]\n    });\n}"
+    }
+  },
+
+  "pageSetup": {
+    "size": "A4",
+    "orientation": "portrait",
+    "margins": {
+      "top": {
+        "inches": 1,
+        "twips": 1440,
+        "conversion": "convertInchesToTwip(1)"
+      },
+      "bottom": {
+        "inches": 1,
+        "twips": 1440,
+        "conversion": "convertInchesToTwip(1)"
+      },
+      "left": {
+        "inches": 1.25,
+        "twips": 1800,
+        "conversion": "convertInchesToTwip(1.25)"
+      },
+      "right": {
+        "inches": 1.25,
+        "twips": 1800,
+        "conversion": "convertInchesToTwip(1.25)"
+      }
+    }
+  },
+
+  "headerFooter": {
+    "header": {
+      "alignment": "right",
+      "textSize": 18,
+      "textColor": "BODY_TEXT",
+      "format": "{DocumentTitle} | CONFIDENTIAL",
+      "example": "MRCC Proposal - Beni Suef BOT Advisory | CONFIDENTIAL"
+    },
+    "footer": {
+      "alignment": "center",
+      "textSize": 18,
+      "textColor": "BODY_TEXT",
+      "format": "{DocumentTitle} | Page {current} of {total}",
+      "example": "Investment Decision Support Package | Page 5 of 24",
+      "usePageNumber": true
+    }
+  },
+
+  "helperFunctions": {
+    "createParagraph": {
+      "description": "Create styled paragraph with Omega defaults",
+      "parameters": {
+        "text": "string (required)",
+        "options": {
+          "bold": "boolean (default: false)",
+          "italic": "boolean (default: false)",
+          "size": "number (default: SIZES.BODY_TEXT = 24)",
+          "color": "string (default: COLORS.BODY_TEXT)",
+          "alignment": "AlignmentType (default: JUSTIFIED)",
+          "spacing": "object (default: { after: 200, line: 276 })"
+        }
+      },
+      "codePattern": "function createParagraph(text, options = {}) {\n  const {\n    bold = false,\n    italic = false,\n    size = SIZES.BODY_TEXT,\n    color = COLORS.BODY_TEXT,\n    alignment = AlignmentType.JUSTIFIED,\n    spacing = { after: 200, line: 276 }\n  } = options;\n\n  return new Paragraph({\n    alignment,\n    spacing,\n    children: [\n      new TextRun({\n        text: fixText(text),\n        bold,\n        italic,\n        size,\n        color,\n        font: 'Arial'\n      })\n    ]\n  });\n}"
+    },
+    "createHeading": {
+      "description": "Create heading linked to MS Word styles for easy global editing. Consultants can modify all headings of same level by right-clicking and selecting 'Modify Style'.",
+      "parameters": {
+        "text": "string (required)",
+        "level": "number 1-3 (default: 1)"
+      },
+      "sizeLookup": {
+        "1": "SIZES.CHAPTER_TITLE (32)",
+        "2": "SIZES.SECTION_HEADING (28)",
+        "3": "SIZES.SUBSECTION_HEADING (24)"
+      },
+      "spacingBeforeLookup": {
+        "1": 400,
+        "2": 300,
+        "3": 240
+      },
+      "wordStyleIntegration": "Uses HeadingLevel.HEADING_1/2/3 to link to Word's built-in styles",
+      "codePattern": "function createHeading(text, level = 1) {\n  const headingLevels = {\n    1: HeadingLevel.HEADING_1,\n    2: HeadingLevel.HEADING_2,\n    3: HeadingLevel.HEADING_3\n  };\n  const spacingBefore = { 1: 400, 2: 300, 3: 240 };\n\n  return new Paragraph({\n    text: fixText(text),\n    heading: headingLevels[level],\n    spacing: { before: spacingBefore[level], after: 200 }\n  });\n}",
+      "documentStyles": "Define custom Omega styles in Document.styles.paragraphStyles",
+      "documentStylesPattern": "const doc = new Document({\n  styles: {\n    paragraphStyles: [\n      {\n        id: \"Heading1\",\n        name: \"Heading 1\",\n        run: {\n          font: \"Arial\",\n          size: 32,\n          bold: true,\n          color: \"1B4F72\"\n        },\n        paragraph: {\n          spacing: { before: 400, after: 200, line: 276 }\n        }\n      },\n      {\n        id: \"Heading2\",\n        name: \"Heading 2\",\n        run: {\n          font: \"Arial\",\n          size: 28,\n          bold: true,\n          color: \"1B4F72\"\n        },\n        paragraph: {\n          spacing: { before: 300, after: 200, line: 276 }\n        }\n      },\n      {\n        id: \"Heading3\",\n        name: \"Heading 3\",\n        run: {\n          font: \"Arial\",\n          size: 24,\n          bold: true,\n          color: \"1B4F72\"\n        },\n        paragraph: {\n          spacing: { before: 240, after: 200, line: 276 }\n        }\n      }\n    ]\n  },\n  sections: [...]\n});"
+    },
+    "createTable": {
+      "description": "Create table with Omega Professional style, including optional caption and repeating headers",
+      "parameters": {
+        "headers": "array of strings",
+        "rows": "array of arrays (data rows)",
+        "caption": "string (optional) - table caption text"
+      },
+      "features": [
+        "Dark Teal header background with white text",
+        "Alternating row shading (odd rows get LIGHT_BG)",
+        "First column left-aligned, others centered",
+        "Light blue borders",
+        "Full width (100%)",
+        "Optional auto-numbered caption above table",
+        "Repeating headers on multi-page tables (tableHeader: true)",
+        "Returns array [caption, table] for flexible placement"
+      ],
+      "usageNote": "IMPORTANT: Use spread operator when adding to sections array: ...createTable(headers, rows, caption)",
+      "codePattern": "function createTable(headers, rows, caption = null) {\n  const elements = [];\n  \n  // Add caption if provided\n  if (caption) {\n    elements.push(createTableCaption(caption));\n  }\n  const headerCells = headers.map(header =>\n    new TableCell({\n      shading: { fill: COLORS.DARK_TEAL, type: ShadingType.CLEAR },\n      verticalAlign: VerticalAlign.CENTER,\n      children: [\n        new Paragraph({\n          alignment: AlignmentType.CENTER,\n          spacing: { before: 60, after: 60 },\n          children: [\n            new TextRun({\n              text: fixText(header),\n              bold: true,\n              color: COLORS.WHITE,\n              size: SIZES.TABLE_HEADER,\n              font: 'Arial'\n            })\n          ]\n        })\n      ],\n      borders: {...}\n    })\n  );\n\n  const dataRows = rows.map((row, rowIndex) => {\n    const isAlternate = rowIndex % 2 === 1;\n    const cells = row.map((cell, colIndex) =>\n      new TableCell({\n        shading: isAlternate ? { fill: COLORS.LIGHT_BG, type: ShadingType.CLEAR } : undefined,\n        verticalAlign: VerticalAlign.CENTER,\n        children: [\n          new Paragraph({\n            alignment: colIndex === 0 ? AlignmentType.LEFT : AlignmentType.CENTER,\n            spacing: { before: 40, after: 40 },\n            children: [\n              new TextRun({\n                text: fixText(String(cell)),\n                size: SIZES.TABLE_BODY,\n                color: COLORS.BODY_TEXT,\n                font: 'Arial'\n              })\n            ]\n          })\n        ],\n        borders: {...}\n      })\n    );\n    return new TableRow({ children: cells });\n  });\n\n  return new Table({\n    width: { size: 100, type: WidthType.PERCENTAGE },\n    rows: [\n      new TableRow({ children: headerCells }),\n      ...dataRows\n    ]\n  });\n}"
+    },
+    "createReference": {
+      "description": "Create source citation after tables/figures",
+      "parameters": {
+        "text": "string (citation text, 'Source:' prefix added automatically)"
+      },
+      "codePattern": "function createReference(text) {\n  return new Paragraph({\n    spacing: { before: 80, after: 240 },\n    children: [\n      new TextRun({\n        text: fixText(`Source: ${text}`),\n        italic: true,\n        size: SIZES.REFERENCE,\n        color: COLORS.REFERENCE_BLUE,\n        font: 'Arial'\n      })\n    ]\n  });\n}"
+    },
+    "createBullets": {
+      "description": "Create bullet list with Omega formatting",
+      "parameters": {
+        "items": "array of strings"
+      },
+      "codePattern": "function createBullets(items) {\n  return items.map(item =>\n    new Paragraph({\n      bullet: { level: 0 },\n      spacing: { after: 100, line: 276 },\n      children: [\n        new TextRun({\n          text: fixText(item),\n          size: SIZES.BODY_TEXT,\n          color: COLORS.BODY_TEXT,\n          font: 'Arial'\n        })\n      ]\n    })\n  );\n}"
+    },
+    "createKeyInsightBox": {
+      "description": "Create key insight box with minimalist left accent bar",
+      "parameters": {
+        "title": "string (insight title)",
+        "content": "string (insight body text)"
+      },
+      "returns": "Array of 3 Paragraph objects (label, title, content)",
+      "codePattern": "function createKeyInsightBox(title, content) {\n  return [\n    new Paragraph({\n      shading: { fill: COLORS.LIGHT_BG, type: ShadingType.CLEAR },\n      border: {\n        left: { style: BorderStyle.SINGLE, size: 32, color: COLORS.PRIMARY }\n      },\n      spacing: { before: 200, after: 100 },\n      indent: { left: 600 },\n      children: [\n        new TextRun({\n          text: 'KEY INSIGHT',\n          bold: true,\n          size: SIZES.KEY_INSIGHT_LABEL,\n          color: COLORS.PRIMARY,\n          font: 'Arial'\n        })\n      ]\n    }),\n    new Paragraph({\n      shading: { fill: COLORS.LIGHT_BG, type: ShadingType.CLEAR },\n      border: {\n        left: { style: BorderStyle.SINGLE, size: 32, color: COLORS.PRIMARY }\n      },\n      spacing: { after: 80 },\n      indent: { left: 600 },\n      children: [\n        new TextRun({\n          text: fixText(title),\n          bold: true,\n          size: SIZES.KEY_INSIGHT_TITLE,\n          color: COLORS.BODY_TEXT,\n          font: 'Arial'\n        })\n      ]\n    }),\n    new Paragraph({\n      shading: { fill: COLORS.LIGHT_BG, type: ShadingType.CLEAR },\n      border: {\n        left: { style: BorderStyle.SINGLE, size: 32, color: COLORS.PRIMARY }\n      },\n      spacing: { after: 200 },\n      indent: { left: 600 },\n      alignment: AlignmentType.JUSTIFIED,\n      children: [\n        new TextRun({\n          text: fixText(content),\n          size: SIZES.KEY_INSIGHT_CONTENT,\n          color: COLORS.BODY_TEXT,\n          font: 'Arial'\n        })\n      ]\n    })\n  ];\n}"
+    }
+  },
+
+  "docxImports": {
+    "required": [
+      "Document",
+      "Packer",
+      "Paragraph",
+      "TextRun",
+      "Table",
+      "TableRow",
+      "TableCell",
+      "HeadingLevel",
+      "AlignmentType",
+      "WidthType",
+      "BorderStyle",
+      "Footer",
+      "PageNumber",
+      "Header",
+      "ShadingType",
+      "VerticalAlign",
+      "convertInchesToTwip"
+    ],
+    "importStatement": "const {\n  Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,\n  HeadingLevel, AlignmentType, WidthType, BorderStyle,\n  Footer, PageNumber, Header, ShadingType, VerticalAlign,\n  convertInchesToTwip\n} = require('docx');"
+  },
+
+  "documentStructure": {
+    "frontMatter": [
+      "Title Page",
+      "Table of Contents (optional)"
+    ],
+    "chapters": "Numbered (1, 2, 3, etc.)",
+    "sections": "Numbered within chapters (1.1, 1.2, 2.1, etc.)",
+    "pageBreaks": "After each major chapter",
+    "pageBreakImplementation": "new Paragraph({ children: [], pageBreakBefore: true })"
+  },
+
+  "bestPractices": {
+    "textNormalization": "Always apply fixText() to user-provided content to handle em-dashes, smart quotes, and special characters",
+    "justification": "Body text should be justified for professional narrative flow",
+    "tableAlternation": "Use alternating row shading (odd rows = LIGHT_BG) for readability",
+    "references": "Always include source citations after tables and figures",
+    "keyInsights": "Use sparingly to highlight critical findings for executives (2-3 per chapter maximum)",
+    "headingHierarchy": "Maintain consistent hierarchy: H1 for chapters, H2 for sections, H3 for subsections",
+    "whitespace": "Use consistent spacing before/after elements",
+    "colorConsistency": "Use exact Omega colors - no variations",
+    "fontConsistency": "Always use Arial font family"
+  },
+
+  "commonPatterns": {
+    "titlePage": {
+      "elements": [
+        "Large centered title (48pt, PRIMARY)",
+        "Subtitle (32pt, DARK_TEAL)",
+        "Project name (40pt, PRIMARY, bold)",
+        "Client name (28pt, PRIMARY, bold)",
+        "Date and reference",
+        "CONFIDENTIAL label"
+      ],
+      "spacing": "Liberal spacing (600-800 twips between sections)"
+    },
+    "sectionIntro": {
+      "pattern": [
+        "Heading (H1 or H2)",
+        "Introductory paragraph (justified)",
+        "Subsections with H3 headings",
+        "Tables with references",
+        "Optional: Key Insight box"
+      ]
+    },
+    "dataPresentation": {
+      "preferred": "Table with reference citation",
+      "alternative": "Bullet list for short lists",
+      "avoid": "Long narrative descriptions of tabular data"
+    }
+  },
+
+  "conversionReference": {
+    "pointsToHalfPoints": "Multiply by 2 (12pt = 24 halfPt)",
+    "inchesToTwips": "Use convertInchesToTwip() function",
+    "twipsPerInch": 1440,
+    "twipsPerPoint": 20,
+    "lineSpacing115": 276
+  },
+
+  "exampleUsage": {
+    "minimalDocument": "// Create document with Omega standards\nconst doc = new Document({\n  sections: [{\n    properties: {\n      page: {\n        margin: {\n          top: convertInchesToTwip(1),\n          bottom: convertInchesToTwip(1),\n          left: convertInchesToTwip(1.25),\n          right: convertInchesToTwip(1.25)\n        }\n      }\n    },\n    headers: { default: new Header({ children: [/* header content */] }) },\n    footers: { default: new Footer({ children: [/* footer content */] }) },\n    children: sections  // Array of Paragraph, Table, etc.\n  }]\n});",
+    "saveDocument": "const buffer = await Packer.toBuffer(doc);\nfs.writeFileSync(outputPath, buffer);",
+    "fullExample": "See: generate_mrcc_client_proposal_v3_FINAL.js"
+  },
+
+  "qualityChecklist": {
+    "beforeGeneration": [
+      "All helper functions (fixText, createParagraph, createHeading, createTable, etc.) are defined",
+      "COLORS and SIZES constants match Omega standards",
+      "Required docx imports are present",
+      "Text content passes through fixText() function"
+    ],
+    "afterGeneration": [
+      "Open document and verify heading hierarchy",
+      "Check table formatting (Dark Teal headers, alternating rows)",
+      "Verify justified text alignment in body paragraphs",
+      "Confirm page numbers display correctly",
+      "Check Key Insight boxes have left accent bar",
+      "Verify source citations are blue and italic"
+    ]
+  },
+
+  "versionHistory": [
+    {
+      "version": "1.0.0",
+      "date": "2026-02-04",
+      "changes": "Initial template created from Omega Feasibility Study Standards v1.0",
+      "baseDocument": "generate_mrcc_client_proposal_v3_FINAL.js",
+      "project": "Beni Suef Dry Port BOT Tender Advisory"
+    }
+  ],
+
+  "relatedFiles": {
+    "referenceImplementation": "scripts/generate_mrcc_client_proposal_v3_FINAL.js",
+    "standardsDocument": "Omega Feasibility Study Formatting Standards v1.0 (JSON schema)",
+    "exampleOutput": "05_Deliverables_Final/MRCC_Client_Proposal_Beni_Suef_BOT_v3_FINAL_2026-02-04.docx"
+  },
+
+  "notes": [
+    "This is an EXECUTIVE BUSINESS document template, not academic",
+    "All measurements in docx library use twips (1/20th of a point)",
+    "Colors in docx library use hex WITHOUT # prefix",
+    "Line spacing 276 = 1.15 line spacing (276 / 240)",
+    "Always test generated documents by opening in Microsoft Word",
+    "Justified alignment improves professional appearance of narrative text",
+    "Key Insight boxes should highlight 2-3 critical findings per chapter maximum",
+    "Table first column left-aligned, others centered for readability",
+    "Always include source citations for data tables and figures"
+  ]
+}

@@ -1,0 +1,710 @@
+{
+  "$schema": "Omega Excel Template Standards",
+  "version": "1.1.0",
+  "created": "2026-02-04",
+  "lastUpdated": "2026-02-04",
+  "templateName": "Omega Excel Template - Business Model & Analysis Standards",
+  "description": "Complete formatting and generation template for professional Omega Excel workbooks using ExcelJS library. Optimized for financial models, data analysis, and business intelligence.",
+  "documentType": "Executive Business Workbook",
+  "library": "exceljs (npm package)",
+
+  "colors": {
+    "description": "Omega brand colors for Excel workbooks - use ARGB format (FF + hex)",
+    "PRIMARY": {
+      "hex": "1B4F72",
+      "argb": "FF1B4F72",
+      "rgb": {"r": 27, "g": 79, "b": 114},
+      "usage": ["Headers", "Section titles", "Key metrics", "Chart primary color"]
+    },
+    "DARK_TEAL": {
+      "hex": "104E70",
+      "argb": "FF104E70",
+      "rgb": {"r": 16, "g": 78, "b": 112},
+      "usage": ["Table headers", "Data headers", "Navigation tabs"]
+    },
+    "LIGHT_BLUE": {
+      "hex": "9CC2E5",
+      "argb": "FF9CC2E5",
+      "rgb": {"r": 156, "g": 194, "b": 229},
+      "usage": ["Borders", "Subtle backgrounds", "Secondary elements"]
+    },
+    "WHITE": {
+      "hex": "FFFFFF",
+      "argb": "FFFFFFFF",
+      "rgb": {"r": 255, "g": 255, "b": 255},
+      "usage": ["Backgrounds", "Text on dark headers"]
+    },
+    "BODY_TEXT": {
+      "hex": "333333",
+      "argb": "FF333333",
+      "rgb": {"r": 51, "g": 51, "b": 51},
+      "usage": ["Data cells", "Regular text", "Table content"]
+    },
+    "CAPTION_GRAY": {
+      "hex": "666666",
+      "argb": "FF666666",
+      "rgb": {"r": 102, "g": 102, "b": 102},
+      "usage": ["Table captions", "Notes", "Metadata", "Secondary text"]
+    },
+    "LIGHT_BG": {
+      "hex": "F8FBFD",
+      "argb": "FFF8FBFD",
+      "rgb": {"r": 248, "g": 251, "b": 253},
+      "usage": ["Alternating rows", "Subtle backgrounds", "Input sections"]
+    },
+    "INPUT_YELLOW": {
+      "hex": "FFF9E6",
+      "argb": "FFFFF9E6",
+      "rgb": {"r": 255, "g": 249, "b": 230},
+      "usage": ["Input cells", "Editable fields", "User assumptions"]
+    },
+    "CALCULATED_GREEN": {
+      "hex": "E8F5E9",
+      "argb": "FFE8F5E9",
+      "rgb": {"r": 232, "g": 245, "b": 233},
+      "usage": ["Calculated cells", "Formula outputs", "Results"]
+    },
+    "CRITICAL_RED": {
+      "hex": "FFEBEE",
+      "argb": "FFFFEBEE",
+      "rgb": {"r": 255, "g": 235, "b": 238},
+      "usage": ["Critical metrics", "Negative values", "Alerts"]
+    },
+    "SUCCESS_GREEN": {
+      "hex": "228B22",
+      "argb": "FF228B22",
+      "rgb": {"r": 34, "g": 139, "b": 34},
+      "usage": ["Positive indicators", "Completed status", "Targets met"]
+    },
+    "WARNING_ORANGE": {
+      "hex": "FF8C00",
+      "argb": "FFFF8C00",
+      "rgb": {"r": 255, "g": 140, "b": 0},
+      "usage": ["Warning indicators", "In-progress status", "Attention needed"]
+    },
+    "CRITICAL_RED_TEXT": {
+      "hex": "CC0000",
+      "argb": "FFCC0000",
+      "rgb": {"r": 204, "g": 0, "b": 0},
+      "usage": ["Critical status", "Error indicators", "High risk"]
+    }
+  },
+
+  "typography": {
+    "fonts": {
+      "primary": "Arial",
+      "numeric": "Arial",
+      "headers": "Arial",
+      "fallback": ["Calibri", "Helvetica", "sans-serif"]
+    },
+    "sizes": {
+      "TITLE": {
+        "pt": 16,
+        "usage": "Workbook title, cover sheet titles"
+      },
+      "SECTION_HEADER": {
+        "pt": 14,
+        "usage": "Section headers within sheets"
+      },
+      "TABLE_HEADER": {
+        "pt": 11,
+        "usage": "Table column headers"
+      },
+      "DATA": {
+        "pt": 10,
+        "usage": "Data cells, regular content"
+      },
+      "SMALL": {
+        "pt": 9,
+        "usage": "Notes, references, secondary info"
+      }
+    },
+    "weights": {
+      "HEADER": "bold",
+      "DATA": "normal",
+      "EMPHASIS": "bold"
+    }
+  },
+
+  "cellStyles": {
+    "workbookTitle": {
+      "font": {
+        "name": "Arial",
+        "size": 16,
+        "bold": true,
+        "color": {"argb": "FF1B4F72"}
+      },
+      "alignment": {
+        "horizontal": "center",
+        "vertical": "middle"
+      },
+      "fill": {
+        "type": "pattern",
+        "pattern": "solid",
+        "fgColor": {"argb": "FFFFFFFF"}
+      }
+    },
+    "sectionHeader": {
+      "font": {
+        "name": "Arial",
+        "size": 14,
+        "bold": true,
+        "color": {"argb": "FFFFFFFF"}
+      },
+      "alignment": {
+        "horizontal": "left",
+        "vertical": "middle"
+      },
+      "fill": {
+        "type": "pattern",
+        "pattern": "solid",
+        "fgColor": {"argb": "FF104E70"}
+      },
+      "border": {
+        "top": {"style": "thin", "color": {"argb": "FF9CC2E5"}},
+        "bottom": {"style": "thin", "color": {"argb": "FF9CC2E5"}},
+        "left": {"style": "thin", "color": {"argb": "FF9CC2E5"}},
+        "right": {"style": "thin", "color": {"argb": "FF9CC2E5"}}
+      }
+    },
+    "tableCaptionRow": {
+      "font": {
+        "name": "Arial",
+        "size": 10,
+        "bold": true,
+        "color": {"argb": "FF666666"}
+      },
+      "alignment": {
+        "horizontal": "left",
+        "vertical": "middle"
+      },
+      "fill": {
+        "type": "pattern",
+        "pattern": "solid",
+        "fgColor": {"argb": "FFFFFFFF"}
+      }
+    },
+    "tableHeader": {
+      "font": {
+        "name": "Arial",
+        "size": 11,
+        "bold": true,
+        "color": {"argb": "FFFFFFFF"}
+      },
+      "alignment": {
+        "horizontal": "center",
+        "vertical": "middle",
+        "wrapText": true
+      },
+      "fill": {
+        "type": "pattern",
+        "pattern": "solid",
+        "fgColor": {"argb": "FF104E70"}
+      },
+      "border": {
+        "top": {"style": "thin", "color": {"argb": "FF9CC2E5"}},
+        "bottom": {"style": "thin", "color": {"argb": "FF9CC2E5"}},
+        "left": {"style": "thin", "color": {"argb": "FF9CC2E5"}},
+        "right": {"style": "thin", "color": {"argb": "FF9CC2E5"}}
+      }
+    },
+    "dataCell": {
+      "font": {
+        "name": "Arial",
+        "size": 10,
+        "bold": false,
+        "color": {"argb": "FF333333"}
+      },
+      "alignment": {
+        "horizontal": "left",
+        "vertical": "middle"
+      },
+      "border": {
+        "top": {"style": "thin", "color": {"argb": "FFE0E0E0"}},
+        "bottom": {"style": "thin", "color": {"argb": "FFE0E0E0"}},
+        "left": {"style": "thin", "color": {"argb": "FFE0E0E0"}},
+        "right": {"style": "thin", "color": {"argb": "FFE0E0E0"}}
+      }
+    },
+    "numericCell": {
+      "font": {
+        "name": "Arial",
+        "size": 10,
+        "bold": false,
+        "color": {"argb": "FF333333"}
+      },
+      "alignment": {
+        "horizontal": "right",
+        "vertical": "middle"
+      },
+      "numFmt": "#,##0",
+      "border": {
+        "top": {"style": "thin", "color": {"argb": "FFE0E0E0"}},
+        "bottom": {"style": "thin", "color": {"argb": "FFE0E0E0"}},
+        "left": {"style": "thin", "color": {"argb": "FFE0E0E0"}},
+        "right": {"style": "thin", "color": {"argb": "FFE0E0E0"}}
+      }
+    },
+    "currencyCell": {
+      "font": {
+        "name": "Arial",
+        "size": 10,
+        "bold": false,
+        "color": {"argb": "FF333333"}
+      },
+      "alignment": {
+        "horizontal": "right",
+        "vertical": "middle"
+      },
+      "numFmt": "#,##0",
+      "border": {
+        "top": {"style": "thin", "color": {"argb": "FFE0E0E0"}},
+        "bottom": {"style": "thin", "color": {"argb": "FFE0E0E0"}},
+        "left": {"style": "thin", "color": {"argb": "FFE0E0E0"}},
+        "right": {"style": "thin", "color": {"argb": "FFE0E0E0"}}
+      }
+    },
+    "percentCell": {
+      "font": {
+        "name": "Arial",
+        "size": 10,
+        "bold": false,
+        "color": {"argb": "FF333333"}
+      },
+      "alignment": {
+        "horizontal": "right",
+        "vertical": "middle"
+      },
+      "numFmt": "0%",
+      "border": {
+        "top": {"style": "thin", "color": {"argb": "FFE0E0E0"}},
+        "bottom": {"style": "thin", "color": {"argb": "FFE0E0E0"}},
+        "left": {"style": "thin", "color": {"argb": "FFE0E0E0"}},
+        "right": {"style": "thin", "color": {"argb": "FFE0E0E0"}}
+      }
+    },
+    "inputCell": {
+      "font": {
+        "name": "Arial",
+        "size": 10,
+        "bold": false,
+        "color": {"argb": "FF333333"}
+      },
+      "alignment": {
+        "horizontal": "right",
+        "vertical": "middle"
+      },
+      "fill": {
+        "type": "pattern",
+        "pattern": "solid",
+        "fgColor": {"argb": "FFFFF9E6"}
+      },
+      "border": {
+        "top": {"style": "thin", "color": {"argb": "FFFF8C00"}},
+        "bottom": {"style": "thin", "color": {"argb": "FFFF8C00"}},
+        "left": {"style": "thin", "color": {"argb": "FFFF8C00"}},
+        "right": {"style": "thin", "color": {"argb": "FFFF8C00"}}
+      }
+    },
+    "calculatedCell": {
+      "font": {
+        "name": "Arial",
+        "size": 10,
+        "bold": false,
+        "color": {"argb": "FF333333"}
+      },
+      "alignment": {
+        "horizontal": "right",
+        "vertical": "middle"
+      },
+      "fill": {
+        "type": "pattern",
+        "pattern": "solid",
+        "fgColor": {"argb": "FFE8F5E9"}
+      },
+      "border": {
+        "top": {"style": "thin", "color": {"argb": "FFE0E0E0"}},
+        "bottom": {"style": "thin", "color": {"argb": "FFE0E0E0"}},
+        "left": {"style": "thin", "color": {"argb": "FFE0E0E0"}},
+        "right": {"style": "thin", "color": {"argb": "FFE0E0E0"}}
+      }
+    },
+    "totalRow": {
+      "font": {
+        "name": "Arial",
+        "size": 10,
+        "bold": true,
+        "color": {"argb": "FF333333"}
+      },
+      "alignment": {
+        "horizontal": "right",
+        "vertical": "middle"
+      },
+      "fill": {
+        "type": "pattern",
+        "pattern": "solid",
+        "fgColor": {"argb": "FFF8FBFD"}
+      },
+      "border": {
+        "top": {"style": "double", "color": {"argb": "FF333333"}},
+        "bottom": {"style": "double", "color": {"argb": "FF333333"}},
+        "left": {"style": "thin", "color": {"argb": "FFE0E0E0"}},
+        "right": {"style": "thin", "color": {"argb": "FFE0E0E0"}}
+      }
+    },
+    "noteCell": {
+      "font": {
+        "name": "Arial",
+        "size": 9,
+        "bold": false,
+        "italic": true,
+        "color": {"argb": "FF666666"}
+      },
+      "alignment": {
+        "horizontal": "left",
+        "vertical": "top",
+        "wrapText": true
+      }
+    }
+  },
+
+  "numberFormats": {
+    "integer": "#,##0",
+    "decimal1": "#,##0.0",
+    "decimal2": "#,##0.00",
+    "currency_egp": "#,##0 \"EGP\"",
+    "currency_usd": "\"$\"#,##0",
+    "currency_usd_decimal": "\"$\"#,##0.00",
+    "percent_0": "0%",
+    "percent_1": "0.0%",
+    "percent_2": "0.00%",
+    "date_short": "dd/mm/yyyy",
+    "date_long": "dd mmm yyyy",
+    "accounting_egp": "_-#,##0 \"EGP\"_-;-#,##0 \"EGP\"_-;_-\"\" \"EGP\"_-;_-@_-",
+    "accounting_usd": "_-\"$\"* #,##0_-;-\"$\"* #,##0_-;_-\"$\"* \"-\"_-;_-@_-"
+  },
+
+  "columnWidths": {
+    "narrow": 8,
+    "label": 25,
+    "description": 35,
+    "data": 12,
+    "currency": 15,
+    "percent": 10,
+    "date": 12,
+    "wide": 40
+  },
+
+  "rowHeights": {
+    "title": 30,
+    "header": 25,
+    "data": 18,
+    "note": 15,
+    "spacer": 5
+  },
+
+  "workbookStructure": {
+    "coverSheet": {
+      "name": "Cover",
+      "purpose": "Workbook title, metadata, navigation",
+      "elements": [
+        "Workbook title (16pt, Primary, bold, centered)",
+        "Project name and reference",
+        "Client name",
+        "Date and version",
+        "Table of contents (hyperlinks to sheets)",
+        "Document classification (CONFIDENTIAL)",
+        "Prepared by Omega"
+      ]
+    },
+    "assumptionsSheet": {
+      "name": "Assumptions",
+      "purpose": "Centralized input parameters",
+      "sections": [
+        "Key Assumptions (growth rates, inflation, etc.)",
+        "Financial Parameters (discount rate, tax rate)",
+        "Project-Specific Variables",
+        "Data Sources & References"
+      ],
+      "cellTypes": "Mostly input cells (yellow background)"
+    },
+    "dataSheets": {
+      "purpose": "Analysis, calculations, models",
+      "naming": "Descriptive names (e.g., 'Enrollment Projections', 'Revenue Model')",
+      "structure": [
+        "Section header with sheet title",
+        "Table headers with column labels",
+        "Data rows with calculations",
+        "Total/summary rows (bold, double border top)",
+        "Notes section at bottom"
+      ]
+    },
+    "summarySheet": {
+      "name": "Summary" or "Dashboard",
+      "purpose": "Executive summary, key metrics",
+      "elements": [
+        "Key Performance Indicators (KPIs)",
+        "Visual summary (conditional formatting)",
+        "Charts and graphs",
+        "Links to detailed sheets"
+      ]
+    }
+  },
+
+  "formulaPatterns": {
+    "relativeFormula": {
+      "description": "Formula that adjusts when copied",
+      "example": "=C5*1.25",
+      "usage": "Growth calculations, row-by-row operations"
+    },
+    "absoluteFormula": {
+      "description": "Formula with fixed cell references",
+      "example": "=$C$5*D10",
+      "usage": "References to assumption cells, lookup tables"
+    },
+    "crossSheetReference": {
+      "description": "Reference to cell in another sheet",
+      "example": "='Assumptions'!$B$5",
+      "usage": "Link to centralized assumptions",
+      "bestPractice": "Use absolute references, document row numbers"
+    },
+    "sumFormula": {
+      "description": "Sum range of cells",
+      "example": "=SUM(C5:C10)",
+      "usage": "Totals, subtotals"
+    },
+    "roundFormula": {
+      "description": "Round to specified decimals",
+      "example": "=ROUND(C5*1.25, 0)",
+      "usage": "Currency values, clean numbers"
+    },
+    "ifFormula": {
+      "description": "Conditional logic",
+      "example": "=IF(C5>0, C5*0.1, 0)",
+      "usage": "Conditional calculations, error handling"
+    }
+  },
+
+  "dataValidation": {
+    "beforeGeneration": [
+      "List ALL required data fields",
+      "Cross-reference against session_state.json or project.json",
+      "Identify missing values",
+      "ASK USER for missing data - NEVER use placeholders"
+    ],
+    "formulaIntegrity": [
+      "Use hardcoded values from data source for base values",
+      "Use relative formulas for growth calculations",
+      "Avoid row number references to assumption sheets (they shift)",
+      "Test all cross-sheet references",
+      "Document exact row numbers for each reference"
+    ],
+    "afterGeneration": [
+      "All cells have values (no blanks where data expected)",
+      "All formulas resolve (no #VALUE!, #REF!, #N/A errors)",
+      "Cross-sheet references verified",
+      "Named ranges avoided (cause issues)",
+      "All monetary values from data source, not assumptions"
+    ]
+  },
+
+  "conditionalFormatting": {
+    "positiveNegative": {
+      "description": "Green for positive, red for negative",
+      "rules": [
+        {"condition": ">0", "fill": "FFE8F5E9", "font": "FF228B22"},
+        {"condition": "<0", "fill": "FFFFEBEE", "font": "FFCC0000"}
+      ]
+    },
+    "thresholdBased": {
+      "description": "Color based on value thresholds",
+      "example": {
+        "green": ">90%",
+        "yellow": "70-90%",
+        "red": "<70%"
+      }
+    },
+    "dataBar": {
+      "description": "In-cell data bars",
+      "usage": "Visual representation of values in a range"
+    },
+    "iconSet": {
+      "description": "Traffic lights or arrows",
+      "usage": "Status indicators, trend arrows"
+    }
+  },
+
+  "chartStandards": {
+    "colors": {
+      "primary": ["FF1B4F72", "FF104E70", "FF9CC2E5"],
+      "extended": ["FF1B4F72", "FF3498DB", "FF2ECC71", "FFE74C3C", "FFF39C12"]
+    },
+    "chartTypes": {
+      "column": "Time series, comparisons",
+      "line": "Trends over time",
+      "pie": "Composition, percentages",
+      "bar": "Rankings, comparisons",
+      "scatter": "Correlation, relationships",
+      "combo": "Multiple data series with different scales"
+    },
+    "formatting": {
+      "title": "14pt, Primary color, bold",
+      "axisLabels": "10pt, Body Text",
+      "legend": "10pt, right or bottom",
+      "dataLabels": "Optional, 9pt"
+    },
+    "big3Integration": {
+      "description": "Reference Big 3 Caliber Libraries for McKinsey/BCG/Bain quality charts",
+      "visualizationLibrary": "assets/BIG3_VISUALIZATION_LIBRARY.json",
+      "chartGeneration": "assets/BIG3_CHART_GENERATION_GUIDE.md",
+      "answerFirstTitles": "Use descriptive, insight-driven chart titles (see BIG3_DOCUMENT_PATTERNS.json)",
+      "professionalPalettes": ["categorical", "sequential", "diverging", "trafficLight", "monochrome"],
+      "recommended": "Use Chart.js with chartjs-node-canvas for embedded images in Excel"
+    }
+  },
+
+  "bestPractices": {
+    "sheetOrganization": [
+      "Cover sheet first",
+      "Assumptions sheet second",
+      "Data/analysis sheets in logical order",
+      "Summary/Dashboard sheet last"
+    ],
+    "formulaManagement": [
+      "Use consistent formula patterns",
+      "Document complex formulas with notes",
+      "Avoid circular references",
+      "Test formulas with edge cases (zero, negative, very large)"
+    ],
+    "dataIntegrity": [
+      "Protect formula cells from accidental editing",
+      "Use data validation for input cells",
+      "Color-code input vs. calculated cells",
+      "Add data validation rules (e.g., positive numbers only)"
+    ],
+    "usability": [
+      "Freeze panes (headers visible when scrolling)",
+      "Add hyperlinks for navigation",
+      "Include notes/instructions for complex sections",
+      "Use descriptive sheet names (no Sheet1, Sheet2)"
+    ],
+    "performance": [
+      "Avoid volatile functions (NOW, TODAY, RAND) in large datasets",
+      "Use tables instead of ranges where appropriate",
+      "Minimize cross-sheet references where possible",
+      "Calculate manually if workbook is very large"
+    ]
+  },
+
+  "excelJSPatterns": {
+    "createWorkbook": "const workbook = new ExcelJS.Workbook();\nworkbook.creator = 'Omega Consulting';\nworkbook.lastModifiedBy = 'Omega';\nworkbook.created = new Date();\nworkbook.modified = new Date();",
+    "addWorksheet": "const sheet = workbook.addWorksheet('Sheet Name', {\n  properties: {tabColor: {argb: 'FF1B4F72'}},\n  pageSetup: {paperSize: 9, orientation: 'landscape'}\n});",
+    "setCellValue": "sheet.getCell('A1').value = 'Text';\nsheet.getCell('B1').value = 123;\nsheet.getCell('C1').value = {formula: '=B1*2'};",
+    "setCellStyle": "sheet.getCell('A1').font = {name: 'Arial', size: 11, bold: true};\nsheet.getCell('A1').fill = {type: 'pattern', pattern: 'solid', fgColor: {argb: 'FF104E70'}};\nsheet.getCell('A1').alignment = {horizontal: 'center', vertical: 'middle'};",
+    "setColumnWidth": "sheet.getColumn('A').width = 25;",
+    "mergeCells": "sheet.mergeCells('A1:D1');",
+    "addBorder": "sheet.getCell('A1').border = {\n  top: {style: 'thin', color: {argb: 'FF9CC2E5'}},\n  left: {style: 'thin', color: {argb: 'FF9CC2E5'}},\n  bottom: {style: 'thin', color: {argb: 'FF9CC2E5'}},\n  right: {style: 'thin', color: {argb: 'FF9CC2E5'}}\n};",
+    "saveWorkbook": "await workbook.xlsx.writeFile('output.xlsx');"
+  },
+
+  "qualityChecklist": {
+    "beforeGeneration": [
+      "All required data identified and sourced",
+      "No missing values or placeholders",
+      "Formula patterns documented",
+      "Cross-sheet reference map created"
+    ],
+    "afterGeneration": [
+      "Open workbook in Excel and verify",
+      "Check all formulas resolve (no errors)",
+      "Verify alternating row colors",
+      "Confirm input cells are yellow",
+      "Verify currency formatting",
+      "Test navigation hyperlinks",
+      "Check chart colors match Omega brand"
+    ]
+  },
+
+  "commonWorkbookTypes": {
+    "financialModel": {
+      "sheets": ["Cover", "Assumptions", "Revenue Model", "Cost Structure", "Cash Flow", "P&L", "Balance Sheet", "Scenarios", "Summary"],
+      "keyFeatures": ["Multi-year projections", "Sensitivity analysis", "Scenario planning", "IRR/NPV calculations"]
+    },
+    "riskRegister": {
+      "sheets": ["Cover", "Risk List", "Risk Matrix", "Mitigation Plans", "Risk Timeline"],
+      "keyFeatures": ["Risk scoring", "Heat map", "Status tracking", "Conditional formatting"]
+    },
+    "projectPlan": {
+      "sheets": ["Cover", "Timeline", "Milestones", "Resources", "Budget", "Status"],
+      "keyFeatures": ["Gantt chart", "Critical path", "Resource allocation", "Progress tracking"]
+    },
+    "dataAnalysis": {
+      "sheets": ["Cover", "Raw Data", "Cleaned Data", "Analysis", "Visualizations", "Summary"],
+      "keyFeatures": ["Pivot tables", "Charts", "Statistical analysis", "Data validation"]
+    }
+  },
+
+  "exampleUsage": {
+    "minimalWorkbook": "const ExcelJS = require('exceljs');\nconst workbook = new ExcelJS.Workbook();\nconst sheet = workbook.addWorksheet('Data');\n\n// Header\nsheet.getCell('A1').value = 'Description';\nsheet.getCell('A1').font = {bold: true};\nsheet.getCell('A1').fill = {type: 'pattern', pattern: 'solid', fgColor: {argb: 'FF104E70'}};\n\n// Data\nsheet.getCell('A2').value = 'Revenue';\nsheet.getCell('B2').value = 1000000;\nsheet.getCell('B2').numFmt = '#,##0';\n\nawait workbook.xlsx.writeFile('output.xlsx');",
+    "fullExample": "See: generate_financial_model.js (reference implementation)"
+  },
+
+  "templateValidation": {
+    "description": "MANDATORY: Load and validate assets before generating ANY Excel workbooks",
+    "requiredAssets": [
+      "assets/omega-branding.json",
+      "assets/Omega_EXCEL_Template_Standards_v1.0.json (this file)",
+      "assets/BIG3_VISUALIZATION_LIBRARY.json",
+      "assets/BIG3_CONSULTING_FRAMEWORKS.json"
+    ],
+    "validationSteps": [
+      "1. Read assets/omega-branding.json and load color palette",
+      "2. Read this template file (Omega_EXCEL_Template_Standards) for styles",
+      "3. Verify all required colors exist (PRIMARY, DARK_TEAL, CAPTION_GRAY, etc.)",
+      "4. Confirm typography and cellStyles are loaded",
+      "5. Only proceed with generation if all validations pass"
+    ],
+    "preGenerationCode": "// MANDATORY PRE-GENERATION VALIDATION\nconst fs = require('fs');\nconst path = require('path');\n\nfunction validateOmegaAssets() {\n  const assetsPath = path.join(__dirname, '../assets');\n  const requiredFiles = [\n    'omega-branding.json',\n    'Omega_EXCEL_Template_Standards_v1.0.json',\n    'BIG3_VISUALIZATION_LIBRARY.json'\n  ];\n  \n  for (const file of requiredFiles) {\n    const filePath = path.join(assetsPath, file);\n    if (!fs.existsSync(filePath)) {\n      throw new Error(`MISSING ASSET: ${file} not found in assets folder`);\n    }\n  }\n  \n  // Load templates\n  const branding = JSON.parse(fs.readFileSync(path.join(assetsPath, 'omega-branding.json')));\n  const excelTemplate = JSON.parse(fs.readFileSync(path.join(assetsPath, 'Omega_EXCEL_Template_Standards_v1.0.json')));\n  \n  console.log('✅ Omega Assets validated - proceeding with generation');\n  return { branding, excelTemplate };\n}\n\n// Call this BEFORE any workbook generation\nconst { branding, excelTemplate } = validateOmegaAssets();",
+    "errorMessage": "GENERATION BLOCKED: Missing required Omega assets. All Excel generation must use assets folder templates for consistency and branding compliance."
+  },
+
+  "versionHistory": [
+    {
+      "version": "1.1.0",
+      "date": "2026-02-04",
+      "changes": "Big 3 Caliber Enhancement - Added CAPTION_GRAY color, tableCaptionRow style, Big 3 visualization integration, mandatory template validation system",
+      "enhancements": [
+        "Added CAPTION_GRAY (#666666) for professional table captions",
+        "Added tableCaptionRow cellStyle (10pt, bold, gray)",
+        "Integrated Big 3 visualization libraries (McKinsey/BCG/Bain quality)",
+        "Added templateValidation section with mandatory pre-generation checks",
+        "Added big3Integration to chartStandards with Chart.js recommendations"
+      ],
+      "project": "Beni Suef Dry Port BOT Tender Advisory"
+    },
+    {
+      "version": "1.0.0",
+      "date": "2026-02-04",
+      "changes": "Initial template created from Omega Excel generation standards",
+      "project": "Beni Suef Dry Port BOT Tender Advisory"
+    }
+  ],
+
+  "relatedFiles": {
+    "promptTemplate": "EXCEL_GENERATION_PROMPT.md",
+    "docxTemplate": "Omega_DOCX_Template_Standards_v1.0.json"
+  },
+
+  "notes": [
+    "Always validate data before generation - NEVER use placeholders",
+    "Use ExcelJS library for Node.js-based generation",
+    "Test workbooks in Microsoft Excel after generation",
+    "Protect formula cells to prevent accidental editing",
+    "Color-code: Yellow=Input, Green=Calculated, White=Display",
+    "Document all cross-sheet references with row numbers",
+    "Include Cover sheet with navigation for complex workbooks",
+    "Use consistent number formatting throughout workbook",
+    "Add data validation to input cells where appropriate",
+    "Include notes/instructions for complex sections"
+  ]
+}

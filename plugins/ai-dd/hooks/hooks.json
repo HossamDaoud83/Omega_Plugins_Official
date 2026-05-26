@@ -1,0 +1,17 @@
+{
+  "$schema": "https://claude.com/schemas/hooks.json",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "tool == \"Write\" && (tool_input.file_path matches \"05_Deliverables_Final\" || tool_input.file_path matches \"dd-export\" || tool_input.file_path matches \"due-diligence\")",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/redact-on-export.js",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  }
+}

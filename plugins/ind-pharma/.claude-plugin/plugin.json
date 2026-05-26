@@ -1,0 +1,23 @@
+{
+  "$schema": "https://claude.com/schemas/plugin.json",
+  "name": "omega-ind-pharma",
+  "version": "1.0.0",
+  "description": "Pharma & life sciences — GxP, clinical trials, pharmacovigilance, regulatory filings.",
+  "author": {
+    "name": "Omega Consulting",
+    "url": "https://omega-consulting.local"
+  },
+  "homepage": "https://github.com/HossamDaoud83/Omega_Consulting_Template_v1",
+  "license": "MIT",
+  "keywords": [
+    "consulting",
+    "omega",
+    "industry",
+    "pharma"
+  ],
+  "components": {
+    "commands": "commands/",
+    "agents": "agents/",
+    "skills": "skills/"
+  }
+}

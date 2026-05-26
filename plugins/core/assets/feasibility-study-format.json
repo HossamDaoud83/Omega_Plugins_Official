@@ -1,0 +1,239 @@
+{
+  "$schema": "Omega Feasibility Study Formatting Standards v1.0",
+  "version": "1.0.0",
+  "created": "2026-02-01",
+  "description": "Standard formatting guidelines for Omega feasibility studies - professional business documents",
+
+  "documentType": "Feasibility Study",
+  "style": "Executive Business Document (not academic)",
+
+  "typography": {
+    "fonts": {
+      "heading": "Arial",
+      "body": "Arial",
+      "fallback": "Helvetica, sans-serif"
+    },
+    "sizes": {
+      "chapterTitle": { "pt": 16, "halfPt": 32, "description": "Chapter headings (H1)" },
+      "sectionHeading": { "pt": 14, "halfPt": 28, "description": "Section headings (H2)" },
+      "subsectionHeading": { "pt": 12, "halfPt": 24, "description": "Subsection headings (H3)" },
+      "bodyText": { "pt": 12, "halfPt": 24, "description": "Regular paragraphs, justified" },
+      "tableHeader": { "pt": 11, "halfPt": 22, "description": "Table header cells" },
+      "tableBody": { "pt": 11, "halfPt": 22, "description": "Table body cells" },
+      "caption": { "pt": 10, "halfPt": 20, "description": "Figure and table captions, italic" },
+      "reference": { "pt": 10, "halfPt": 20, "description": "Source references, italic, blue" },
+      "keyInsightLabel": { "pt": 9, "halfPt": 18, "description": "KEY INSIGHT label" },
+      "keyInsightTitle": { "pt": 13, "halfPt": 26, "description": "Key insight title, bold" },
+      "keyInsightContent": { "pt": 12, "halfPt": 24, "description": "Key insight body text, justified" }
+    },
+    "alignment": {
+      "bodyText": "justified",
+      "headings": "left",
+      "captions": "center",
+      "tableHeaders": "center",
+      "tableFirstColumn": "left",
+      "tableOtherColumns": "center"
+    }
+  },
+
+  "colors": {
+    "primary": {
+      "hex": "#1B4F72",
+      "hexNoHash": "1B4F72",
+      "usage": "Headings, accents, key insight bars"
+    },
+    "tableHeader": {
+      "hex": "#104E70",
+      "hexNoHash": "104E70",
+      "usage": "Table header background (Dark Teal)"
+    },
+    "tableBorder": {
+      "hex": "#9CC2E5",
+      "hexNoHash": "9CC2E5",
+      "usage": "Table borders (Light Blue)"
+    },
+    "bodyText": {
+      "hex": "#333333",
+      "hexNoHash": "333333",
+      "usage": "Body text, table content"
+    },
+    "referenceBlue": {
+      "hex": "#0066CC",
+      "hexNoHash": "0066CC",
+      "usage": "Source citations (italic, 8pt)"
+    },
+    "captionGray": {
+      "hex": "#666666",
+      "hexNoHash": "666666",
+      "usage": "Figure and table captions"
+    },
+    "lightBackground": {
+      "hex": "#F8FBFD",
+      "hexNoHash": "F8FBFD",
+      "usage": "Alternating table rows, key insight background"
+    },
+    "white": {
+      "hex": "#FFFFFF",
+      "hexNoHash": "FFFFFF",
+      "usage": "Table header text, backgrounds"
+    }
+  },
+
+  "keyInsightBox": {
+    "style": "Option B - Minimalist Left Accent Bar",
+    "design": {
+      "leftBar": {
+        "width": "4pt (32 half-points)",
+        "color": "primary (#1B4F72)"
+      },
+      "background": "lightBackground (#F8FBFD)",
+      "borders": {
+        "top": "none",
+        "bottom": "none",
+        "left": "4pt solid primary",
+        "right": "none"
+      },
+      "padding": {
+        "top": "8pt",
+        "bottom": "10pt",
+        "left": "25pt",
+        "right": "15pt"
+      }
+    },
+    "content": {
+      "label": {
+        "text": "KEY INSIGHT",
+        "size": "9pt",
+        "color": "primary",
+        "weight": "bold"
+      },
+      "title": {
+        "size": "13pt",
+        "color": "bodyText (#333333)",
+        "weight": "bold"
+      },
+      "body": {
+        "size": "12pt",
+        "color": "bodyText",
+        "alignment": "justified"
+      }
+    }
+  },
+
+  "tables": {
+    "style": "Omega Professional",
+    "header": {
+      "background": "tableHeader (#104E70)",
+      "textColor": "white",
+      "textWeight": "bold",
+      "alignment": "center"
+    },
+    "body": {
+      "background": "white",
+      "alternateBackground": "lightBackground (#F8FBFD)",
+      "textColor": "bodyText",
+      "alignment": {
+        "firstColumn": "left",
+        "otherColumns": "center"
+      }
+    },
+    "borders": {
+      "color": "tableBorder (#9CC2E5)",
+      "width": "1pt",
+      "style": "single"
+    },
+    "caption": {
+      "position": "above",
+      "format": "Table {chapter}.{sequence}: {title}",
+      "example": "Table 1.3: Capital Investment Summary",
+      "size": "10pt",
+      "style": "italic",
+      "color": "captionGray (#666666)",
+      "alignment": "left",
+      "spacing": "small gap before table, no extra space after table"
+    }
+  },
+
+  "figures": {
+    "alignment": "center",
+    "maxWidth": "520px",
+    "caption": {
+      "position": "below",
+      "format": "Figure {chapter}.{sequence}: {title}",
+      "example": "Figure 1.1: 5-Year Enrollment Projections",
+      "size": "10pt",
+      "style": "italic",
+      "color": "captionGray (#666666)",
+      "alignment": "center",
+      "spacing": "no extra space after image or caption"
+    }
+  },
+
+  "sources": {
+    "format": "Source: {citation}",
+    "size": "10pt",
+    "style": "italic",
+    "color": "referenceBlue (#0066CC)",
+    "position": "immediately after table or figure",
+    "spacing": "no extra space after table/image"
+  },
+
+  "documentStructure": {
+    "frontMatter": [
+      "Title Page",
+      "Table of Contents"
+    ],
+    "excludeFromFrontMatter": [
+      "Table of Figures (too academic)",
+      "Table of Tables (too academic)",
+      "Abstract (use Executive Summary instead)"
+    ],
+    "chapters": "Numbered (Chapter 1, Chapter 2, etc.)",
+    "sections": "Numbered within chapters (1.1, 1.2, 2.1, etc.)",
+    "pageBreaks": "After each chapter"
+  },
+
+  "headerFooter": {
+    "header": {
+      "left": "Omega Logo (0.77\" x 0.77\")",
+      "center": "separator line",
+      "right": "Document Title | CONFIDENTIAL"
+    },
+    "footer": {
+      "center": "Document Title | Page X of Y"
+    }
+  },
+
+  "pageSetup": {
+    "size": "A4",
+    "orientation": "portrait",
+    "margins": {
+      "top": "1 inch (1440 twips)",
+      "bottom": "1 inch",
+      "left": "1 inch",
+      "right": "1 inch"
+    }
+  },
+
+  "captionNumbering": {
+    "tables": {
+      "format": "Table {chapter}.{sequence}",
+      "restartEachChapter": true,
+      "example": "Table 1.1, Table 1.2, Table 2.1, Table 2.2"
+    },
+    "figures": {
+      "format": "Figure {chapter}.{sequence}",
+      "restartEachChapter": true,
+      "example": "Figure 1.1, Figure 1.2, Figure 2.1, Figure 2.2"
+    }
+  },
+
+  "notes": [
+    "This is an EXECUTIVE BUSINESS document, not an academic thesis",
+    "Keep formatting clean and professional",
+    "Use captions for clarity, not for academic compliance",
+    "Avoid excessive footnotes - integrate information into text",
+    "Key Insights highlight critical findings for executives",
+    "Tables and figures should be self-explanatory with captions"
+  ]
+}

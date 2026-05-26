@@ -1,0 +1,26 @@
+{
+  "$schema": "https://claude.com/schemas/plugin.json",
+  "name": "omega-bundle-digital-transformation",
+  "version": "1.0.0",
+  "description": "Digital transformation engagements (any industry) — core + kg-enhance + finance + DIG + ESI (integration) + STR (corporate strategy). Industry plugin added separately.",
+  "author": {
+    "name": "Omega Consulting",
+    "url": "https://omega-consulting.local"
+  },
+  "homepage": "https://github.com/HossamDaoud83/Omega_Plugins_Official",
+  "license": "MIT",
+  "keywords": [
+    "consulting",
+    "omega",
+    "bundle",
+    "meta-plugin"
+  ],
+  "dependencies": [
+    "omega-core",
+    "omega-kg-enhance",
+    "omega-finance",
+    "omega-dig",
+    "omega-esi",
+    "omega-str"
+  ]
+}

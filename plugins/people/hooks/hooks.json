@@ -1,0 +1,17 @@
+{
+  "$schema": "https://claude.com/schemas/hooks.json",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "(tool == \"Edit\" || tool == \"Write\") && (tool_input.file_path matches \"org-design\" || tool_input.file_path matches \"org_design\" || tool_input.file_path matches \"talent\" || tool_input.file_path matches \"workforce\")",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/pii-people.js",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  }
+}

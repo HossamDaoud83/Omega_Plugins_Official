@@ -1,0 +1,17 @@
+{
+  "$schema": "https://claude.com/schemas/hooks.json",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/glossary-coverage.js",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  }
+}

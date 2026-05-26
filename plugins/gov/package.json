@@ -1,0 +1,9 @@
+{
+  "name": "@omega/gov",
+  "version": "4.0.0-alpha.0",
+  "private": true,
+  "description": "Omega omega-gov plugin",
+  "scripts": {
+    "test": "node tests/run-all.js"
+  }
+}

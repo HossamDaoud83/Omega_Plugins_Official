@@ -1,0 +1,26 @@
+{
+  "$schema": "https://claude.com/schemas/plugin.json",
+  "name": "omega-bundle-life-sciences",
+  "version": "1.0.0",
+  "description": "Life sciences engagements — core + kg-enhance + finance + iso + cyber + pharma industry vocab (GxP, clinical trials).",
+  "author": {
+    "name": "Omega Consulting",
+    "url": "https://omega-consulting.local"
+  },
+  "homepage": "https://github.com/HossamDaoud83/Omega_Plugins_Official",
+  "license": "MIT",
+  "keywords": [
+    "consulting",
+    "omega",
+    "bundle",
+    "meta-plugin"
+  ],
+  "dependencies": [
+    "omega-core",
+    "omega-kg-enhance",
+    "omega-finance",
+    "omega-iso",
+    "omega-cyber",
+    "omega-ind-pharma"
+  ]
+}

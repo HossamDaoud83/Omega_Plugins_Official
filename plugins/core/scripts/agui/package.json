@@ -1,0 +1,29 @@
+{
+  "name": "omega-agui-dashboard",
+  "version": "4.0.0-alpha.0",
+  "private": true,
+  "description": "Omega portfolio AGUI dashboard — Next.js 15 + AG-UI Protocol consuming per-project + central FastAPI graphify endpoints.",
+  "scripts": {
+    "dev": "next dev -p 3030",
+    "build": "next build",
+    "start": "next start -p 3030",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "15.0.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "@ag-ui/client": "^0.0.52",
+    "d3": "^7.8.0",
+    "tailwindcss": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/d3": "^7.4.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^19.0.0",
+    "typescript": "^5.4.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0"
+  },
+  "_install": "Run `npm install` from this directory before first launch. tools/launch-agui.sh handles this automatically."
+}

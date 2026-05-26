@@ -1,0 +1,27 @@
+{
+  "$schema": "https://claude.com/schemas/hooks.json",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "(tool == \"Edit\" || tool == \"Write\") && tool_input.file_path matches \"05_Deliverables_Final\"",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/pii-scan.js",
+            "timeout": 5000
+          }
+        ]
+      },
+      {
+        "matcher": "(tool == \"Edit\" || tool == \"Write\") && (tool_input.file_path matches \"package.json\" || tool_input.file_path matches \"requirements.txt\" || tool_input.file_path matches \"Pipfile\" || tool_input.file_path matches \"pom.xml\" || tool_input.file_path matches \"build.gradle\")",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/license-scan.js",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  }
+}

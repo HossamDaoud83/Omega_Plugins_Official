@@ -1,0 +1,25 @@
+{
+  "$schema": "https://claude.com/schemas/plugin.json",
+  "name": "omega-bundle-data-platform",
+  "version": "1.0.0",
+  "description": "Data platform engagements — core + kg-enhance + data + cloud + coe (KPIs/dashboards).",
+  "author": {
+    "name": "Omega Consulting",
+    "url": "https://omega-consulting.local"
+  },
+  "homepage": "https://github.com/HossamDaoud83/Omega_Plugins_Official",
+  "license": "MIT",
+  "keywords": [
+    "consulting",
+    "omega",
+    "bundle",
+    "meta-plugin"
+  ],
+  "dependencies": [
+    "omega-core",
+    "omega-kg-enhance",
+    "omega-data",
+    "omega-cloud",
+    "omega-coe"
+  ]
+}

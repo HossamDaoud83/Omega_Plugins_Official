@@ -1,0 +1,23 @@
+{
+  "$schema": "https://claude.com/schemas/plugin.json",
+  "name": "omega-ind-logistics",
+  "version": "1.0.0",
+  "description": "Logistics & 3PL — fleet, warehousing, last-mile, freight, port operations.",
+  "author": {
+    "name": "Omega Consulting",
+    "url": "https://omega-consulting.local"
+  },
+  "homepage": "https://github.com/HossamDaoud83/Omega_Consulting_Template_v1",
+  "license": "MIT",
+  "keywords": [
+    "consulting",
+    "omega",
+    "industry",
+    "logistics"
+  ],
+  "components": {
+    "commands": "commands/",
+    "agents": "agents/",
+    "skills": "skills/"
+  }
+}

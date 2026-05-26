@@ -1,0 +1,467 @@
+{
+  "$schema": "Big 3 Document Patterns & Communication Standards",
+  "version": "1.0.0",
+  "created": "2026-02-04",
+  "templateName": "Big 3 Document Structure & Narrative Patterns",
+  "description": "Communication frameworks, document structures, and writing best practices from McKinsey, BCG, and Bain for executive-level business documents.",
+
+  "fundamentalPrinciples": {
+    "answerFirst": {
+      "principle": "Lead with the conclusion, then provide supporting evidence",
+      "rationale": "Executives are time-constrained; they want the answer immediately",
+      "badExample": "We analyzed 47 data points across 12 regions over 5 years and conducted 23 interviews...",
+      "goodExample": "We recommend pursuing Strategy A, which will increase EBITDA by 15% at acceptable risk...",
+      "application": ["Executive summaries", "Slide titles", "Email subject lines", "Meeting openings"]
+    },
+    "soWhat": {
+      "principle": "Every piece of analysis must answer 'So what?' - the implication or action",
+      "test": "If removed, would the decision-maker care?",
+      "badExample": "Market share declined from 23% to 19%",
+      "goodExample": "Market share loss of 4pts translates to $12M revenue at risk; requires immediate pricing response",
+      "application": ["Chart titles", "Bullet points", "Insights", "Recommendations"]
+    },
+    "threeRule": {
+      "principle": "Group ideas in threes for memorability and structure",
+      "rationale": "Three is cognitively optimal for retention and persuasion",
+      "examples": [
+        "Three strategic pillars",
+        "Three-year roadmap",
+        "Three key risks",
+        "Three customer segments"
+      ],
+      "application": ["Recommendation structures", "Slide organization", "Messaging frameworks"]
+    },
+    "actionOrientation": {
+      "principle": "Every document should drive to specific, actionable recommendations",
+      "components": ["What to do", "Why it matters", "How to do it", "Who owns it", "When to deliver"],
+      "avoidance": "Analysis for analysis' sake; no 'findings' without 'implications'"
+    }
+  },
+
+  "documentTypes": {
+    "executiveSummary": {
+      "purpose": "Standalone synopsis for senior executives who may not read full report",
+      "length": "1-2 pages (3 pages maximum)",
+      "structure": {
+        "situation": {
+          "content": "Context and background (2-3 sentences)",
+          "example": "CompanyX operates in a $2B widget market growing at 5% annually. Despite market leadership, profitability has declined 300bps over 3 years."
+        },
+        "complication": {
+          "content": "The problem or opportunity (2-3 sentences)",
+          "example": "New entrants with 20% cost advantage have captured 8pts of market share. CompanyX's cost structure is no longer competitive."
+        },
+        "question": {
+          "content": "Key question being addressed (1 sentence)",
+          "example": "How can CompanyX restore margins while defending market position?"
+        },
+        "answer": {
+          "content": "Clear recommendation (1-2 sentences)",
+          "example": "We recommend a three-pronged transformation: 1) Reduce COGS by $40M through manufacturing consolidation, 2) Shift product mix to premium segments, 3) Selective price increases in low-elasticity segments."
+        },
+        "keySupport": {
+          "content": "3-5 supporting points with evidence (bullet format)",
+          "example": [
+            "Manufacturing consolidation: Close 2 of 5 plants, invest in automation → $40M annual savings by Year 2",
+            "Premium shift: Launch 3 new products in high-margin segments → +500bps margin by Year 3",
+            "Pricing: 5-8% increases in segments with elasticity <-0.8 → $15M revenue, minimal volume loss"
+          ]
+        },
+        "implications": {
+          "content": "Impact and next steps (2-3 sentences)",
+          "example": "This program will restore EBITDA margins to 18% (vs. 14% today) and deliver $60M value in 3 years. Board approval needed by Q2 to achieve Year 1 savings targets."
+        }
+      },
+      "formatting": {
+        "font": "Arial 11-12pt",
+        "spacing": "1.15 line spacing",
+        "paragraphs": "Short (3-5 sentences max)",
+        "bullets": "Use liberally for scannability",
+        "emphasis": "Bold for key numbers and recommendations"
+      }
+    },
+    "slideDeck": {
+      "purpose": "Visual presentation for meetings, steering committees, or board presentations",
+      "types": {
+        "1pager": {
+          "slides": 1,
+          "purpose": "Single-slide summary for quick briefings",
+          "structure": ["Title with key message", "3-4 supporting insights with visuals", "Clear recommendation at bottom"],
+          "usage": "Weekly updates, steering committees, quick decisions"
+        },
+        "pitchDeck": {
+          "slides": "10-20 slides",
+          "purpose": "Sell a strategy, project, or investment",
+          "structure": [
+            "Situation (1-2 slides): Context and market landscape",
+            "Complication (2-3 slides): The problem/opportunity",
+            "Solution (5-8 slides): Your recommendation with supporting analysis",
+            "Implementation (2-3 slides): How to execute, timeline, resources",
+            "Next Steps (1 slide): Clear actions, owners, dates"
+          ]
+        },
+        "steeringCommittee": {
+          "slides": "15-30 slides",
+          "purpose": "Monthly/quarterly program updates",
+          "structure": [
+            "Executive Summary (1 slide)",
+            "Progress vs Plan (2-3 slides): Milestones, KPIs, deliverables",
+            "Issues & Risks (2-4 slides): Blockers, mitigations",
+            "Deep Dive (5-10 slides): Detail on key workstreams",
+            "Decisions Needed (2-3 slides): Clear asks of steering committee",
+            "Next Period Priorities (1 slide)"
+          ]
+        },
+        "boardPresentation": {
+          "slides": "15-25 slides",
+          "purpose": "Board-level decision or update",
+          "structure": [
+            "Exec Summary (1 slide): The ask and key points",
+            "Strategic Context (2-3 slides): Industry, competitive, financial performance",
+            "Recommendation (5-10 slides): Options considered, recommended approach, supporting analysis",
+            "Financial Impact (2-3 slides): NPV, IRR, sensitivity, funding",
+            "Risk & Mitigation (2 slides): Key risks and how you'll address them",
+            "Next Steps (1 slide): Timeline, governance, Board actions needed"
+          ]
+        }
+      },
+      "slideDesignPrinciples": {
+        "title": {
+          "format": "Full sentence stating the 'So what?'",
+          "badExample": "Market Share Trends",
+          "goodExample": "Market share declined 4pts in Q3, driven by pricing pressure in Segment A",
+          "length": "1-2 lines (15 words max)"
+        },
+        "content": {
+          "rule": "One message per slide",
+          "textLimit": "6 bullet points max, 6 words per bullet guideline ('6x6 rule')",
+          "visualPriority": "Chart > Table > Text (always prefer visual over text)",
+          "whitespace": "40-50% of slide should be empty (avoid clutter)"
+        },
+        "layout": {
+          "alignment": "Consistent alignment across all slides",
+          "margins": "1 inch all sides",
+          "fontSizes": ["Title: 24-28pt", "Body: 18-20pt", "Footer: 10-12pt"],
+          "colors": "Brand colors only, max 4 colors per slide"
+        },
+        "navigation": {
+          "pageNumbers": "Required (bottom right)",
+          "sections": "Section dividers every 5-7 slides",
+          "agenda": "Include agenda slide for >15 slide decks",
+          "appendix": "Move supporting detail to appendix, reference in main deck"
+        }
+      }
+    },
+    "fullReport": {
+      "purpose": "Comprehensive written report for detailed documentation",
+      "length": "20-50 pages (excluding appendices)",
+      "structure": {
+        "cover": {
+          "elements": ["Title", "Client name", "Consulting firm", "Date", "Document classification (Confidential)"],
+          "design": "Clean, professional, branded"
+        },
+        "executiveSummary": {
+          "pages": "1-3 pages",
+          "standalone": "Must be understandable without reading full report"
+        },
+        "tableOfContents": {
+          "depth": "2-3 levels",
+          "pageNumbers": "Required",
+          "hyperlinked": "In digital versions"
+        },
+        "mainBody": {
+          "chapters": "4-8 chapters, each with clear purpose",
+          "chapterStructure": [
+            "Chapter intro (situation)",
+            "Analysis (findings with evidence)",
+            "Implications (so what?)",
+            "Recommendations (what to do)"
+          ],
+          "formatting": {
+            "headings": ["H1: 16pt bold", "H2: 14pt bold", "H3: 12pt bold"],
+            "body": "12pt, justified",
+            "lineSpacing": "1.15",
+            "paragraphSpacing": "6-12pt after"
+          }
+        },
+        "appendices": {
+          "content": ["Detailed data tables", "Methodology notes", "Interview lists", "Technical specifications"],
+          "organization": "Lettered (Appendix A, B, C) and titled",
+          "reference": "Referenced from main body with [See Appendix A]"
+        }
+      },
+      "writingStyle": {
+        "voice": "Active voice strongly preferred",
+        "tense": "Present tense for findings, future for recommendations",
+        "person": "Third person or 'we' (not 'I')",
+        "tone": "Professional, confident, action-oriented",
+        "jargon": "Minimize; define acronyms on first use",
+        "numbers": "Spell out one through nine, numerals for 10+"
+      }
+    },
+    "memo": {
+      "purpose": "Internal communication or brief update",
+      "length": "1-2 pages maximum",
+      "structure": {
+        "header": {
+          "to": "Recipient name and title",
+          "from": "Sender name and title",
+          "date": "Full date",
+          "re": "Subject line (the 'So what?')"
+        },
+        "body": {
+          "opening": "Lead with the recommendation or key message (1 paragraph)",
+          "support": "2-4 paragraphs with supporting points",
+          "close": "Next steps and call to action (1 paragraph)"
+        }
+      },
+      "example": {
+        "re": "Recommendation to accelerate Phase 2 implementation to Q3 2026",
+        "opening": "We recommend accelerating Phase 2 from Q4 to Q3 to capture $5M in savings 3 months earlier and align with FY budget cycle.",
+        "support": "Three key drivers: 1) Vendor capacity is available now but uncertain in Q4, 2) Early benefits fund Phase 3, 3) Aligns with CFO's budget planning timeline.",
+        "close": "Request approval by Friday to secure vendor slot. Implementation team is prepared to start Week of March 15."
+      }
+    },
+    "oneSlider": {
+      "name": "One-Slide Summary ('Slide Zero')",
+      "purpose": "Standalone summary that precedes a longer deck",
+      "structure": {
+        "title": "Full sentence with key message/recommendation",
+        "topLeft": "Situation (1-2 bullets)",
+        "topRight": "Visual supporting the recommendation (chart or diagram)",
+        "middleLeft": "Key findings (3-4 bullets with data)",
+        "bottomLeft": "Recommendation (1-2 sentences, bold)",
+        "bottomRight": "Implications and next steps (2-3 bullets)"
+      },
+      "usage": "Board meetings (execs read this first), steering committees, project approvals"
+    }
+  },
+
+  "narrativePatterns": {
+    "situationComplicationResolution": {
+      "name": "Situation-Complication-Resolution",
+      "source": "McKinsey/Minto Pyramid Principle variant",
+      "structure": [
+        {"stage": "Situation", "purpose": "Establish shared understanding of context", "length": "10-15% of document"},
+        {"stage": "Complication", "purpose": "Introduce the problem that disrupts the situation", "length": "15-20% of document"},
+        {"stage": "Resolution", "purpose": "Your recommended solution and implementation", "length": "65-75% of document"}
+      ],
+      "example": {
+        "situation": "CompanyX has maintained 30% market share for a decade in a stable $500M market.",
+        "complication": "However, three new digital-native competitors entered in 2025, offering 20% lower prices through direct-to-consumer models. CompanyX lost 5pts share in 6 months.",
+        "resolution": "We recommend a dual strategy: 1) Launch direct channel to match new entrants, 2) Differentiate legacy channel with premium services justifying current prices. This will stabilize share at 28% and protect 90% of current revenue."
+      }
+    },
+    "problemSolutionBenefit": {
+      "name": "Problem-Solution-Benefit",
+      "usage": "Change management, transformation programs",
+      "structure": [
+        {"stage": "Problem", "content": "Current state pain points, quantified impact"},
+        {"stage": "Solution", "content": "What we will do differently, how it works"},
+        {"stage": "Benefit", "content": "Future state outcomes, quantified benefits"}
+      ],
+      "emphasis": "Heavy emphasis on benefits (WIIFM - What's In It For Me)"
+    },
+    "beforeAfter": {
+      "name": "Before-After Contrast",
+      "usage": "Transformation stories, process redesign",
+      "structure": {
+        "before": {
+          "description": "Paint picture of current state problems",
+          "format": "Table or side-by-side comparison",
+          "metrics": "Quantify pain (time, cost, quality, satisfaction)"
+        },
+        "after": {
+          "description": "Describe future state after solution",
+          "format": "Matching table or comparison",
+          "metrics": "Quantify improvements (same metrics as before)"
+        },
+        "transition": {
+          "description": "Roadmap showing how to get from before to after",
+          "format": "Timeline or phased approach"
+        }
+      }
+    },
+    "3act": {
+      "name": "Three-Act Structure",
+      "source": "Storytelling, adapted for business",
+      "acts": [
+        {"act": 1, "name": "Setup", "content": "Introduce characters (stakeholders), context, stakes", "duration": "25%"},
+        {"act": 2, "name": "Conflict", "content": "Present challenges, obstacles, alternative approaches considered", "duration": "50%"},
+        {"act": 3, "name": "Resolution", "content": "Recommended solution, implementation, outcome", "duration": "25%"}
+      ],
+      "usage": "Case studies, transformation narratives, strategic storytelling"
+    }
+  },
+
+  "writingBestPractices": {
+    "clarity": {
+      "sentenceLength": "15-20 words average (vary for rhythm, but avoid >30 words)",
+      "paragraphLength": "3-5 sentences ideal, 7 maximum",
+      "activeVoice": {
+        "bad": "The project was completed by the team",
+        "good": "The team completed the project"
+      },
+      "strongVerbs": {
+        "avoid": ["is/are/was/were (to be verbs)", "utilize (use instead)", "facilitate (enable/help)"],
+        "prefer": ["Increase", "Reduce", "Deliver", "Achieve", "Transform", "Accelerate"]
+      },
+      "specificity": {
+        "bad": "We saw significant improvement",
+        "good": "We increased conversion rates by 23%"
+      }
+    },
+    "conciseness": {
+      "wordiness": {
+        "bad": "In order to optimize the utilization of resources",
+        "good": "To optimize resource use"
+      },
+      "redundancy": {
+        "avoid": ["Added bonus", "Advance planning", "End result", "Past history", "Future plans"],
+        "replace": ["Bonus", "Planning", "Result", "History", "Plans"]
+      },
+      "fillerWords": {
+        "avoid": ["Very", "Really", "Quite", "Somewhat", "Rather", "Basically", "Actually"],
+        "exception": "Acceptable in casual communication, remove in formal documents"
+      }
+    },
+    "persuasion": {
+      "evidenceBased": "Support every claim with data, cite sources",
+      "quantification": "Numbers are more persuasive than words (23% > 'significant')",
+      "comparisons": "Use benchmarks, alternatives, or past performance for context",
+      "credibility": {
+        "techniques": ["Cite authoritative sources", "Show methodology", "Acknowledge limitations", "Preempt objections"]
+      },
+      "callToAction": "Every document should end with clear next steps and owners"
+    },
+    "formatting": {
+      "scannability": {
+        "techniques": ["Headings every 2-3 paragraphs", "Bullet lists for items", "Bold for emphasis (sparingly)", "Tables for data", "Charts for trends"],
+        "goal": "Reader can skim and grasp key points in 30 seconds"
+      },
+      "emphasis": {
+        "bold": "Key recommendations, metrics, dates",
+        "italics": "Definitions, de-emphasis, citations",
+        "underline": "Avoid (use bold instead)",
+        "ALL CAPS": "Avoid (use bold instead)"
+      },
+      "lists": {
+        "bullets": "For unordered items or short lists",
+        "numbers": "For sequential steps or prioritized items",
+        "parallelStructure": "Start each bullet with same part of speech (all verbs or all nouns)"
+      }
+    }
+  },
+
+  "dataPresentation": {
+    "numberFormatting": {
+      "large": {
+        "millions": "$5M or $5.2M (not $5,000,000)",
+        "billions": "$1.3B",
+        "thousands": "$150K or 150k (context-dependent)"
+      },
+      "percentages": {
+        "whole": "15% (not 15 percent)",
+        "decimal": "15.7% (one decimal when precision matters)",
+        "basisPoints": "150bps (for small changes like margin movements)"
+      },
+      "currency": {
+        "placement": "$5M (US convention) or 5M USD (international)",
+        "multiple": "EGP 4.5M ($96K USD) - show both if relevant"
+      },
+      "ranges": {
+        "format": "15-20% or 15% to 20% (consistent throughout)",
+        "uncertainty": "~$5M or approximately $5M"
+      }
+    },
+    "comparisonTechniques": {
+      "variance": {
+        "absolute": "Revenue increased by $5M",
+        "relative": "Revenue increased by 15%",
+        "both": "Revenue increased by $5M (+15%)",
+        "direction": "Revenue increased 15% (not 'by 15%' in casual use)"
+      },
+      "indexing": {
+        "purpose": "Show trends when absolute values are less important",
+        "method": "Set base year = 100, calculate others as (Value / Base Value) × 100",
+        "example": "Year 1 = 100, Year 2 = 115 (15% growth), Year 3 = 132"
+      },
+      "benchmarking": {
+        "format": "Our 18% margin vs. industry 14% (+400bps)",
+        "visualization": "Bar chart with reference line for benchmark"
+      }
+    },
+    "tableDesign": {
+      "structure": {
+        "headers": "Bold, dark background, white text",
+        "rowLabels": "Left-aligned",
+        "numbers": "Right-aligned or center-aligned",
+        "totals": "Bold, double border or shading",
+        "alternatingRows": "Light shading for readability"
+      },
+      "order": {
+        "descending": "By value (highest to lowest) unless natural order exists",
+        "natural": "Time (left to right), geography (alphabetical or logical), process (sequential)"
+      },
+      "simplification": {
+        "maxRows": "10-12 rows visible (rest in appendix)",
+        "maxColumns": "6-8 columns ideal",
+        "aggregation": "Group small items into 'Other' category if <5% each"
+      }
+    }
+  },
+
+  "qualityChecklist": {
+    "content": [
+      "Clear recommendation or answer stated upfront",
+      "Every claim supported by evidence",
+      "All charts/tables have actionable titles",
+      "So what?' answered for each section",
+      "Next steps are specific (who, what, when)",
+      "Assumptions and limitations acknowledged"
+    ],
+    "structure": [
+      "Logical flow (SCQA or similar)",
+      "MECE organization (no gaps or overlaps)",
+      "Headings create clear hierarchy",
+      "Transitions between sections",
+      "Consistent numbering/formatting"
+    ],
+    "writing": [
+      "Active voice (>80% of sentences)",
+      "Short sentences (avg <20 words)",
+      "No jargon without definition",
+      "Consistent terminology",
+      "Error-free (spelling, grammar, math)"
+    ],
+    "design": [
+      "Brand compliance (colors, fonts, logos)",
+      "Consistent formatting throughout",
+      "White space for readability",
+      "Charts follow visualization best practices",
+      "Professional appearance (no clipart, comic sans, etc.)"
+    ]
+  },
+
+  "commonMistakes": {
+    "avoid": [
+      "Burying the lead (answer on page 5 instead of page 1)",
+      "Chart titles that just describe ('Revenue by Year' instead of 'Revenue grew 15% CAGR')",
+      "Passive voice ('It was decided' instead of 'We recommend')",
+      "Vague recommendations ('Improve customer satisfaction' instead of 'Reduce call wait times to <2 min by Q3')",
+      "Analysis without implication ('Share dropped 5pts' without 'costing us $10M annually')",
+      "Too much text on slides (>50 words)",
+      "Inconsistent formatting (fonts, colors, number formats)",
+      "Missing sources ('Industry benchmark' without citation)",
+      "Acronyms without definition (CAGR, EBITDA, etc.)",
+      "Imprecise language ('a lot', 'significant', 'soon')"
+    ]
+  },
+
+  "templateIntegration": {
+    "withDOCX": "Use createHeading, createParagraph, createTable from Omega_DOCX_Template_Standards_v1.1.0.json",
+    "withVISUALS": "Reference BIG3_VISUALIZATION_LIBRARY.json for chart types and design",
+    "withFRAMEWORKS": "Apply frameworks from BIG3_CONSULTING_FRAMEWORKS.json in analysis sections",
+    "consistency": "Maintain same narrative pattern throughout document (don't mix SCQA with Problem-Solution)"
+  }
+}

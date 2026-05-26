@@ -1,0 +1,23 @@
+{
+  "$schema": "https://claude.com/schemas/plugin.json",
+  "name": "omega-ind-mining",
+  "version": "1.0.0",
+  "description": "Mining & metals — ore reserves, mine planning, ESG license to operate, tailings.",
+  "author": {
+    "name": "Omega Consulting",
+    "url": "https://omega-consulting.local"
+  },
+  "homepage": "https://github.com/HossamDaoud83/Omega_Consulting_Template_v1",
+  "license": "MIT",
+  "keywords": [
+    "consulting",
+    "omega",
+    "industry",
+    "mining"
+  ],
+  "components": {
+    "commands": "commands/",
+    "agents": "agents/",
+    "skills": "skills/"
+  }
+}

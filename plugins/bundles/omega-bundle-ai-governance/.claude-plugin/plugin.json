@@ -1,0 +1,25 @@
+{
+  "$schema": "https://claude.com/schemas/plugin.json",
+  "name": "omega-bundle-ai-governance",
+  "version": "1.0.0",
+  "description": "AI Governance engagements (any industry) — core + kg-enhance + AIG service-line + ISO certification + AAI (agentic AI tooling). Industry plugin added separately based on client domain.",
+  "author": {
+    "name": "Omega Consulting",
+    "url": "https://omega-consulting.local"
+  },
+  "homepage": "https://github.com/HossamDaoud83/Omega_Plugins_Official",
+  "license": "MIT",
+  "keywords": [
+    "consulting",
+    "omega",
+    "bundle",
+    "meta-plugin"
+  ],
+  "dependencies": [
+    "omega-core",
+    "omega-kg-enhance",
+    "omega-aig",
+    "omega-iso",
+    "omega-aai"
+  ]
+}

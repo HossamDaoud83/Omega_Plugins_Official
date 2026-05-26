@@ -1,0 +1,9 @@
+{
+  "name": "@omega/ind-realestate",
+  "version": "4.0.0-alpha.0",
+  "private": true,
+  "description": "Omega omega-ind-realestate plugin",
+  "scripts": {
+    "test": "node tests/run-all.js"
+  }
+}

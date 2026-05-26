@@ -1,0 +1,24 @@
+{
+  "$schema": "https://claude.com/schemas/plugin.json",
+  "name": "omega-bundle-education",
+  "version": "1.0.0",
+  "description": "Education engagements — core + kg-enhance + edu service-line + education industry vocab (K-12, higher ed, accreditation, FERPA, LMS).",
+  "author": {
+    "name": "Omega Consulting",
+    "url": "https://omega-consulting.local"
+  },
+  "homepage": "https://github.com/HossamDaoud83/Omega_Plugins_Official",
+  "license": "MIT",
+  "keywords": [
+    "consulting",
+    "omega",
+    "bundle",
+    "meta-plugin"
+  ],
+  "dependencies": [
+    "omega-core",
+    "omega-kg-enhance",
+    "omega-edu",
+    "omega-ind-education"
+  ]
+}

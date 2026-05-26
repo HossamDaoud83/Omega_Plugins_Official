@@ -1,0 +1,562 @@
+{
+  "$schema": "Big 3 Consulting Frameworks Library",
+  "version": "1.0.0",
+  "created": "2026-02-04",
+  "templateName": "Big 3 Strategic & Analytical Frameworks",
+  "description": "Comprehensive library of consulting frameworks used by McKinsey, BCG, Bain, and other top firms. Includes strategic, financial, operational, and problem-solving frameworks with implementation guidance.",
+
+  "strategicFrameworks": {
+    "portersFiveForces": {
+      "name": "Porter's Five Forces",
+      "author": "Michael Porter (Harvard Business School)",
+      "category": "Competitive Strategy",
+      "purpose": "Analyze industry structure and competitive intensity to determine attractiveness",
+      "forces": [
+        {
+          "name": "Threat of New Entrants",
+          "factors": ["Economies of scale", "Capital requirements", "Brand loyalty", "Access to distribution", "Regulatory barriers", "Technology/IP"],
+          "rating": "Low / Medium / High",
+          "questions": [
+            "How difficult is it for new competitors to enter this market?",
+            "What barriers exist (capital, technology, regulation)?",
+            "How quickly can new entrants achieve scale?"
+          ]
+        },
+        {
+          "name": "Bargaining Power of Suppliers",
+          "factors": ["Supplier concentration", "Switching costs", "Forward integration threat", "Input uniqueness", "Availability of substitutes"],
+          "rating": "Low / Medium / High",
+          "questions": [
+            "How concentrated is the supplier base?",
+            "Can suppliers easily switch to other customers?",
+            "Are there substitute inputs available?"
+          ]
+        },
+        {
+          "name": "Bargaining Power of Buyers",
+          "factors": ["Buyer concentration", "Volume purchased", "Switching costs", "Backward integration threat", "Price sensitivity"],
+          "rating": "Low / Medium / High",
+          "questions": [
+            "How concentrated are our customers?",
+            "Can buyers easily switch to competitors?",
+            "How price-sensitive are buyers?"
+          ]
+        },
+        {
+          "name": "Threat of Substitutes",
+          "factors": ["Relative price-performance", "Switching costs", "Buyer propensity to substitute", "Perceived differentiation"],
+          "rating": "Low / Medium / High",
+          "questions": [
+            "What alternative products/services can meet the same need?",
+            "How do substitutes compare on price and performance?",
+            "How likely are customers to switch?"
+          ]
+        },
+        {
+          "name": "Rivalry Among Existing Competitors",
+          "factors": ["Industry growth rate", "Number of competitors", "Product differentiation", "Exit barriers", "Strategic stakes"],
+          "rating": "Low / Medium / High",
+          "questions": [
+            "How intense is price competition?",
+            "Are products commoditized or differentiated?",
+            "What is the rate of industry growth?"
+          ]
+        }
+      ],
+      "output": {
+        "attractivenessScore": "Calculate weighted score across all five forces",
+        "strategicImplications": "Identify which forces are most favorable/unfavorable",
+        "recommendations": "Strategies to improve positioning within the force framework"
+      },
+      "visualization": "Radar chart showing strength of each force, or table with ratings and commentary"
+    },
+    "bcgMatrix": {
+      "name": "BCG Growth-Share Matrix",
+      "author": "Boston Consulting Group",
+      "category": "Portfolio Analysis",
+      "purpose": "Prioritize resource allocation across business units or product lines based on market growth and relative market share",
+      "axes": {
+        "horizontal": "Relative Market Share (company share / largest competitor share)",
+        "vertical": "Market Growth Rate (%)"
+      },
+      "quadrants": [
+        {
+          "name": "Stars",
+          "position": "High Growth, High Market Share",
+          "characteristics": "Market leaders in growing markets",
+          "cashFlow": "Cash neutral (invest to maintain share)",
+          "strategy": "Invest to maintain/grow market share",
+          "color": "#228B22"
+        },
+        {
+          "name": "Cash Cows",
+          "position": "Low Growth, High Market Share",
+          "characteristics": "Dominant in mature markets",
+          "cashFlow": "Positive cash generation",
+          "strategy": "Harvest - milk for cash to fund Stars and Question Marks",
+          "color": "#1B4F72"
+        },
+        {
+          "name": "Question Marks (Problem Children)",
+          "position": "High Growth, Low Market Share",
+          "characteristics": "Small players in growing markets",
+          "cashFlow": "Cash negative (requires investment)",
+          "strategy": "Selective investment - invest heavily or divest",
+          "color": "#FF8C00"
+        },
+        {
+          "name": "Dogs",
+          "position": "Low Growth, Low Market Share",
+          "characteristics": "Weak position in unattractive markets",
+          "cashFlow": "Low or negative",
+          "strategy": "Divest or harvest (minimal investment)",
+          "color": "#CC0000"
+        }
+      ],
+      "calculation": {
+        "relativeMarketShare": "Your market share ÷ Largest competitor's market share",
+        "marketGrowthRate": "Industry revenue growth rate (CAGR)",
+        "bubbleSize": "Revenue or profit contribution"
+      },
+      "strategicImplications": {
+        "balanced": "Healthy mix of Stars, Cash Cows, and selective Question Marks",
+        "unbalanced": "Too many Dogs or Question Marks without Stars/Cash Cows",
+        "resourceAllocation": "Cash from Cows funds Stars; selective investment in Question Marks"
+      },
+      "visualization": "2x2 scatter plot with bubbles sized by revenue"
+    },
+    "mckinsey7S": {
+      "name": "McKinsey 7S Framework",
+      "author": "McKinsey & Company (Peters, Waterman, Phillips)",
+      "category": "Organizational Effectiveness",
+      "purpose": "Analyze organizational alignment across seven interdependent elements",
+      "elements": {
+        "hard": [
+          {
+            "name": "Strategy",
+            "description": "Plan to achieve competitive advantage",
+            "questions": ["What is our strategy?", "How do we gain advantage?", "Is strategy clearly articulated?"]
+          },
+          {
+            "name": "Structure",
+            "description": "How the organization is organized (hierarchy, reporting)",
+            "questions": ["What is our org structure?", "Is it aligned with strategy?", "Clear roles and responsibilities?"]
+          },
+          {
+            "name": "Systems",
+            "description": "Processes and procedures (IT, HR, finance, operations)",
+            "questions": ["What systems support our work?", "Are they efficient?", "Do they enable or hinder strategy?"]
+          }
+        ],
+        "soft": [
+          {
+            "name": "Shared Values",
+            "description": "Core values and culture (center of model)",
+            "questions": ["What do we stand for?", "What are our core values?", "Is culture aligned with strategy?"]
+          },
+          {
+            "name": "Skills",
+            "description": "Distinctive capabilities and competencies",
+            "questions": ["What are we really good at?", "Do we have the skills to execute strategy?", "Skill gaps?"]
+          },
+          {
+            "name": "Style",
+            "description": "Leadership style and management approach",
+            "questions": ["How do leaders behave?", "What is the management style?", "Is style appropriate for strategy?"]
+          },
+          {
+            "name": "Staff",
+            "description": "Human resources - capabilities, motivation, development",
+            "questions": ["Do we have the right people?", "Are they motivated?", "Development programs in place?"]
+          }
+        ]
+      },
+      "application": {
+        "organizationalChange": "Assess current vs desired state across all 7S",
+        "mergers": "Identify cultural and operational integration challenges",
+        "strategy": "Ensure all elements support strategic direction"
+      },
+      "visualization": "Circular diagram with Shared Values in center, other 6S around it, interconnecting lines"
+    },
+    "geMcKinseyMatrix": {
+      "name": "GE-McKinsey Nine-Box Matrix",
+      "author": "General Electric & McKinsey & Company",
+      "category": "Portfolio Analysis (advanced)",
+      "purpose": "More nuanced portfolio analysis than BCG Matrix, using multi-factor assessment",
+      "axes": {
+        "horizontal": "Competitive Strength (weighted score of factors)",
+        "vertical": "Industry Attractiveness (weighted score of factors)"
+      },
+      "factors": {
+        "industryAttractiveness": [
+          "Market size and growth",
+          "Profitability (margins, ROI)",
+          "Competitive intensity",
+          "Technological change",
+          "Regulatory environment",
+          "Macroeconomic factors"
+        ],
+        "competitiveStrength": [
+          "Market share",
+          "Brand strength",
+          "Cost position",
+          "Technology/innovation",
+          "Quality/service",
+          "Management strength"
+        ]
+      },
+      "scoring": {
+        "scale": "1-5 or 1-10 for each factor",
+        "weighting": "Assign weights based on importance (sum to 100%)",
+        "calculation": "Weighted average score for each axis"
+      },
+      "matrix": {
+        "size": "3x3 grid",
+        "zones": [
+          {"position": "High-High", "label": "Invest/Grow", "color": "#228B22"},
+          {"position": "Medium", "label": "Selective/Maintain", "color": "#FF8C00"},
+          {"position": "Low-Low", "label": "Harvest/Divest", "color": "#CC0000"}
+        ]
+      },
+      "visualization": "3x3 grid with colored zones, bubbles for business units"
+    },
+    "swot": {
+      "name": "SWOT Analysis",
+      "category": "Strategic Planning",
+      "purpose": "Identify Strengths, Weaknesses, Opportunities, Threats to inform strategy",
+      "structure": {
+        "internal": [
+          {"name": "Strengths", "description": "Internal advantages (resources, capabilities, position)", "examples": ["Strong brand", "Patent protection", "Economies of scale", "Talented workforce"]},
+          {"name": "Weaknesses", "description": "Internal disadvantages or gaps", "examples": ["High costs", "Limited distribution", "Outdated technology", "Weak management"]}
+        ],
+        "external": [
+          {"name": "Opportunities", "description": "External factors to exploit", "examples": ["Growing market", "New customer segments", "Regulatory changes", "Technology trends"]},
+          {"name": "Threats", "description": "External risks or challenges", "examples": ["New competitors", "Substitute products", "Economic downturn", "Regulatory restrictions"]}
+        ]
+      },
+      "application": {
+        "strategies": [
+          "SO (Strength-Opportunity): Leverage strengths to capture opportunities",
+          "WO (Weakness-Opportunity): Overcome weaknesses to pursue opportunities",
+          "ST (Strength-Threat): Use strengths to mitigate threats",
+          "WT (Weakness-Threat): Defensive strategies to minimize exposure"
+        ]
+      },
+      "limitations": [
+        "Can be too broad without prioritization",
+        "Lacks quantification",
+        "Static (needs regular updates)",
+        "Should lead to actionable strategies, not just list-making"
+      ],
+      "visualization": "2x2 quadrant table or four-box diagram"
+    },
+    "pestel": {
+      "name": "PESTEL Analysis",
+      "category": "Macro-Environmental Scanning",
+      "purpose": "Analyze external macro factors affecting the organization",
+      "factors": [
+        {
+          "name": "Political",
+          "elements": ["Government stability", "Tax policy", "Trade regulations", "Political risk", "Corruption levels"],
+          "questions": ["How stable is the political environment?", "What are the tax implications?", "Trade barriers or incentives?"]
+        },
+        {
+          "name": "Economic",
+          "elements": ["GDP growth", "Interest rates", "Exchange rates", "Inflation", "Unemployment", "Disposable income"],
+          "questions": ["What is the economic outlook?", "How sensitive are we to economic cycles?", "Currency risks?"]
+        },
+        {
+          "name": "Social",
+          "elements": ["Demographics", "Cultural attitudes", "Lifestyle trends", "Education levels", "Health consciousness"],
+          "questions": ["What demographic trends affect us?", "Changing consumer preferences?", "Social attitudes toward our products?"]
+        },
+        {
+          "name": "Technological",
+          "elements": ["R&D activity", "Automation", "Technology incentives", "Rate of change", "Digital disruption"],
+          "questions": ["What technologies could disrupt us?", "Are we keeping pace with innovation?", "Opportunities from new tech?"]
+        },
+        {
+          "name": "Environmental",
+          "elements": ["Climate change", "Sustainability", "Energy consumption", "Waste management", "Carbon footprint"],
+          "questions": ["What environmental regulations apply?", "Sustainability pressures?", "Climate risks or opportunities?"]
+        },
+        {
+          "name": "Legal",
+          "elements": ["Employment law", "Consumer protection", "Antitrust", "Health & safety", "IP law"],
+          "questions": ["What legal requirements must we meet?", "Upcoming regulatory changes?", "Compliance risks?"]
+        }
+      ],
+      "output": {
+        "format": "Table or list of factors with impact assessment (High/Medium/Low) and trends (Increasing/Stable/Decreasing)",
+        "strategicImplications": "How to respond to each significant factor"
+      }
+    },
+    "valueChain": {
+      "name": "Porter's Value Chain",
+      "author": "Michael Porter",
+      "category": "Operational Strategy",
+      "purpose": "Identify sources of competitive advantage by analyzing activities that create value",
+      "activities": {
+        "primary": [
+          {"name": "Inbound Logistics", "description": "Receiving, storing, inventory management", "optimization": "Reduce costs, improve quality of inputs"},
+          {"name": "Operations", "description": "Transformation of inputs to products/services", "optimization": "Efficiency, quality, flexibility"},
+          {"name": "Outbound Logistics", "description": "Distribution, warehousing, delivery", "optimization": "Speed, reliability, cost"},
+          {"name": "Marketing & Sales", "description": "Promotion, sales, pricing", "optimization": "Customer acquisition cost, conversion rates"},
+          {"name": "Service", "description": "After-sales support, maintenance, warranty", "optimization": "Customer satisfaction, retention"}
+        ],
+        "support": [
+          {"name": "Firm Infrastructure", "description": "Management, finance, legal, quality", "optimization": "Governance, cost control"},
+          {"name": "Human Resource Management", "description": "Recruiting, training, compensation", "optimization": "Talent quality, retention, productivity"},
+          {"name": "Technology Development", "description": "R&D, process improvement, automation", "optimization": "Innovation, efficiency gains"},
+          {"name": "Procurement", "description": "Purchasing inputs (materials, services)", "optimization": "Cost, quality, reliability of supply"}
+        ]
+      },
+      "analysis": {
+        "costAnalysis": "Identify where costs are incurred in each activity",
+        "differentiationAnalysis": "Identify activities that create customer value and differentiation",
+        "benchmarking": "Compare performance in each activity vs competitors"
+      },
+      "output": {
+        "visualization": "Horizontal arrow diagram with support activities above, primary activities below",
+        "recommendations": "Where to invest, where to optimize, potential outsourcing candidates"
+      }
+    },
+    "ansoffMatrix": {
+      "name": "Ansoff Growth Matrix",
+      "author": "Igor Ansoff",
+      "category": "Growth Strategy",
+      "purpose": "Identify growth strategies based on market and product dimensions",
+      "quadrants": [
+        {"name": "Market Penetration", "market": "Existing", "product": "Existing", "strategy": "Increase share in current markets with current products", "risk": "Low", "tactics": ["Price competition", "Promotion", "Improve quality/service"]},
+        {"name": "Market Development", "market": "New", "product": "Existing", "strategy": "Enter new markets or segments with current products", "risk": "Medium", "tactics": ["Geographic expansion", "New segments", "New channels"]},
+        {"name": "Product Development", "market": "Existing", "product": "New", "strategy": "Develop new products for existing markets", "risk": "Medium", "tactics": ["R&D", "New features", "Product line extensions"]},
+        {"name": "Diversification", "market": "New", "product": "New", "strategy": "Enter new markets with new products", "risk": "High", "tactics": ["M&A", "Joint ventures", "Organic growth into new areas"]}
+      ],
+      "riskAssessment": "Market Penetration < Market/Product Development < Diversification",
+      "visualization": "2x2 matrix with axes: Market (Existing/New) and Product (Existing/New)"
+    }
+  },
+
+  "financialFrameworks": {
+    "dcf": {
+      "name": "Discounted Cash Flow (DCF) Valuation",
+      "purpose": "Value an investment based on projected future cash flows discounted to present value",
+      "formula": "PV = CF1/(1+r)^1 + CF2/(1+r)^2 + ... + CFn/(1+r)^n + Terminal Value/(1+r)^n",
+      "steps": [
+        "Project Free Cash Flows (FCF) for forecast period (5-10 years)",
+        "Determine Discount Rate (WACC for company, required return for project)",
+        "Calculate Terminal Value (perpetuity growth or exit multiple)",
+        "Discount all cash flows to present value",
+        "Sum to get Enterprise Value, adjust for debt/cash to get Equity Value"
+      ],
+      "keyInputs": {
+        "revenue": "Revenue growth assumptions",
+        "margins": "EBITDA margin, operating margin",
+        "capex": "Capital expenditure requirements",
+        "workingCapital": "Changes in working capital",
+        "wacc": "Weighted Average Cost of Capital",
+        "terminalGrowth": "Perpetuity growth rate (typically GDP growth rate, 2-3%)"
+      },
+      "sensitivity": "Run scenarios varying WACC (±1-2%), revenue growth (±5-10%), terminal value assumptions"
+    },
+    "irr": {
+      "name": "Internal Rate of Return (IRR)",
+      "purpose": "Calculate the discount rate at which NPV = 0, used to evaluate project profitability",
+      "formula": "Find r where: 0 = CF0 + CF1/(1+r)^1 + CF2/(1+r)^2 + ... + CFn/(1+r)^n",
+      "interpretation": {
+        "hurdle": "IRR must exceed hurdle rate (WACC + risk premium)",
+        "comparison": "Compare IRR across mutually exclusive projects"
+      },
+      "limitations": [
+        "Assumes reinvestment at IRR (often unrealistic)",
+        "Can have multiple IRRs for unconventional cash flows",
+        "Doesn't account for project scale (prefer NPV for that)"
+      ]
+    },
+    "npv": {
+      "name": "Net Present Value (NPV)",
+      "purpose": "Calculate the value created by an investment (PV of inflows - PV of outflows)",
+      "formula": "NPV = -Initial Investment + CF1/(1+r)^1 + CF2/(1+r)^2 + ... + CFn/(1+r)^n",
+      "decisionRule": {
+        "positive": "Accept project (creates value)",
+        "negative": "Reject project (destroys value)",
+        "zero": "Indifferent (earns exactly the discount rate)"
+      },
+      "advantages": ["Accounts for time value of money", "Additive (can sum NPVs)", "Accounts for scale"],
+      "keyAssumptions": ["Discount rate (WACC)", "Cash flow projections", "Terminal value"]
+    },
+    "payback": {
+      "name": "Payback Period",
+      "purpose": "Time required to recover initial investment",
+      "calculation": "Count years until cumulative cash flows equal initial investment",
+      "interpretation": {
+        "simple": "Ignores time value of money",
+        "discounted": "Uses discounted cash flows for more accurate payback"
+      },
+      "limitations": ["Ignores cash flows after payback", "No indication of profitability", "Arbitrary cutoff"],
+      "usage": "Quick screening tool, especially for high-risk or short-horizon projects"
+    },
+    "roi": {
+      "name": "Return on Investment (ROI)",
+      "purpose": "Simple profitability metric comparing gain to investment",
+      "formula": "ROI = (Gain - Investment) / Investment × 100%",
+      "advantages": ["Simple to understand", "Easy to communicate"],
+      "limitations": ["Doesn't account for time", "Doesn't account for risk", "Can be manipulated (numerator/denominator definitions)"]
+    },
+    "sensitivityAnalysis": {
+      "name": "Sensitivity Analysis",
+      "purpose": "Test impact of changes in key variables on financial outcomes (NPV, IRR)",
+      "method": {
+        "oneWay": "Vary one variable at a time (e.g., revenue ±10%), hold others constant",
+        "twoWay": "Vary two variables simultaneously, show in matrix",
+        "scenario": "Define discrete scenarios (Base, Optimistic, Pessimistic) with multiple variable changes"
+      },
+      "keyVariables": ["Revenue growth", "Margins", "CAPEX", "Discount rate", "Terminal value"],
+      "output": {
+        "tornado": "Tornado diagram showing which variables have biggest impact",
+        "table": "Sensitivity table with NPV/IRR for different scenarios",
+        "chart": "Waterfall chart showing contribution of each variable to total variance"
+      }
+    }
+  },
+
+  "problemSolvingFrameworks": {
+    "mece": {
+      "name": "MECE Principle",
+      "fullName": "Mutually Exclusive, Collectively Exhaustive",
+      "author": "McKinsey & Company",
+      "purpose": "Structure analysis to avoid overlaps and gaps",
+      "mutuallyExclusive": "Categories don't overlap (no double-counting)",
+      "collectivelyExhaustive": "Categories cover all possibilities (nothing missing)",
+      "examples": {
+        "revenue": "MECE: Product A + Product B + Product C (if these are all products)",
+        "notMECE": "Large customers + Growing customers (overlap possible)"
+      },
+      "application": [
+        "Issue trees (breaking down problems)",
+        "Segmentation (customer groups, product lines)",
+        "Cost breakdowns",
+        "Root cause analysis"
+      ]
+    },
+    "issueTree": {
+      "name": "Issue Tree / Logic Tree",
+      "purpose": "Decompose a problem into MECE sub-issues to identify root causes and solutions",
+      "structure": {
+        "root": "Main problem/question",
+        "branches": "MECE decomposition of root into sub-issues",
+        "leaves": "Specific, testable hypotheses"
+      },
+      "types": {
+        "diagnostic": "What is causing the problem? (e.g., Why are profits declining?)",
+        "solution": "How can we solve the problem? (e.g., How to increase revenue?)"
+      },
+      "example": {
+        "question": "How to increase profits?",
+        "level1": ["Increase Revenue", "Decrease Costs"],
+        "level2_revenue": ["Increase Prices", "Increase Volume"],
+        "level2_costs": ["Reduce COGS", "Reduce SG&A"],
+        "level3": "Continue decomposition until actionable"
+      },
+      "bestPractices": [
+        "Use MECE at each level",
+        "Go 3-5 levels deep (not too shallow, not too deep)",
+        "Focus analysis on high-impact branches",
+        "Validate hypotheses at leaf level with data"
+      ]
+    },
+    "hypothesisDriven": {
+      "name": "Hypothesis-Driven Problem Solving",
+      "purpose": "Start with a hypothesis about the answer, then test it (vs. boiling the ocean)",
+      "process": [
+        "Define the problem/question",
+        "Develop initial hypothesis based on experience/intuition",
+        "Identify what data/analysis would prove/disprove hypothesis",
+        "Conduct targeted analysis",
+        "Refine or reject hypothesis",
+        "Iterate until confident in answer"
+      ],
+      "advantages": ["Faster than exhaustive analysis", "Focuses effort on key issues", "Iterative and adaptive"],
+      "format": "If [situation], then [expected outcome], because [reasoning]",
+      "example": "If we reduce prices by 10%, then volume will increase by 20%, because price elasticity in this segment is -2.0"
+    },
+    "pyramidPrinciple": {
+      "name": "Pyramid Principle",
+      "author": "Barbara Minto (McKinsey)",
+      "purpose": "Structure communication with the answer first, then supporting arguments",
+      "structure": {
+        "top": "Main conclusion/recommendation (the 'So what?')",
+        "level1": "3-5 key supporting arguments",
+        "level2": "Evidence/data supporting each argument"
+      },
+      "rules": [
+        "Start with the answer",
+        "Group ideas logically",
+        "Order ideas (importance, time, structure)",
+        "Summarize each group",
+        "Use MECE groupings"
+      ],
+      "application": ["Executive summaries", "Slide decks", "Reports", "Emails to senior leaders"],
+      "benefits": ["Clarity for audience", "Easier to follow logic", "Action-oriented"]
+    },
+    "scqa": {
+      "name": "SCQA Framework",
+      "fullName": "Situation - Complication - Question - Answer",
+      "author": "Barbara Minto (McKinsey)",
+      "purpose": "Structure storytelling to engage audience and drive to recommendation",
+      "components": [
+        {"name": "Situation", "description": "Set the context (undisputed facts)", "example": "Our company has 15% market share in a $500M market"},
+        {"name": "Complication", "description": "Introduce the problem/opportunity", "example": "However, a new competitor entered with 10% lower prices"},
+        {"name": "Question", "description": "The key question to address", "example": "How should we respond to maintain share and profitability?"},
+        {"name": "Answer", "description": "Your recommendation", "example": "We recommend a three-pronged response: cost reduction, differentiation, and selective price matching"}
+      ],
+      "variations": {
+        "startWithAnswer": "Answer-Situation-Complication (when audience is impatient)",
+        "multipleComplications": "Can have multiple complications before the question"
+      }
+    }
+  },
+
+  "changeManagementFrameworks": {
+    "adkar": {
+      "name": "ADKAR Model",
+      "author": "Prosci",
+      "purpose": "Individual change management framework",
+      "stages": [
+        {"name": "Awareness", "description": "Understand why change is needed", "actions": ["Communicate business case", "Share data on need for change"]},
+        {"name": "Desire", "description": "Personal motivation to support change", "actions": ["Address WIIFM (What's In It For Me)", "Engage leaders as sponsors"]},
+        {"name": "Knowledge", "description": "Understand how to change", "actions": ["Training", "Job aids", "Documentation"]},
+        {"name": "Ability", "description": "Skills to implement change", "actions": ["Practice", "Coaching", "Support systems"]},
+        {"name": "Reinforcement", "description": "Sustain the change", "actions": ["Recognition", "Incentives", "Feedback loops"]}
+      ],
+      "application": "Assess where individuals/groups are stuck in ADKAR progression and address barriers"
+    },
+    "kotter8Step": {
+      "name": "Kotter's 8-Step Change Model",
+      "author": "John Kotter (Harvard)",
+      "purpose": "Organizational change management process",
+      "steps": [
+        "Create Urgency (communicate need for change)",
+        "Form Powerful Coalition (get leadership buy-in)",
+        "Create Vision (clear picture of future state)",
+        "Communicate Vision (repeatedly, through multiple channels)",
+        "Empower Action (remove barriers, enable change agents)",
+        "Create Quick Wins (celebrate early successes)",
+        "Build on Change (use momentum, tackle bigger issues)",
+        "Anchor in Culture (embed changes in processes, norms)"
+      ]
+    }
+  },
+
+  "usageGuidelines": {
+    "frameworkSelection": {
+      "strategic": "Use Porter's Five Forces for industry analysis, BCG/GE Matrix for portfolio decisions, McKinsey 7S for organizational alignment",
+      "financial": "Use DCF for valuation, NPV for project selection, IRR for profitability comparison, Sensitivity for risk assessment",
+      "problemSolving": "Use MECE for structure, Issue Trees for problem decomposition, Hypothesis-Driven for fast problem solving, Pyramid Principle for communication"
+    },
+    "combining": "Often use multiple frameworks in sequence (e.g., PESTEL → Porter's Five Forces → SWOT → Strategy Selection)",
+    "customization": "Adapt frameworks to context - don't force-fit if not relevant",
+    "documentation": "Always document assumptions, data sources, and scoring methodologies",
+    "iteration": "Revisit frameworks periodically as conditions change"
+  }
+}

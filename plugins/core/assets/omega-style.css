@@ -1,0 +1,263 @@
+/*
+ * Omega (Omega Consulting) Brand Stylesheet
+ * Version: 1.0
+ * Use this CSS for web-based deliverables and HTML outputs
+ */
+
+:root {
+    /* Primary Colors */
+    --omega-primary: #1B4F72;
+    --omega-primary-rgb: 27, 79, 114;
+    --omega-accent: #1B4F72;
+    
+    /* Table Colors */
+    --omega-table-header-bg: #1B4F72;
+    --omega-table-header-text: #FFFFFF;
+    --omega-table-border: #1B4F72;
+    --omega-table-alt-row: #F8FBFD;
+    
+    /* Text Colors */
+    --omega-text: #000000;
+    --omega-white: #FFFFFF;
+    --omega-gray: #666666;
+    --omega-light-gray: #F8FBFD;
+    
+    /* Fonts */
+    --omega-font-heading: "Arial Black", Arial, Helvetica, sans-serif;
+    --omega-font-body: Arial, Helvetica, sans-serif;
+    
+    /* Spacing */
+    --omega-margin: 1rem;
+    --omega-padding: 1rem;
+}
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+
+body {
+    font-family: var(--omega-font-body);
+    font-size: 11pt;
+    line-height: 1.15;
+    color: var(--omega-text);
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--omega-font-heading);
+    color: var(--omega-primary);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+h1 { font-size: 24pt; }
+h2 { font-size: 18pt; }
+h3 { font-size: 14pt; }
+h4 { font-size: 12pt; }
+
+/* ========================================
+   TABLES
+   ======================================== */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+table th {
+    background-color: var(--omega-table-header-bg);
+    color: var(--omega-table-header-text);
+    font-weight: bold;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid var(--omega-table-border);
+}
+
+table td {
+    padding: 8px 10px;
+    border: 1px solid var(--omega-table-border);
+}
+
+table tr:nth-child(even) {
+    background-color: var(--omega-table-alt-row);
+}
+
+/* ========================================
+   KEY TERMS & HIGHLIGHTS
+   ======================================== */
+
+.omega-key-term,
+strong.key-term {
+    color: var(--omega-primary);
+    font-weight: bold;
+}
+
+.omega-definition,
+em.definition {
+    color: var(--omega-primary);
+    font-style: italic;
+}
+
+.omega-highlight {
+    background-color: #D4E6F1;
+    color: var(--omega-primary);
+    padding: 2px 6px;
+}
+
+/* ========================================
+   LINKS
+   ======================================== */
+
+a {
+    color: var(--omega-primary);
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #2874A6;
+}
+
+/* ========================================
+   HEADER & FOOTER
+   ======================================== */
+
+.omega-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 2px solid var(--omega-primary);
+}
+
+.omega-header-logo {
+    height: 50px;
+}
+
+.omega-header-title {
+    font-family: var(--omega-font-heading);
+    font-size: 18pt;
+    color: var(--omega-primary);
+}
+
+.omega-footer {
+    text-align: center;
+    padding: 1rem;
+    border-top: 1px solid var(--omega-primary);
+    font-size: 10pt;
+    color: var(--omega-primary);
+}
+
+.omega-footer-confidential {
+    font-style: italic;
+    font-size: 9pt;
+    color: var(--omega-gray);
+}
+
+/* ========================================
+   DOCUMENT LAYOUT
+   ======================================== */
+
+.omega-document {
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 1in;
+    background: white;
+}
+
+.omega-section {
+    margin-bottom: 2rem;
+}
+
+.omega-section-title {
+    color: var(--omega-primary);
+    font-family: var(--omega-font-heading);
+    font-size: 18pt;
+    border-bottom: 2px solid var(--omega-primary);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* ========================================
+   COMPONENTS
+   ======================================== */
+
+.omega-callout {
+    background-color: var(--omega-light-gray);
+    border-left: 4px solid var(--omega-primary);
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.omega-callout-title {
+    font-weight: bold;
+    color: var(--omega-primary);
+    margin-bottom: 0.5rem;
+}
+
+.omega-card {
+    border: 1px solid var(--omega-primary);
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.omega-card-header {
+    background-color: var(--omega-primary);
+    color: var(--omega-white);
+    padding: 0.75rem 1rem;
+    margin: -1rem -1rem 1rem -1rem;
+    font-weight: bold;
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+
+@media print {
+    body {
+        font-size: 11pt;
+    }
+    
+    .omega-document {
+        padding: 0;
+        max-width: none;
+    }
+    
+    h1, h2, h3 {
+        page-break-after: avoid;
+    }
+    
+    table {
+        page-break-inside: avoid;
+    }
+    
+    .omega-header,
+    .omega-footer {
+        position: fixed;
+    }
+    
+    .omega-header {
+        top: 0;
+    }
+    
+    .omega-footer {
+        bottom: 0;
+    }
+}
+
+/* ========================================
+   DARK MODE THEME
+   ======================================== */
+
+.omega-dark-theme {
+    --omega-text: #FFFFFF;
+    --omega-white: #1a1a1a;
+    --omega-light-gray: #2d2d2d;
+    background-color: #1a1a1a;
+}
+
+.omega-dark-theme table tr:nth-child(even) {
+    background-color: #2d2d2d;
+}

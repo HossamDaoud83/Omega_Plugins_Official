@@ -1,0 +1,774 @@
+{
+  "$schema": "Big 3 Visualization Library",
+  "version": "1.0.0",
+  "created": "2026-02-04",
+  "templateName": "Big 3 Consulting Visualization Library",
+  "description": "Comprehensive chart, diagram, and visualization specifications based on McKinsey, BCG, and Bain best practices. Designed for executive-level business documents and presentations.",
+  "compatibleWith": ["docx", "pptx", "Chart.js", "D3.js", "Recharts"],
+
+  "designPrinciples": {
+    "clarity": "Every visualization should answer 'So what?' within 3 seconds",
+    "simplicity": "Remove all non-essential elements (Tufte's data-ink ratio)",
+    "actionability": "Visualizations should drive decisions, not just display data",
+    "consistency": "Use consistent colors, fonts, and styles across all visuals",
+    "accessibility": "Ensure color-blind friendly palettes and clear labels"
+  },
+
+  "colorPalettes": {
+    "primary": {
+      "name": "Omega Professional",
+      "description": "Primary brand colors for Omega documents",
+      "colors": [
+        {"name": "Primary Blue", "hex": "#1B4F72", "usage": "Main data series, emphasis"},
+        {"name": "Dark Teal", "hex": "#104E70", "usage": "Secondary data series"},
+        {"name": "Light Blue", "hex": "#9CC2E5", "usage": "Tertiary data, backgrounds"},
+        {"name": "Body Gray", "hex": "#333333", "usage": "Text, labels, axes"},
+        {"name": "Light Gray", "hex": "#F8FBFD", "usage": "Grid lines, backgrounds"}
+      ]
+    },
+    "sequential": {
+      "name": "Blue Sequential (5-step)",
+      "description": "For progressive data (low to high values)",
+      "colors": ["#EFF3F7", "#9CC2E5", "#5B9BD5", "#2E75B6", "#1B4F72"],
+      "usage": "Heat maps, choropleth maps, graduated data"
+    },
+    "diverging": {
+      "name": "Red-Blue Diverging",
+      "description": "For data with positive/negative or opposing values",
+      "colors": ["#CC0000", "#FF6B6B", "#F8FBFD", "#5B9BD5", "#1B4F72"],
+      "usage": "Variance analysis, sentiment analysis, performance gaps"
+    },
+    "categorical": {
+      "name": "Big 3 Standard (6 categories)",
+      "description": "Distinct colors for unrelated categories",
+      "colors": ["#1B4F72", "#228B22", "#FF8C00", "#CC0000", "#7030A0", "#104E70"],
+      "usage": "Bar charts, pie charts, categorical comparisons",
+      "maxCategories": 6,
+      "note": "Beyond 6 categories, use grouped/stacked charts or filter data"
+    },
+    "trafficLight": {
+      "name": "Traffic Light (RAG Status)",
+      "description": "Red-Amber-Green for status indicators",
+      "colors": [
+        {"status": "Critical/Red", "hex": "#CC0000"},
+        {"status": "Warning/Amber", "hex": "#FF8C00"},
+        {"status": "Good/Green", "hex": "#228B22"}
+      ],
+      "usage": "KPI dashboards, risk matrices, project status"
+    }
+  },
+
+  "chartTypes": {
+    "bar": {
+      "name": "Bar Chart (Vertical)",
+      "bestFor": ["Comparing categories", "Time series (few periods)", "Ranking"],
+      "avoid": ["Too many categories (>15)", "Showing trends over time (use line)"],
+      "specifications": {
+        "barWidth": "60-80% of available space",
+        "spacing": "20-40% gap between bars",
+        "colors": "Use categorical palette or single color with gradient",
+        "dataLabels": "Show for <10 bars, hide for >10",
+        "gridLines": "Horizontal only, light gray",
+        "baseline": "Always start Y-axis at zero for bar charts"
+      },
+      "exampleUseCases": [
+        "Revenue by product line",
+        "Market share by competitor",
+        "Customer satisfaction by region"
+      ]
+    },
+    "column": {
+      "name": "Column Chart (Horizontal)",
+      "bestFor": ["Long category names", "Comparing many items (10-20)", "Survey results"],
+      "avoid": ["Time series", "Data with natural hierarchy"],
+      "specifications": {
+        "columnHeight": "Consistent across all items",
+        "colors": "Highlight top 3 or key insight in accent color",
+        "dataLabels": "Show at end of bar",
+        "gridLines": "Vertical only, light gray",
+        "sorting": "Descending order by value (unless natural order exists)"
+      }
+    },
+    "line": {
+      "name": "Line Chart",
+      "bestFor": ["Trends over time", "Multiple time series comparisons", "Continuous data"],
+      "avoid": ["Categorical data", "Too many series (>5)"],
+      "specifications": {
+        "lineWidth": "2-3px for primary series, 1-2px for secondary",
+        "markers": "Use for <20 data points, hide for >20",
+        "colors": "Primary series in brand color, others in muted tones",
+        "gridLines": "Both axes, very light gray",
+        "legend": "Top-right or bottom, sorted by final value"
+      },
+      "exampleUseCases": [
+        "Revenue growth over 10 years",
+        "KPI tracking monthly",
+        "Comparing 3 scenarios over time"
+      ]
+    },
+    "waterfall": {
+      "name": "Waterfall Chart",
+      "bestFor": ["Showing cumulative effect", "Variance analysis", "Bridge charts (before → after)"],
+      "avoid": ["Simple comparisons (use bar)", "More than one dimension"],
+      "specifications": {
+        "positiveColor": "#228B22",
+        "negativeColor": "#CC0000",
+        "totalColor": "#1B4F72",
+        "connectorLines": "Dashed, light gray",
+        "dataLabels": "Always show, positioned above/below bars",
+        "baseline": "Clearly marked, often zero line"
+      },
+      "exampleUseCases": [
+        "Revenue to EBITDA bridge",
+        "Budget vs Actual variance",
+        "Customer churn analysis (start → additions → losses → end)"
+      ]
+    },
+    "pie": {
+      "name": "Pie Chart",
+      "bestFor": ["Showing parts of a whole (100%)", "Simple proportions (3-5 slices)"],
+      "avoid": ["Comparing similar-sized slices", "More than 6 slices", "Multiple pies"],
+      "specifications": {
+        "maxSlices": 6,
+        "ordering": "Descending clockwise from 12 o'clock",
+        "colors": "Categorical palette or gradient from dark to light",
+        "dataLabels": "Percentage + category name",
+        "explosionEffect": "Only for highlighting key slice",
+        "alternative": "Use bar chart for >6 categories or similar values"
+      },
+      "mcKinseyRule": "Pie charts are rarely the best choice. Consider bar chart first."
+    },
+    "donut": {
+      "name": "Donut Chart",
+      "bestFor": ["Same as pie, with center metric (total, average)"],
+      "specifications": {
+        "centerMetric": "Display total or key insight in center",
+        "holeSize": "40-60% of radius",
+        "allOther": "Same as pie chart"
+      }
+    },
+    "scatter": {
+      "name": "Scatter Plot",
+      "bestFor": ["Correlation analysis", "Outlier identification", "Portfolio analysis (2x2 matrix with continuous axes)"],
+      "avoid": ["Time series", "Categorical data"],
+      "specifications": {
+        "markerSize": "Based on third dimension (bubble chart) or uniform",
+        "colors": "By category or gradient by value",
+        "trendLine": "Add for correlation analysis",
+        "quadrants": "Add reference lines for 2x2 analysis",
+        "dataLabels": "For outliers or top N points only"
+      },
+      "exampleUseCases": [
+        "BCG Growth-Share Matrix (growth rate vs market share)",
+        "Risk vs Impact matrix",
+        "Customer value (revenue vs profit margin)"
+      ]
+    },
+    "combo": {
+      "name": "Combination Chart (Bar + Line)",
+      "bestFor": ["Two metrics with different scales", "Comparing volume and rate"],
+      "avoid": ["More than 2 metrics", "Similar-scale metrics (use dual bar)"],
+      "specifications": {
+        "primaryAxis": "Left Y-axis for bars (volume metrics)",
+        "secondaryAxis": "Right Y-axis for line (rate/percentage metrics)",
+        "colors": "Bars in brand color, line in contrasting color",
+        "legend": "Clearly label which metric uses which axis"
+      },
+      "exampleUseCases": [
+        "Revenue (bar) + Margin % (line)",
+        "Units sold (bar) + Market share % (line)",
+        "Headcount (bar) + Revenue per employee (line)"
+      ]
+    },
+    "area": {
+      "name": "Area Chart (Stacked)",
+      "bestFor": ["Showing cumulative totals over time", "Part-to-whole over time"],
+      "avoid": ["Precise value reading", "Volatile middle layers"],
+      "specifications": {
+        "stacking": "100% stacked or absolute values",
+        "colors": "Darkest at bottom, lightest at top",
+        "transparency": "20-30% to show overlaps if unstacked",
+        "baseline": "Bottom layer should be most important or stable"
+      }
+    },
+    "heatmap": {
+      "name": "Heat Map",
+      "bestFor": ["Matrix of values with color intensity", "Correlation matrices", "Time-based patterns"],
+      "specifications": {
+        "colorScale": "Sequential (single hue) or diverging (two hues)",
+        "cellLabels": "Show actual values for small matrices (<10x10)",
+        "legend": "Show color scale with min/max values",
+        "borders": "Light borders to separate cells"
+      },
+      "exampleUseCases": [
+        "Correlation matrix (variables vs variables)",
+        "Performance by region × product",
+        "Website activity by hour × day of week"
+      ]
+    }
+  },
+
+  "diagramTemplates": {
+    "matrix2x2": {
+      "name": "2x2 Matrix",
+      "description": "Classic consulting framework for categorizing items across two dimensions",
+      "structure": {
+        "axes": {
+          "horizontal": {"label": "X-axis dimension", "range": "Low to High"},
+          "vertical": {"label": "Y-axis dimension", "range": "Low to High"}
+        },
+        "quadrants": [
+          {"position": "top-right", "label": "Quadrant 1", "color": "#228B22", "interpretation": "Best case"},
+          {"position": "top-left", "label": "Quadrant 2", "color": "#FF8C00", "interpretation": "Caution/Invest"},
+          {"position": "bottom-right", "label": "Quadrant 3", "color": "#FF8C00", "interpretation": "Caution/Divest"},
+          {"position": "bottom-left", "label": "Quadrant 4", "color": "#CC0000", "interpretation": "Worst case"}
+        ],
+        "dataPoints": {
+          "representation": "Circles or icons",
+          "sizing": "By third dimension (e.g., revenue, market size)",
+          "labeling": "Top N or all if <10 points"
+        }
+      },
+      "examples": [
+        "BCG Growth-Share Matrix (Market Growth Rate vs Relative Market Share)",
+        "GE-McKinsey Matrix (Industry Attractiveness vs Competitive Strength)",
+        "Risk Matrix (Probability vs Impact)",
+        "Eisenhower Matrix (Urgency vs Importance)"
+      ],
+      "designNotes": [
+        "Reference lines at midpoints to create quadrants",
+        "Annotate each quadrant with strategic implications",
+        "Use bubble size for third dimension",
+        "Label axes clearly with low/high indicators"
+      ]
+    },
+    "pyramid": {
+      "name": "Pyramid Diagram",
+      "description": "Hierarchical representation showing levels from broad base to narrow top",
+      "structure": {
+        "levels": "3-7 levels (optimal: 4-5)",
+        "orientation": "Point up (hierarchy) or point down (funnel)",
+        "colors": "Gradient from dark (bottom/top) to light, or categorical by level",
+        "labels": "Inside each level with percentage or count"
+      },
+      "examples": [
+        "Organizational hierarchy",
+        "Customer segmentation (mass market → premium)",
+        "Maslow's Hierarchy of Needs",
+        "Sales funnel (awareness → purchase)"
+      ]
+    },
+    "funnel": {
+      "name": "Funnel Chart",
+      "description": "Shows progressive reduction through stages of a process",
+      "structure": {
+        "stages": "4-7 stages typical",
+        "widthCalculation": "Proportional to volume at each stage",
+        "colors": "Single color with decreasing opacity or gradient",
+        "conversionRates": "Show % between stages",
+        "dataLabels": "Volume and % of original at each stage"
+      },
+      "examples": [
+        "Sales pipeline (leads → opportunities → closed deals)",
+        "Recruitment funnel (applicants → interviews → offers → hires)",
+        "Website conversion (visitors → sign-ups → purchases)"
+      ]
+    },
+    "processFlow": {
+      "name": "Process Flow Diagram",
+      "description": "Sequential steps with decision points and feedback loops",
+      "elements": {
+        "process": {"shape": "rectangle", "color": "#1B4F72"},
+        "decision": {"shape": "diamond", "color": "#FF8C00"},
+        "startEnd": {"shape": "rounded rectangle", "color": "#228B22"},
+        "connector": {"type": "arrow", "style": "solid or dashed"}
+      },
+      "bestPractices": [
+        "Flow top-to-bottom or left-to-right",
+        "Consistent spacing between elements",
+        "Minimal crossing lines",
+        "Label all connectors (especially decision branches)",
+        "Group related steps with background shading"
+      ],
+      "examples": [
+        "Customer onboarding process",
+        "Order fulfillment workflow",
+        "Decision-making framework"
+      ]
+    },
+    "orgChart": {
+      "name": "Organization Chart",
+      "description": "Hierarchical structure of roles and reporting relationships",
+      "structure": {
+        "layout": "Top-down tree structure",
+        "boxes": {
+          "size": "Uniform for same level",
+          "color": "By department or level",
+          "content": ["Role title", "Name (optional)", "FTE count"]
+        },
+        "connectors": "Vertical and horizontal lines showing reporting",
+        "spanOfControl": "Show direct reports count"
+      },
+      "designNotes": [
+        "CEO/top at apex",
+        "Same level = same vertical position",
+        "Dotted lines for matrix/indirect reporting",
+        "Compact layout to fit on one page/slide"
+      ]
+    },
+    "timeline": {
+      "name": "Timeline / Gantt Chart",
+      "description": "Project schedule showing tasks, durations, and dependencies",
+      "structure": {
+        "horizontal": "Time axis (days, weeks, months, quarters)",
+        "vertical": "Tasks or workstreams",
+        "bars": {
+          "color": "By workstream or status",
+          "style": "Solid for committed, striped for tentative",
+          "milestones": "Diamond markers at completion points"
+        },
+        "dependencies": "Arrows between related tasks",
+        "today": "Vertical line indicating current date"
+      },
+      "examples": [
+        "Project delivery schedule",
+        "Product roadmap",
+        "Implementation timeline"
+      ]
+    },
+    "stakeholderMap": {
+      "name": "Stakeholder Map / Power-Interest Matrix",
+      "description": "Categorizes stakeholders by influence and interest level",
+      "structure": {
+        "axes": {
+          "horizontal": "Interest in project (Low → High)",
+          "vertical": "Power/Influence (Low → High)"
+        },
+        "quadrants": [
+          {"name": "Keep Satisfied", "power": "High", "interest": "Low", "strategy": "Keep informed, low effort"},
+          {"name": "Manage Closely", "power": "High", "interest": "High", "strategy": "Key players, engage actively"},
+          {"name": "Monitor", "power": "Low", "interest": "Low", "strategy": "Minimal effort"},
+          {"name": "Keep Informed", "power": "Low", "interest": "High", "strategy": "Regular updates, advocates"}
+        ],
+        "stakeholders": {
+          "representation": "Labeled circles",
+          "sizing": "By importance or impact",
+          "grouping": "By type (internal, external, customer, etc.)"
+        }
+      }
+    },
+    "riskHeatMap": {
+      "name": "Risk Heat Map",
+      "description": "Visual representation of risks by probability and impact",
+      "structure": {
+        "axes": {
+          "horizontal": "Probability (Rare → Almost Certain)",
+          "vertical": "Impact (Negligible → Catastrophic)"
+        },
+        "scale": "Typically 5x5 matrix",
+        "riskRating": {
+          "low": {"range": "1-5", "color": "#228B22"},
+          "medium": {"range": "6-12", "color": "#FF8C00"},
+          "high": {"range": "15-25", "color": "#CC0000"}
+        },
+        "risks": {
+          "placement": "In appropriate cell",
+          "labeling": "Risk ID or short description",
+          "sizing": "By exposure value (probability × impact × cost)"
+        }
+      }
+    },
+    "valueChain": {
+      "name": "Value Chain Diagram",
+      "description": "Porter's Value Chain showing primary and support activities",
+      "structure": {
+        "primary": ["Inbound Logistics", "Operations", "Outbound Logistics", "Marketing & Sales", "Service"],
+        "support": ["Firm Infrastructure", "Human Resource Management", "Technology Development", "Procurement"],
+        "margin": "Arrow showing value creation",
+        "colors": "Differentiate primary vs support activities"
+      }
+    },
+    "swimLane": {
+      "name": "Swimlane Diagram",
+      "description": "Process flow showing different actors/departments in horizontal lanes",
+      "structure": {
+        "lanes": "Horizontal bands for each actor/department",
+        "processes": "Flow left-to-right across lanes",
+        "handoffs": "Vertical movements between lanes",
+        "colors": "By lane or by process type"
+      },
+      "examples": [
+        "Order-to-cash process across departments",
+        "Customer journey across touchpoints",
+        "Procurement workflow"
+      ]
+    }
+  },
+
+  "iconLibrary": {
+    "description": "Standard icon set for consulting documents (recommended: Noun Project, Font Awesome, or custom)",
+    "categories": {
+      "people": ["Person", "Team", "Customer", "Stakeholder", "Executive", "Employee"],
+      "business": ["Strategy", "Growth", "Revenue", "Profit", "Cost", "Investment"],
+      "process": ["Automation", "Efficiency", "Workflow", "Integration", "Transformation"],
+      "technology": ["Cloud", "Analytics", "AI/ML", "Security", "Infrastructure", "Software"],
+      "finance": ["Money", "Chart Up", "Chart Down", "Calculator", "Bank", "Wallet"],
+      "operations": ["Factory", "Supply Chain", "Logistics", "Quality", "Inventory"],
+      "time": ["Clock", "Calendar", "Timeline", "Deadline", "Schedule"],
+      "status": ["Check Mark", "Warning", "Error", "In Progress", "Completed"],
+      "location": ["Office", "Globe", "Map Pin", "Building", "Region"],
+      "communication": ["Meeting", "Email", "Phone", "Presentation", "Document"]
+    },
+    "specifications": {
+      "style": "Flat, minimalist, line-based (avoid 3D or skeuomorphic)",
+      "colors": "Solid fills in brand colors or monochrome",
+      "sizing": "16px, 24px, 32px, 48px (scalable SVG preferred)",
+      "spacing": "Consistent padding around icons in layouts"
+    }
+  },
+
+  "typographyForVisuals": {
+    "chartTitles": {
+      "font": "Arial Black or Arial Bold",
+      "size": "14-16pt",
+      "color": "#1B4F72",
+      "alignment": "Left-aligned",
+      "format": "Active voice, answer the 'So what?'"
+    },
+    "axisLabels": {
+      "font": "Arial",
+      "size": "10-11pt",
+      "color": "#333333",
+      "format": "Abbreviate units (M for millions, % for percent)"
+    },
+    "dataLabels": {
+      "font": "Arial",
+      "size": "9-10pt",
+      "color": "#333333 or white (on dark backgrounds)",
+      "precision": "0 decimals for large numbers, 1-2 for small/rates"
+    },
+    "legend": {
+      "font": "Arial",
+      "size": "9-10pt",
+      "color": "#333333",
+      "position": "Top-right or bottom (avoid left/middle)"
+    },
+    "annotations": {
+      "font": "Arial Italic",
+      "size": "9pt",
+      "color": "#666666",
+      "usage": "Call out key insights, explain anomalies"
+    }
+  },
+
+  "chartTitleFormulas": {
+    "description": "McKinsey-style chart titles that answer 'So what?' rather than just describe the data",
+    "badExamples": [
+      "Revenue by Product Line",
+      "Customer Satisfaction Scores",
+      "Market Share Analysis"
+    ],
+    "goodExamples": [
+      "Product A drives 60% of revenue, creating concentration risk",
+      "Customer satisfaction declined 15pts in Q3, primarily in region EMEA",
+      "Market share gains in premium segment offset losses in mass market"
+    ],
+    "formula": "[Key insight/trend] + [Supporting detail] = Actionable title",
+    "guidelines": [
+      "State the conclusion upfront",
+      "Include the key number/metric",
+      "Highlight the 'why it matters'",
+      "Use active voice",
+      "Limit to 1-2 lines (< 15 words)"
+    ]
+  },
+
+  "chartElementsChecklist": {
+    "required": [
+      "Clear, actionable title",
+      "Labeled axes (with units)",
+      "Data source citation",
+      "Time period indicated",
+      "Legend (if multiple series)",
+      "Zero baseline (for bar/column charts)"
+    ],
+    "optional": [
+      "Data labels (for emphasis)",
+      "Trend lines (for insights)",
+      "Reference lines (benchmarks, targets)",
+      "Annotations (callouts for anomalies)",
+      "Gridlines (very light, if needed for reading precision)"
+    ],
+    "remove": [
+      "Chart borders",
+      "Background fills (unless subtle)",
+      "3D effects",
+      "Excessive gridlines",
+      "Unnecessary chart junk"
+    ]
+  },
+
+  "dimensionGuidelines": {
+    "slideCharts": {
+      "width": "8-10 inches (20-25cm)",
+      "height": "5-6 inches (13-15cm)",
+      "aspectRatio": "16:9 or 4:3 depending on deck",
+      "resolution": "Minimum 150 DPI for print"
+    },
+    "reportCharts": {
+      "width": "6-7 inches (full page width in Word)",
+      "height": "3-5 inches",
+      "margins": "0.5 inch from text",
+      "resolution": "Minimum 300 DPI for print"
+    },
+    "dashboardCharts": {
+      "layout": "Grid-based (2x2, 3x2, etc.)",
+      "chartSize": "Uniform within dashboard",
+      "spacing": "Consistent gutters between charts"
+    }
+  },
+
+  "exportFormats": {
+    "vector": {
+      "formats": ["SVG", "PDF", "EPS"],
+      "bestFor": "Print, scalability, editing",
+      "tools": ["D3.js", "Chart.js (with plugin)", "Vega", "Adobe Illustrator"]
+    },
+    "raster": {
+      "formats": ["PNG (transparent bg)", "JPG (photos only)"],
+      "resolution": "300 DPI minimum for print, 150 DPI for screen",
+      "bestFor": "Embedding in documents, screenshots"
+    },
+    "interactive": {
+      "formats": ["HTML/JavaScript", "Tableau", "Power BI"],
+      "bestFor": "Dashboards, exploration, drill-down"
+    }
+  },
+
+  "accessibilityGuidelines": {
+    "colorBlindness": [
+      "Avoid red-green combinations without additional indicators",
+      "Use patterns/textures in addition to colors",
+      "Test with color-blind simulators (e.g., Coblis)",
+      "Provide text alternatives for color-coded information"
+    ],
+    "contrast": [
+      "Minimum 4.5:1 contrast ratio for text",
+      "Avoid light colors on light backgrounds",
+      "Use WCAG AA or AAA standards"
+    ],
+    "textAlternatives": [
+      "Provide alt text for images",
+      "Include data table for complex charts",
+      "Ensure key insights are in text, not just visuals"
+    ]
+  },
+
+  "toolRecommendations": {
+    "chartingLibraries": [
+      {"name": "Chart.js", "language": "JavaScript", "bestFor": "Web dashboards, interactive charts", "license": "MIT (free)"},
+      {"name": "D3.js", "language": "JavaScript", "bestFor": "Custom, complex visualizations", "license": "BSD (free)"},
+      {"name": "Recharts", "language": "React", "bestFor": "React applications", "license": "MIT (free)"},
+      {"name": "Plotly", "language": "Python/JavaScript", "bestFor": "Interactive dashboards, HTML reports, PoC tools", "license": "MIT (free)"},
+      {"name": "ApexCharts", "language": "JavaScript", "bestFor": "Modern, responsive charts", "license": "MIT (free)"}
+    ],
+    "pythonDataVisualization": {
+      "description": "Python stack for Big 3-quality data analysis and visualization",
+      "coreLibraries": [
+        {"name": "NumPy", "purpose": "Numerical computing, array operations", "usage": "Foundation for all data manipulation"},
+        {"name": "pandas", "purpose": "Data manipulation and analysis", "usage": "DataFrames, pivots, aggregations, time series"},
+        {"name": "matplotlib", "purpose": "Static publication-quality plots", "usage": "Excel-embedded charts, PDF reports, print materials"},
+        {"name": "seaborn", "purpose": "Statistical visualization", "usage": "Heatmaps, distributions, correlation matrices"},
+        {"name": "Plotly", "purpose": "Interactive charts", "usage": "HTML dashboards, client PoC tools, web presentations"}
+      ],
+      "chartTypeMapping": {
+        "matplotlib": ["bar", "line", "pie", "scatter", "area", "waterfall", "gantt"],
+        "seaborn": ["heatmap", "correlation", "distribution", "boxplot", "violin"],
+        "plotly": ["interactive_dashboards", "drill_down", "animated", "3d_charts"]
+      },
+      "outputFormats": {
+        "PNG": {"dpi": 150, "use": "Excel embedding, web display"},
+        "PNG_print": {"dpi": 300, "use": "Print documents, high-resolution"},
+        "SVG": {"scalable": true, "use": "Vector graphics, presentations"},
+        "HTML": {"interactive": true, "use": "Plotly dashboards, client portals"}
+      },
+      "styleConfiguration": {
+        "font_family": "Arial",
+        "title_size": 14,
+        "label_size": 10,
+        "tick_size": 9,
+        "spine_visibility": {"top": false, "right": false},
+        "grid_alpha": 0.3,
+        "figure_facecolor": "white"
+      }
+    },
+    "pythonDocumentGeneration": {
+      "description": "Python stack for professional document generation",
+      "excelGeneration": [
+        {
+          "name": "openpyxl",
+          "purpose": "Native Excel workbook creation and manipulation",
+          "bestFor": "Complex formatting, formulas, charts, conditional formatting",
+          "omegaUsage": "Banking-grade financial models, CAPEX analysis, risk registers"
+        },
+        {
+          "name": "xlsxwriter",
+          "purpose": "High-performance Excel file creation",
+          "bestFor": "Large datasets, performance-critical workbooks, chart generation",
+          "omegaUsage": "Data-heavy reports, automated Excel generation"
+        },
+        {
+          "name": "pandas.ExcelWriter",
+          "purpose": "DataFrame export to Excel",
+          "bestFor": "Quick data export, multi-sheet workbooks from DataFrames",
+          "omegaUsage": "Data analysis exports, pivot table outputs"
+        }
+      ],
+      "wordGeneration": [
+        {
+          "name": "python-docx",
+          "approach": "Programmatic",
+          "purpose": "Create Word documents from scratch programmatically",
+          "bestFor": "Data-heavy reports, automated document generation, simple layouts",
+          "omegaUsage": "Technical appendices, data tables, auto-generated sections",
+          "limitations": "Complex layouts require manual positioning"
+        },
+        {
+          "name": "docxtpl",
+          "approach": "Template-based",
+          "purpose": "Jinja2 templating for Word documents",
+          "bestFor": "High-stakes client reports where branding is critical, mail merge",
+          "omegaUsage": "Executive summaries, proposals, branded deliverables",
+          "workflow": "Designer creates .docx template → Python fills data placeholders"
+        },
+        {
+          "name": "Spire.Doc",
+          "approach": "Commercial/Heavy",
+          "purpose": "Advanced document processing and conversion",
+          "bestFor": "Complex document merging, Word-to-PDF conversion, advanced formatting",
+          "omegaUsage": "Final deliverable assembly, PDF generation, complex merges",
+          "license": "Commercial (free tier available)"
+        }
+      ],
+      "presentationGeneration": [
+        {
+          "name": "python-pptx",
+          "purpose": "Create PowerPoint presentations programmatically",
+          "bestFor": "Converting Python analysis into final decks, automated slide generation",
+          "omegaUsage": "Client presentations, automated reporting decks, chart embedding",
+          "features": ["Slide layouts", "Charts", "Tables", "Images", "Master slides"]
+        }
+      ],
+      "pdfGeneration": [
+        {
+          "name": "reportlab",
+          "purpose": "PDF creation from scratch",
+          "bestFor": "Custom layouts, complex documents",
+          "omegaUsage": "Final deliverables, print-ready documents"
+        },
+        {
+          "name": "weasyprint",
+          "purpose": "HTML/CSS to PDF conversion",
+          "bestFor": "Web-style layouts, responsive designs",
+          "omegaUsage": "Reports from HTML templates"
+        },
+        {
+          "name": "fpdf2",
+          "purpose": "Lightweight PDF generation",
+          "bestFor": "Simple documents, quick generation",
+          "omegaUsage": "Certificates, simple reports"
+        }
+      ],
+      "selectionMatrix": {
+        "description": "Decision matrix for document generation approach",
+        "scenarios": [
+          {
+            "scenario": "Data-heavy financial workbook",
+            "recommended": "openpyxl + pandas + matplotlib",
+            "rationale": "Full control over formatting, embedded charts"
+          },
+          {
+            "scenario": "Branded executive report",
+            "recommended": "docxtpl with pre-designed template",
+            "rationale": "Designer controls branding, Python fills data"
+          },
+          {
+            "scenario": "Technical appendix with tables",
+            "recommended": "python-docx",
+            "rationale": "Programmatic table generation, simple layout"
+          },
+          {
+            "scenario": "Client presentation deck",
+            "recommended": "python-pptx",
+            "rationale": "Automated slide creation, chart embedding"
+          },
+          {
+            "scenario": "Interactive dashboard",
+            "recommended": "Plotly + HTML export",
+            "rationale": "Full interactivity, client exploration"
+          },
+          {
+            "scenario": "Final PDF deliverable",
+            "recommended": "Spire.Doc or python-docx → Word → PDF",
+            "rationale": "Preserve formatting, professional output"
+          }
+        ]
+      }
+    },
+    "diagramTools": [
+      {"name": "draw.io (diagrams.net)", "type": "Web/Desktop", "bestFor": "Flowcharts, org charts, diagrams", "license": "Free"},
+      {"name": "Lucidchart", "type": "Web", "bestFor": "Professional diagrams, collaboration", "license": "Paid"},
+      {"name": "Miro", "type": "Web", "bestFor": "Collaborative whiteboarding, workshops", "license": "Freemium"},
+      {"name": "Visio", "type": "Desktop", "bestFor": "Enterprise diagrams, process flows", "license": "Microsoft 365"}
+    ],
+    "presentationTools": [
+      {"name": "PowerPoint", "bestFor": "Standard business presentations", "formats": ["PPTX"]},
+      {"name": "Google Slides", "bestFor": "Collaborative presentations", "formats": ["Google Slides", "PPTX"]},
+      {"name": "Keynote", "bestFor": "Apple ecosystem presentations", "formats": ["KEY", "PPTX"]}
+    ]
+  },
+
+  "usageNotes": [
+    "Always start with the question: What decision does this chart support?",
+    "Choose the simplest chart type that conveys the insight",
+    "Test readability at actual presentation size (not zoomed in)",
+    "Get feedback from someone unfamiliar with the data",
+    "Iterate based on 'So what?' test - can viewer understand in 3 seconds?",
+    "Reference this library when generating charts in scripts",
+    "Maintain consistency across all charts in a document/presentation",
+    "Update chart data sources and dates regularly"
+  ],
+
+  "integrationNotes": {
+    "withDocx": {
+      "javascript": "Use ImageRun to embed charts as PNG/JPG. Generate charts with Chart.js, export as images.",
+      "python_programmatic": "Use python-docx: Document(), add_heading(), add_paragraph(), add_table(), add_picture()",
+      "python_template": "Use docxtpl: DocxTemplate('template.docx').render(context) for branded reports"
+    },
+    "withExcel": {
+      "javascript": "Use ExcelJS charts API for native Excel charts in workbooks.",
+      "python_openpyxl": "Use openpyxl: Workbook(), create_sheet(), cell styling, openpyxl.chart for native charts",
+      "python_matplotlib": "Generate matplotlib charts, save as PNG, embed with openpyxl.drawing.image.Image()",
+      "python_pandas": "Use df.to_excel() with ExcelWriter for quick data export, then enhance with openpyxl"
+    },
+    "withPowerPoint": {
+      "javascript": "Use pptxgenjs library to create charts directly in PPTX files.",
+      "python": "Use python-pptx: Presentation(), add_slide(), shapes.add_chart(), shapes.add_picture()"
+    },
+    "withPDF": {
+      "from_word": "Generate Word with python-docx/docxtpl, convert to PDF with Spire.Doc or LibreOffice",
+      "direct": "Use reportlab for complex layouts, weasyprint for HTML-to-PDF, fpdf2 for simple PDFs"
+    },
+    "withDashboards": {
+      "interactive": "Use Plotly: fig = px.bar(), fig.write_html() for self-contained interactive HTML",
+      "embedding": "Plotly charts can be embedded in Jupyter notebooks or exported as static images"
+    }
+  },
+
+  "pythonInstallation": {
+    "description": "Required Python packages for Omega document generation",
+    "command": "pip install numpy pandas matplotlib seaborn openpyxl xlsxwriter plotly python-docx docxtpl python-pptx reportlab",
+    "optional": "pip install fpdf2 weasyprint pillow",
+    "note": "Spire.Doc requires separate commercial installation"
+  }
+}

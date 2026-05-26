@@ -1,0 +1,23 @@
+{
+  "$schema": "https://claude.com/schemas/plugin.json",
+  "name": "omega-cx",
+  "version": "1.0.0",
+  "description": "Customer experience, journey mapping, VoC analytics, NPS programs, service blueprinting.",
+  "author": {
+    "name": "Omega Consulting",
+    "url": "https://omega-consulting.local"
+  },
+  "homepage": "https://github.com/HossamDaoud83/Omega_Consulting_Template_v1",
+  "license": "MIT",
+  "keywords": [
+    "consulting",
+    "omega",
+    "capability",
+    "cx"
+  ],
+  "components": {
+    "commands": "commands/",
+    "agents": "agents/",
+    "skills": "skills/"
+  }
+}
