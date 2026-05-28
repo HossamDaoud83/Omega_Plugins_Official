@@ -2,7 +2,7 @@
 
 Polished portfolio surface for Omega engagements. Built with Next.js 15 and React 19.
 
-**v2.0 — Obsidian-Primary.** The dashboard reads instinct markdown and engagement config directly from disk; there is no FastAPI process, no SQL graph layer. For visual brain exploration, open the engagement folder (or `Omega_Second_Brain/`) in Obsidian — its built-in graph view renders the wikilink relationships natively.
+**v2.0 — Obsidian-Primary.** The dashboard reads instinct markdown and engagement config directly from disk; there is no FastAPI process, no SQL graph layer. For visual brain exploration, open the engagement folder (or `D:/Obsidian Notes Taken/` (vault root)) in Obsidian — its built-in graph view renders the wikilink relationships natively.
 
 ## Tabs
 
