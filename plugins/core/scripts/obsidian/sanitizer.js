@@ -90,8 +90,13 @@ function sanitize(content, rules, project, config) {
   }
 
   if (rules.strip_client_identifiers) {
-    const client = project.client;
-    const engagement = project.engagement_name;
+    // Accept both v2.0 string schema (project.client = "Acme") and v4.x nested
+    // schema (project.client = { name: "Acme", ... } and engagement = { name: ... })
+    const client = typeof project.client === 'string' ? project.client
+                 : (project.client && project.client.name) || null;
+    const engagement = typeof project.engagement_name === 'string' ? project.engagement_name
+                     : typeof project.engagement === 'string' ? project.engagement
+                     : (project.engagement && project.engagement.name) || null;
     if (client) {
       text = text.replace(new RegExp(escapeRegExp(client), 'gi'), '[CLIENT]');
       // Strip word-boundary forms of any single-word part of the client name
