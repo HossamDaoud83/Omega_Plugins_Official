@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Omega @cps/core — PostToolUse hook (v4.1)
+// Omega @omega/core — PostToolUse hook (v4.1)
 // When Claude edits a markdown file inside .brain/, incrementally sync the
 // GBrain PGLite index so subsequent queries see the change immediately.
 //

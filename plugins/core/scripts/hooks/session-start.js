@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Omega @cps/core — SessionStart hook
+// Omega @omega/core — SessionStart hook
 // Validates engagement artifacts, surfaces stale blockers, alerts on milestones,
 // loads handoff notes from session_state.json. Non-blocking (always exits 0).
 

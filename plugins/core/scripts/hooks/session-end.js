@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Omega @cps/core — Stop hook (session end)
+// Omega @omega/core — Stop hook (session end)
 // Verifies state files updated, persists session_state.json delta,
 // triggers instinct extraction (Phase 4), creates git commit (if configured).
 // Non-blocking advisory — never aborts the session.
