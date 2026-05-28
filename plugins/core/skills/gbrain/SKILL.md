@@ -70,6 +70,48 @@ Omega-specific typed relationships added via frontmatter in instincts and entity
 
 **Critical: wikilink format.** GBrain's extractor requires the full slug path. `[[iso-42001]]` (short form) silently produces zero edges; `[[03_Frameworks/iso-42001]]` works. Omega uses **absolute path wikilinks with display aliases**: `[[03_Frameworks/iso-42001|ISO 42001]]`. Obsidian is configured for "Absolute path in vault" link format in `.brain/.obsidian/app.json`.
 
+## Obsidian graph view vs GBrain query (the typed-vs-untyped split)
+
+Obsidian's graph view and GBrain's typed graph **read the same wikilinks from the same markdown files**, but they answer different questions:
+
+| Layer | Question it answers | How |
+|---|---|---|
+| **Obsidian graph view** | *What is connected to what?* | Untyped topology — plain lines between notes |
+| **GBrain typed graph** | *How, and in what direction?* | Typed edges (`mitigates`, `applies`, `observed_in`, `extracted_from`, etc.) via `gbrain query` |
+
+The split mirrors the v4.1 architecture: **GBrain is the typed/queryable brain for agents; Obsidian is the human-facing visual map of the same knowledge.** Both stay in sync automatically because both layers read the markdown directly — the `gbrain-sync` PostToolUse hook keeps PGLite up to date as files change.
+
+### Recover "typing" visually in Obsidian
+
+Obsidian's graph view itself doesn't render edge types, but you can color-code the nodes so entity types and status are visually distinct (Settings → Appearance → Graph view):
+
+| Setting | Recipe |
+|---|---|
+| **Color groups by folder** | `01_Instincts/` blue; `02_Entities/` gray; `03_Frameworks/` green; `05_Risks/` red; `06_Persons/` yellow; `07_Engagements/` purple. Entity types become visually distinct without edge labels. |
+| **Color groups by tag** | Layer on tag-based coloring for status: `status/active` solid; `status/evolved` outlined; `status/superseded` dimmed. |
+| **Local graph per note** | Open any client / engagement / instinct page and view its neighborhood only. This is the highest-leverage daily view for partners. |
+| **Filters** | Hide orphans, limit by path, cap link depth. Useful as the vault grows past ~500 nodes. |
+
+### Daily-use pattern (which layer for which task)
+
+| Action | Tool |
+|---|---|
+| Browse / orient: *"what's around this engagement?"* | Obsidian local-graph-per-note |
+| See the whole brain at a glance | Obsidian full graph view (filtered by tag/folder) |
+| Find a specific page | Obsidian quick switcher (`Ctrl+O`) or `gbrain search` |
+| Query semantics: *"which instincts mitigate data residency in healthcare?"* | `/omega:gbrain query` |
+| Cross-engagement pattern lookup | `/omega:gbrain query` (central is imported read-only) |
+| Trace why a claim was made | Local graph (visual) + `gbrain get_backlinks` (precise) |
+
+### Prerequisites (already configured in v4.1 engagement-template)
+
+The view-only `.obsidian/app.json` we ship sets these automatically, but worth knowing:
+
+- `useMarkdownLinks: false` — Obsidian writes/renders `[[Wikilinks]]` not `[markdown](links)`. Matches GBrain.
+- `newLinkFormat: "absolute"` — full-slug paths (`[[03_Frameworks/iso-42001]]`), the only form GBrain's extractor accepts.
+- `alwaysUpdateLinks: false` — Obsidian doesn't auto-rewrite links if a file moves. GBrain owns refactors.
+- `defaultViewMode: "preview"` — Reading view by default. Visual browsing, not direct editing.
+
 ## Hybrid search
 
 | Command | Method | Use when |
