@@ -86,7 +86,7 @@ Always work bottom-up. Never invent a verdict before locating a source; never sk
 ## Integration
 
 - **Input:** any `.md` deliverable in the engagement
-- **Calls:** Grep across `.brain/01_Instincts/`, `.brain/02_Entities/`, and `Omega_Second_Brain/{05_Frameworks_Library, 01_Instincts_Aggregated}/`
+- **Calls:** Grep across `.brain/01_Instincts/`, `.brain/02_Entities/`, and `D:/Obsidian Notes Taken/{05_Frameworks_Library, 01_Instincts_Aggregated}/`
 - **Output:** structured fact-check table in the chat; optionally the consultant pastes it into the deliverable's review section
 - **Follows:** `/omega:verify-quality` (structural checks)
 - **Precedes:** `/omega:client-communication` (delivery)
