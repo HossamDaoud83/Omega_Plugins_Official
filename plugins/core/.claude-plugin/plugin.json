@@ -16,7 +16,8 @@
     "quality-gates",
     "document-generation",
     "obsidian",
-    "knowledge-graph"
+    "knowledge-brain",
+    "markdown"
   ],
   "components": {
     "commands": "commands/",

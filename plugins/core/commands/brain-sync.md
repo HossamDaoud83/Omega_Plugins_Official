@@ -31,7 +31,6 @@ For each instinct in `.brain/01_Instincts/` where `central_sync: pending` and `v
    ```
 3. Show consultant the sanitized output for review.
 4. After confirmation, the script flips `central_sync: synced` in the source.
-5. Trigger central graphify rebuild: `python plugins/core/scripts/graphify/central_builder.py`
 
 ## Safety check
 

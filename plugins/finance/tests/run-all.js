@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Aggregate test runner for @omega/finance.
-// Today: smoke test that all 9 Python scripts and 7 commands and 6 skills and 3 agents exist.
+// Today: smoke test that all 7 Python scripts and 4 commands and 3 skills exist.
 
 const fs = require('fs');
 const path = require('path');
@@ -17,33 +17,13 @@ const REQUIRED_SCRIPTS = [
   'scenario_analysis.py',
   'breakeven_analysis.py',
   'run_all_analysis.py',
-  // v4.1 analyst foundation
-  'ratio_analysis.py',
-  'amortization_schedule.py',
 ];
 
-const REQUIRED_SKILLS = [
-  'project-finance',
-  'sensitivity-analysis',
-  'financial-modeling',
-  // v4.1 analyst foundation
-  'accounting-fundamentals',
-  'financial-statement-analysis',
-  'analyst-toolkit',
-];
+const REQUIRED_SKILLS = ['project-finance', 'sensitivity-analysis', 'financial-modeling'];
 
-const REQUIRED_COMMANDS = [
-  'sensitivity.md',
-  'montecarlo.md',
-  'scenarios.md',
-  'breakeven.md',
-  // v4.1 analyst foundation
-  'ratios.md',
-  'amortization.md',
-  'statements.md',
-];
+const REQUIRED_COMMANDS = ['sensitivity.md', 'montecarlo.md', 'scenarios.md', 'breakeven.md'];
 
-const REQUIRED_AGENTS = ['financial-analyst.md', 'deal-financing-advisor.md', 'associate-analyst.md'];
+const REQUIRED_AGENTS = ['financial-analyst.md'];
 
 test('plugin manifest exists and names omega-finance', () => {
   const manifest = JSON.parse(

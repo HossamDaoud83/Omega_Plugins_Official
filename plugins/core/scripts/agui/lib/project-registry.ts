@@ -1,6 +1,9 @@
 /**
- * Project registry — auto-discovers per-engagement FastAPI endpoints by reading
- * ~/Omega_Projects/<engagement>/.brain/config.json and the central API at :8800.
+ * Project registry — auto-discovers engagements by reading
+ * ~/Omega_Projects/<engagement>/.brain/config.json.
+ *
+ * v2.0 — markdown-first. No per-engagement FastAPI; the dashboard reads
+ * tracker + instinct markdown directly from disk via server components.
  *
  * Server-side only (uses fs). Called from app routes via React Server Components.
  */
@@ -31,16 +34,11 @@ export interface ProjectEndpoint {
   engagement: string;
   project_id: string;
   short_name: string;
-  api_port: number;
-  api_url: string;
   central_brain: string;
   commercials: Commercials;
   deliverables: Deliverable[];
-  graph_html_path: string | null;
   engagement_path: string;
 }
-
-const CENTRAL_API = process.env.Omega_CENTRAL_API || 'http://127.0.0.1:8800';
 
 const DEFAULT_COMMERCIALS: Commercials = {
   currency: 'USD',
@@ -48,18 +46,6 @@ const DEFAULT_COMMERCIALS: Commercials = {
   invoiced: 0,
   collected: 0,
 };
-
-function findGraphHtml(engagementDir: string): string | null {
-  const candidates = [
-    path.join(engagementDir, 'graphify-out', 'graph.html'),
-    path.join(engagementDir, '.brain', 'graphify-out', 'graph.html'),
-    path.join(engagementDir, '.brain', 'graph.html'),
-  ];
-  for (const c of candidates) {
-    if (fs.existsSync(c)) return c;
-  }
-  return null;
-}
 
 function normaliseDeliverable(d: any, idx: number): Deliverable | null {
   if (!d || typeof d !== 'object') return null;
@@ -83,7 +69,6 @@ function discoverFrom(base: string): ProjectEndpoint[] {
     if (!fs.existsSync(cfg)) continue;
     try {
       const c = JSON.parse(fs.readFileSync(cfg, 'utf8'));
-      if (!c.api_port) continue;
       const commercials: Commercials = {
         ...DEFAULT_COMMERCIALS,
         ...(c.commercials ?? {}),
@@ -97,12 +82,9 @@ function discoverFrom(base: string): ProjectEndpoint[] {
         engagement: entry.name,
         project_id: c.project_id ?? entry.name,
         short_name: c.engagement_short_name ?? entry.name,
-        api_port: c.api_port,
-        api_url: `http://127.0.0.1:${c.api_port}`,
         central_brain: c.central_brain_path ?? '',
         commercials,
         deliverables,
-        graph_html_path: findGraphHtml(engagementDir),
         engagement_path: engagementDir,
       });
     } catch {
@@ -116,10 +98,6 @@ export function discoverProjects(): ProjectEndpoint[] {
   const home = os.homedir();
   const primary = path.join(home, 'Omega_Projects');
   return discoverFrom(primary);
-}
-
-export function centralApiUrl(): string {
-  return CENTRAL_API;
 }
 
 export function deliverableProgress(deliverables: Deliverable[]): { done: number; total: number; pct: number } {

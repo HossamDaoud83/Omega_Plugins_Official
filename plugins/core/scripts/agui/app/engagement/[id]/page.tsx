@@ -5,7 +5,7 @@ import {
   formatMoney,
   type Deliverable,
 } from '@/lib/project-registry';
-import { fetchProjectMeta, fetchInstincts, fetchGraph } from '@/lib/agent-bridge';
+import { readEngagementInstincts } from '@/lib/agent-bridge';
 
 export default async function EngagementPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -25,10 +25,7 @@ export default async function EngagementPage({ params }: { params: Promise<{ id:
     );
   }
 
-  let meta: any = null, instincts: any[] = [], graph: any = null, errors: string[] = [];
-  try { meta = await fetchProjectMeta(proj.api_url); } catch (e: any) { errors.push(`meta: ${e.message}`); }
-  try { instincts = await fetchInstincts(proj.api_url); } catch (e: any) { errors.push(`instincts: ${e.message}`); }
-  try { graph = await fetchGraph(proj.api_url); } catch (e: any) { errors.push(`graph: ${e.message}`); }
+  const instincts = readEngagementInstincts(proj.engagement_path);
 
   const initial = proj.short_name?.[0]?.toUpperCase() ?? '·';
   const prog = deliverableProgress(proj.deliverables);
@@ -63,7 +60,7 @@ export default async function EngagementPage({ params }: { params: Promise<{ id:
           <div className="min-w-0">
             <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">{proj.short_name}</h1>
             <div className="text-sm text-omega-muted font-mono mt-1">
-              {proj.project_id} · port {proj.api_port}
+              {proj.project_id}
               {proj.commercials.phase && <> · <span className="capitalize">{proj.commercials.phase}</span></>}
               {proj.commercials.billing_model && <> · {proj.commercials.billing_model}</>}
             </div>
@@ -77,17 +74,9 @@ export default async function EngagementPage({ params }: { params: Promise<{ id:
         </div>
       </section>
 
-      {errors.length > 0 && (
-        <div className="mb-6 p-4 rounded-xl border border-rose-200/70 bg-rose-50/60 text-sm text-rose-700">
-          <strong className="font-semibold">Some endpoints offline.</strong>{' '}
-          <span className="text-rose-600/80">{errors.join(' · ')}</span>
-        </div>
-      )}
-
       {/* Top stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
         <Stat label="Instincts"   value={instincts.length}             from="#1B4F72" to="#0EA5A4" />
-        <Stat label="Graph nodes" value={graph?.meta?.node_count ?? '—'} from="#7C3AED" to="#0EA5E9" />
         <Stat label="Deliverables" value={`${prog.done}/${prog.total}`}  from="#10B981" to="#0EA5A4" sub={`${prog.pct}% complete`} />
         <Stat label="Engagement value" value={fee ? formatMoney(fee, proj.commercials.currency) : '—'} from="#F59E0B" to="#E11D48" />
       </div>
@@ -201,7 +190,7 @@ export default async function EngagementPage({ params }: { params: Promise<{ id:
           <div className="text-sm text-omega-muted py-6 text-center">No instincts yet.</div>
         ) : (
           <ul className="divide-y divide-omega-border">
-            {instincts.slice(-10).reverse().map((i: any) => {
+            {instincts.slice(-10).reverse().map((i) => {
               const c = i.frontmatter.confidence_score ?? 0;
               const tier = c >= 0.92 ? 'high' : c >= 0.75 ? 'med' : c >= 0.5 ? 'low' : 'new';
               const dot = { high: '#10B981', med: '#0EA5E9', low: '#F59E0B', new: '#94A3B8' }[tier];
@@ -224,9 +213,9 @@ export default async function EngagementPage({ params }: { params: Promise<{ id:
         )}
       </section>
 
-      {/* Embedded graphify brain */}
-      <section className="card p-0 overflow-hidden mb-6">
-        <header className="flex items-center justify-between p-5 border-b border-omega-border">
+      {/* Brain location */}
+      <section className="card p-6 mb-6">
+        <header className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold tracking-tight flex items-center gap-2">
             <span
               className="grid place-items-center w-7 h-7 rounded-md text-white text-sm"
@@ -235,41 +224,15 @@ export default async function EngagementPage({ params }: { params: Promise<{ id:
             >◇</span>
             Knowledge Brain
           </h2>
-          {proj.graph_html_path ? (
-            <span className="chip" style={{ background: 'rgba(124,58,237,0.10)', color: '#6D28D9' }}>
-              <span className="chip-dot" style={{ background: '#7C3AED' }} />
-              interactive · vis-network
-            </span>
-          ) : (
-            <span className="chip" style={{ background: '#F1F5F9', color: '#64748B' }}>
-              <span className="chip-dot" style={{ background: '#94A3B8' }} />
-              not generated
-            </span>
-          )}
         </header>
-
-        {proj.graph_html_path ? (
-          <iframe
-            src={`/api/graph-viewer?path=${encodeURIComponent(proj.graph_html_path)}`}
-            className="w-full border-0"
-            style={{ height: '720px' }}
-            title={`${proj.short_name} knowledge brain`}
-          />
-        ) : (
-          <div className="p-6">
-            <div className="rounded-lg bg-slate-900 text-slate-100 p-3 text-[12px] font-mono overflow-x-auto">
-              <span className="text-emerald-400">$</span> graphify "{proj.engagement_path}" --output graphify-out
-            </div>
-            <p className="text-xs text-omega-muted mt-2">
-              Once generated, the interactive vis-network graph will be embedded here.
-            </p>
-          </div>
-        )}
+        <p className="text-sm text-omega-muted mb-3">
+          The engagement brain is a markdown vault. Open it directly in Obsidian for search,
+          backlinks, and the built-in graph view.
+        </p>
+        <div className="rounded-lg bg-slate-900 text-slate-100 p-3 text-[12px] font-mono overflow-x-auto">
+          <span className="text-emerald-400">$</span> open "{proj.engagement_path}/.brain"
+        </div>
       </section>
-
-      <Link href={`/graph?engagement=${encodeURIComponent(proj.engagement)}` as any} className="btn-primary">
-        Open data graph view <span aria-hidden>→</span>
-      </Link>
     </div>
   );
 }

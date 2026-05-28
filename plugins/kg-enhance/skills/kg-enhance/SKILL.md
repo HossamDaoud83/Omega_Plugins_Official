@@ -1,43 +1,44 @@
 ---
 name: kg-enhance
-description: Knowledge brain enhancement (markdown-first) — when to ingest a client document, fact-check a deliverable, check version history, or merge bilingual entities. Apply when the consultant references document ingestion, claim verification, version chains, or bilingual entity resolution.
+description: Knowledge brain enhancement (v2.0 markdown-first) — when to ingest a client document, fact-check a deliverable, trace document version history, or merge bilingual entities. Apply when the consultant references document ingestion, version chains, or wants to verify factual claims.
 ---
 
-# Knowledge Brain Enhancement (Markdown-First)
+# Knowledge Brain Enhancement (v2.0 — markdown-first)
 
-Closes the loop between client documents and the engagement brain. Four slash commands; markdown-vault-first (no SQL, no graph layer); aligns with the v2.0 Obsidian-Primary architecture.
+Closes the loop between client documents and the engagement brain. Four slash commands; outputs are plain markdown navigable in Obsidian.
 
 ## When to use which command
 
 | Trigger | Command |
 |---|---|
 | Client sent a new MD-converted document | `/omega:doc-ingest <path>` |
-| Need to verify factual claims in a deliverable before delivery | `/omega:fact-check [<deliverable-path>]` |
-| Want to know what changed in client requirements between versions | `/omega:version-diff <doc-title>` |
-| Bilingual engagement (EN/AR) — duplicate entity files appearing in `.brain/02_Entities/` | `/omega:alias-merge` |
+| Want to verify factual claims in a deliverable | `/omega:fact-check [<path>]` |
+| Want to know what changed in client requirements | `/omega:version-diff <doc-title>` |
+| Bilingual engagement (EN/AR) — duplicate entity nodes appearing | `/omega:alias-merge` |
+| Want to ask a question about prior work, risks, deliverables | _ask Claude directly_ — Claude reads `.brain/` markdown |
+| Want a visual view of the brain | _open the engagement folder in Obsidian_ — built-in graph view |
 
 ## Quality bar
 
-- Every `doc-ingest` produces a deterministic `DOC-XXX` ID — re-running is idempotent
-- Every `fact-check` is read-only on both engagement and central brain; refuses if >50% claims unverifiable
-- Every `alias-merge` requires explicit consultant confirmation before applying
-- Every `version-diff` reads the `supersedes:` frontmatter chain + `.brain/04_Versions/` narratives
+- Every `/omega:doc-ingest` produces a deterministic `DOC-XXX` ID — re-running is idempotent
+- Every `/omega:fact-check` is read-only on both per-project and central brains; refuses if >50% of claims are unverifiable
+- Every `/omega:alias-merge` requires explicit consultant confirmation before applying
+- All outputs are markdown — open the engagement folder in Obsidian to navigate visually
 
-## Brain isolation invariants (enforced by existing platform)
+## Brain isolation invariants
 
 - Per-project `.brain/` never auto-pushes raw — `/omega:brain-sync` is the only sanitized path out
-- Central → per-project is read-only at session-start (Claude reads central markdown for high-confidence patterns)
-- `visibility: project-only` on instincts is honored by the existing sanitizer (one-way ratchet)
+- Central → per-project is read-only
+- `visibility: project-only` on instincts is honored by the sanitizer (one-way ratchet)
 
 ## Integration with existing commands
 
-- After `/omega:doc-ingest`, the next `/omega:session-end` will pick up new entities directly from `.brain/02_Entities/` markdown (no extra step needed)
-- `/omega:brain-sync` continues to handle sanitization on instinct markdown before push to the central vault
-- `/omega:evolve` operates on instinct clusters in the central vault — unaffected by document-side additions
-- `/omega:verify-quality` Check 8 uses the same `.brain/01_Instincts/` + `.brain/02_Entities/` markdown vault that `/omega:fact-check` searches — the claim-traceability firewall
+- After `/omega:doc-ingest`, the next `/omega:session-end` will pick up new entities (no extra step — instinct-writer reads markdown directly)
+- `/omega:brain-sync` continues to handle sanitization
+- `/omega:evolve` operates on instinct clusters — unaffected by document-side additions
 
 ## Reference
 
 - Aliases seed: `plugins/kg-enhance/assets/seed-entity-aliases.json`
-- Engagement brain layout: `.brain/01_Instincts/`, `.brain/02_Entities/`, `.brain/04_Versions/`, `.brain/.obsidian/`
-- Central vault layout: `D:/Obsidian Notes Taken/` (direct root scan; engagement folders at `01 Clients/_Active/<Name>/`; cross-engagement instincts at `02 Omega/_Instincts/`)
+- Frontmatter schema for instincts: `docs/instinct-schema.md`
+- Markdown validator: `node tools/validate-obsidian-brain.js --engagement <path>`

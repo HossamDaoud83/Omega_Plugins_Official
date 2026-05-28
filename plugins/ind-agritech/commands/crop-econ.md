@@ -14,7 +14,7 @@ When the engagement scope explicitly calls for crop economics work in the agricu
 ## Inputs you should gather first
 
 - The engagement `project.json` (industry, service line, regulatory frameworks)
-- Relevant client documents already ingested into the brain (run `/omega:graph-query` to find them)
+- Relevant client documents already ingested into the brain (browse `.brain/02_Entities/` or ask Claude)
 - Any prior Omega Agriculture & Agritech deliverables for cross-reference (central brain)
 
 ## Steps

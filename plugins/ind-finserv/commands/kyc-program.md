@@ -14,7 +14,7 @@ When the engagement is in Financial Services Industry and scope explicitly calls
 ## Inputs you should gather first
 
 - Engagement `project.json` (industry = finserv, regulatory frameworks)
-- Relevant client documents in the brain (run `/omega:graph-query`)
+- Relevant client documents in the brain (browse `.brain/02_Entities/` or ask Claude)
 - Any prior Omega Financial Services Industry deliverables for cross-reference
 
 ## Steps

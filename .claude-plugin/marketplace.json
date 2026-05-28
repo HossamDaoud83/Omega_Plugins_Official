@@ -267,7 +267,7 @@
       "source": "./plugins/kg-enhance",
       "category": "capability",
       "version": "1.0.0",
-      "description": "Knowledge brain enhancement (markdown-first) — document ingestion, version tracking, fact-check, bilingual entity resolution.",
+      "description": "Knowledge graph enhancement — document ingestion, versioning, bilingual resolution, queries, live brain HTML.",
       "dependencies": [
         "omega-core"
       ],

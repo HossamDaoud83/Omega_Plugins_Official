@@ -1,8 +1,8 @@
 {
   "$schema": "https://claude.com/schemas/plugin.json",
   "name": "omega-kg-enhance",
-  "version": "1.0.0",
-  "description": "Knowledge brain enhancement (markdown-first): document ingestion, version tracking, fact-check, bilingual entity resolution.",
+  "version": "2.0.0",
+  "description": "Knowledge brain enhancement (v2.0 markdown-first): document ingestion to markdown entities, version tracking via frontmatter, bilingual entity resolution, adversarial fact-checking.",
   "author": {
     "name": "Omega Consulting",
     "url": "https://omega-consulting.local"
@@ -12,8 +12,9 @@
   "keywords": [
     "consulting",
     "omega",
-    "knowledge-graph",
-    "obsidian"
+    "knowledge-brain",
+    "obsidian",
+    "markdown"
   ],
   "components": {
     "commands": "commands/",

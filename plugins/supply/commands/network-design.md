@@ -14,7 +14,7 @@ When the engagement scope explicitly calls for network design work in the supply
 ## Inputs you should gather first
 
 - The engagement `project.json` (industry, service line, regulatory frameworks)
-- Relevant client documents already ingested into the brain (run `/omega:graph-query` to find them)
+- Relevant client documents already ingested into the brain (browse `.brain/02_Entities/` or ask Claude)
 - Any prior Omega Supply Chain & Procurement deliverables for cross-reference (central brain)
 
 ## Steps

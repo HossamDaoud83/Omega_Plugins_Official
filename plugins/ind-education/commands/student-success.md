@@ -14,7 +14,7 @@ When the engagement is in Education Industry and scope explicitly calls for stud
 ## Inputs you should gather first
 
 - Engagement `project.json` (industry = education, regulatory frameworks)
-- Relevant client documents in the brain (run `/omega:graph-query`)
+- Relevant client documents in the brain (browse `.brain/02_Entities/` or ask Claude)
 - Any prior Omega Education Industry deliverables for cross-reference
 
 ## Steps

@@ -1,13 +1,15 @@
-import { centralApiUrl, discoverProjects } from '@/lib/project-registry';
-import { fetchInstincts, type InstinctSummary } from '@/lib/agent-bridge';
+import { discoverProjects } from '@/lib/project-registry';
+import {
+  readCentralInstincts,
+  readEngagementInstincts,
+  defaultCentralPath,
+  type InstinctSummary,
+} from '@/lib/agent-bridge';
 
 export default async function InstinctsPage() {
-  const central = centralApiUrl();
+  const centralPath = defaultCentralPath();
   const projects = discoverProjects();
-
-  let centralInstincts: InstinctSummary[] = [];
-  let centralError: string | null = null;
-  try { centralInstincts = await fetchInstincts(central); } catch (e: any) { centralError = e?.message || String(e); }
+  const centralInstincts: InstinctSummary[] = readCentralInstincts(centralPath);
 
   return (
     <div>
@@ -30,22 +32,19 @@ export default async function InstinctsPage() {
           </h2>
           <span className="text-xs font-mono text-omega-muted">{centralInstincts.length} record{centralInstincts.length === 1 ? '' : 's'}</span>
         </header>
-        {centralError ? (
-          <OfflineNotice
-            title="Central brain offline"
-            subtitle="Sanitized instincts are served by the central FastAPI on :8800."
-            apiUrl={central}
-            startHint="python3 plugins/core/scripts/graphify/central_api.py --port 8800"
-            detail={centralError}
+        {centralInstincts.length === 0 ? (
+          <EmptyNotice
+            title="No sanitized instincts yet"
+            subtitle="Run /omega:brain-sync from any engagement to push sanitized patterns to the central brain."
+            path={`${centralPath}/01_Instincts_Aggregated/`}
           />
         ) : (
           <InstinctList list={centralInstincts} />
         )}
       </section>
 
-      {projects.map(async p => {
-        let local: InstinctSummary[] = [];
-        try { local = await fetchInstincts(p.api_url); } catch { /* offline */ }
+      {projects.map(p => {
+        const local = readEngagementInstincts(p.engagement_path);
         if (local.length === 0) return null;
         return (
           <section key={p.engagement} className="mb-12">
@@ -67,9 +66,9 @@ export default async function InstinctsPage() {
   );
 }
 
-function OfflineNotice({
-  title, subtitle, apiUrl, startHint, detail,
-}: { title: string; subtitle: string; apiUrl: string; startHint: string; detail?: string }) {
+function EmptyNotice({
+  title, subtitle, path,
+}: { title: string; subtitle: string; path: string }) {
   return (
     <div className="card p-7 relative overflow-hidden">
       <div
@@ -86,20 +85,10 @@ function OfflineNotice({
           ◌
         </span>
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2 mb-1">
-            <h3 className="text-base font-semibold tracking-tight text-slate-800">{title}</h3>
-            <span className="chip" style={{ background: '#F1F5F9', color: '#64748B' }}>
-              <span className="chip-dot" style={{ background: '#94A3B8' }} />
-              offline
-            </span>
-          </div>
+          <h3 className="text-base font-semibold tracking-tight text-slate-800 mb-1">{title}</h3>
           <p className="text-sm text-omega-muted mb-3">{subtitle}</p>
-          <div className="text-xs text-omega-muted mb-3">
-            Tried <code className="font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">{apiUrl}</code>
-            {detail && <> · <span className="text-slate-500">{detail}</span></>}
-          </div>
-          <div className="rounded-lg bg-slate-900 text-slate-100 p-3 text-[12px] font-mono overflow-x-auto">
-            <span className="text-emerald-400">$</span> {startHint}
+          <div className="text-xs text-omega-muted">
+            Expected at <code className="font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">{path}</code>
           </div>
         </div>
       </div>

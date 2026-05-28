@@ -1,8 +1,8 @@
 {
   "name": "omega-agui-dashboard",
-  "version": "4.0.0-alpha.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "Omega portfolio AGUI dashboard — Next.js 15 + AG-UI Protocol consuming per-project + central FastAPI graphify endpoints.",
+  "description": "Omega portfolio AGUI dashboard — Next.js 15 reading markdown brain content directly from disk (v2.0 — Obsidian-Primary).",
   "scripts": {
     "dev": "next dev -p 3030",
     "build": "next build",

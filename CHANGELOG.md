@@ -7,132 +7,302 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [1.1.0] — 2026-05-28 — GBrain memory layer + consultant-grade quality pass
-
-Distribution release. Adds GBrain (https://github.com/garrytan/gbrain) as the
-per-engagement memory layer in `omega-core`, plus a consultant-grade enrichment
-pass on the highest-frequency commands. Sister-release of CPS v4.1.0 — Omega
-plugins follow the same architectural contract but with the `omega-*` namespace
-and Omega Consulting branding.
+## [2.1.0] — 2026-05-28 — GBrain memory layer + view-only Obsidian + Claude Code only
 
 ### Added
 
-- **GBrain skill** at `plugins/core/skills/gbrain/SKILL.md` — operational reference
-  for the per-engagement memory layer (PGLite-embedded Postgres 17, typed graph
-  via regex inference cascade, hybrid BM25 + vector + RRF search, 74 MCP tools,
-  write-lane discipline, troubleshooting matrix).
-- **`/omega:gbrain` dispatcher** at `plugins/core/commands/gbrain.md` with
-  subcommands: `status`, `capture`, `search`, `query`, `refresh-central`,
-  `init`, `import`, `extract-links`.
-- **New core hook `gbrain-sync.js`** — PostToolUse on `Edit|Write|NotebookEdit`
-  matching `.brain/**/*.md`. Runs `gbrain sync` incrementally to keep PGLite
-  in lock-step with disk. Soft-fails if Bun (≥ 1.3.10) or GBrain CLI absent.
-  Core hook count: **6 → 7**.
+- **GBrain integration (project-only, dual-source).** Every engagement's `.brain/` is now indexed by a project-scoped GBrain instance (PGLite-embedded Postgres 17 + typed graph + hybrid BM25/vector search). Central `Omega_Second_Brain/` is imported as a **read-only** second source (`gbrain import <central> --read-only`). No GBrain at central — central stays a plain Obsidian vault.
+- **`/omega:gbrain` dispatcher command** in `omega-core` with subcommands: `status`, `capture`, `search`, `query`, `refresh-central`, `init`, `import`, `extract-links`.
+- **`gbrain` skill in `omega-core`** at `plugins/core/skills/gbrain/SKILL.md` — architecture, 74 MCP tools, write-lane discipline, troubleshooting matrix. Loads contextually when GBrain operations are relevant.
+- **New core hook `gbrain-sync.js`** — PostToolUse on `Edit|Write|NotebookEdit` matching `.brain/**/*.md`. Runs `gbrain sync` incrementally to keep PGLite in lock-step with disk. Soft-fails if Bun/GBrain absent. Core hook count: **6 → 7**.
+- **Slug folders** in engagement `.brain/`: `03_Frameworks/`, `05_Risks/`, `06_Persons/`, `07_Engagements/`. Each is a typed-graph node folder. `04_Versions/` keeps its v2.0 slot.
+- **Inbox** at `.brain/inbox/` for `gbrain capture` quick notes.
+- **View-only Obsidian config** baked into `engagement-template/.brain/.obsidian/`: Reading view default, absolute-path wikilinks, write plugins disabled, Obsidian Sync off.
+- **`gbrain.config.json`** in `.brain/` — dual-source config with embedding default OFF for data sovereignty.
+- **`.brain/.gitignore`** for GBrain runtime (`gbrain.db/`, `*.pglite`, etc.).
+- **`ACTIVATION.md`** at repo root — single-source on-ramp for new machines and engagements.
+- **`tools/validate-obsidian-brain.js`** — slug-format wikilink validator + frontmatter checker for engagement and central vaults.
+- **`tools/migrate-engagement-to-gbrain.js`** — retrofits pre-v4.1 engagements: adds layout, gbrain config, view-only Obsidian; soft-runs GBrain init; `--report-wikilinks` audits short-form links.
+- **`tools/migrate-central-to-slugs.js`** — one-shot central wikilink migration: renames legacy folders, rewrites `[[Framework: X]]` / `[[Risk: Y]]` to slug form, creates stub files.
+- **`.mcp.json`** registers `gbrain serve` at engagement scope (74 MCP tools become available to Claude).
 
 ### Changed
 
-- **`session-start.js`** — added incremental `gbrain import <central> --read-only`
-  (when `gbrain.config.json` requests it) and inbox-triage advisory.
-- **`session-end.js`** — added post-extraction `gbrain sync` + `gbrain extract-links`
-  so new instincts are immediately indexed and graph-typed.
-- **Consultant-grade command enrichment** on the highest-frequency commands:
-  - `plugins/kg-enhance/commands/doc-ingest.md` — full rewrite to a consistent
-    template (When-to-run, Inputs, Steps, Output table, worked example,
-    Banking-profile rules, GBrain awareness).
-  - `plugins/kg-enhance/commands/fact-check.md` — Tier 3 fallback prefers
-    `gbrain search`/`query` over grep (BM25 + hybrid). Worked example with
-    verdict table + Must-Fix block. Banking-profile blocking on any
-    contradicted claim.
-  - `plugins/kg-enhance/commands/version-diff.md` — argument-hint, worked
-    example, GBrain cross-link for hybrid retrieval over diff narratives.
-  - `plugins/kg-enhance/commands/alias-merge.md` — worked example, output
-    destination table, post-merge `gbrain extract-links`, Banking-profile
-    double-confirmation for Person-entity merges (PII drift prevention).
-  - `plugins/aig/commands/iso42001-gap.md` — service-line exemplar. Was a
-    5-step stub (16 lines); now 173 lines consultant-grade with
-    clause-by-clause scoring, MECE + Pyramid Principle, full quality gate +
-    fact-check integration, Banking profile escalation (threshold 85,
-    peer review required, Opus auto-escalation, additional hooks),
-    GBrain awareness.
+- **Central `Omega_Second_Brain/` renumbered** to clean numbering. Slug folders now at `04_Frameworks/`, `05_Risks/`, `07_Persons_Roles/`, `08_Engagements_Anonymized/`. Legacy: `05_Frameworks_Library` → `06_Frameworks_Library`, `06_Glossary` → `09_Glossary`, `07_Lessons_Learned` → `10_Lessons_Learned`. Migration handled by `tools/migrate-central-to-slugs.js`.
+- **`session-start.js` hook** now also runs an incremental `gbrain import <central> --read-only` (when config requests it) and surfaces unprocessed inbox items as advisory output.
+- **`session-end.js` hook** now runs `gbrain sync` + `gbrain extract links --source db` after instinct extraction, so new instincts are immediately indexed and graph-typed.
+- **Wikilink convention** mandated: **absolute path + display alias** (`[[03_Frameworks/iso-42001|ISO 42001]]`). Short-form wikilinks silently produce zero graph edges in GBrain's regex inference cascade.
+- **`tools/init-project-brain.js`** writes view-only `.obsidian/` config, slug folders, `gbrain.config.json`, `.gitignore`; soft-runs `gbrain init --pglite --no-embedding` and dual `gbrain import`.
+- **`tools/scaffold-engagement.sh`** auto-runs GBrain init + dual import (soft-fail). New `--skip-gbrain` flag.
+- **`tools/seed-central-brain.js`** seeds the v4.1 11-folder central layout.
+- **CLAUDE.md** (root) refreshed to v4.1 (was stale on v4 phase status).
+- **`CPS_Complete_Reference.md`** gained Part 22 — GBrain integration (full operational reference).
+- **`CPS_Commands_Master_Reference.md`** gained `/omega:gbrain` subcommand table in Appendix F.1.
+
+### Removed
+
+- **`engagement-template/.cursor/`** — Cursor IDE adapter (rules + hooks adapter).
+- **`engagement-template/.codex/`** — Codex CLI configuration + agent TOMLs.
+- **All Cursor + Codex references** in `README.md`, `CPS_Complete_Reference.md` (Concept 9, Part 16), `docs/migration-framework.md`, `engagement-template/AGENTS.md`, `engagement-template/README.md`. **Claude Code is the only supported host going forward.**
 
 ### Preserved (invariants, unchanged)
 
-- Sanitizer rules + `/omega:brain-sync` as the only writer to central Omega Second Brain.
-- `visibility: project-only` ratchet — sanitizer refuses to promote flagged instincts.
-- Quality Gate Check 8 (markdown-traceable claims).
+- Sanitizer rules + `/omega:brain-sync` as the only writer to central brain.
+- `visibility: project-only` ratchet — sanitizer refuses to promote.
+- Quality Gate Check 8 (markdown-traceable claims) — still grep-based; GBrain enhancement deferred to future version.
 - Confidence ladder (0.25 / 0.50 / 0.75 / 0.92) + 1.5× cross-project weighting.
-- All 49 plugins + 21 bundles + 18 plugin-scoped hooks (24 total: 7 core + 18).
-- Hook profiles (`advisory` / `standard` / `banking`) + `OMEGA_DISABLED_HOOKS`.
+- All 49 plugins, 21 bundles, 18 plugin-scoped hooks (24 total now: 7 core + 18 plugin-scoped — but core hook count bumped from 6 to 7).
+- Hook profiles (`advisory` / `standard` / `banking`) + `OMEGA_DISABLED_HOOKS` escape hatch.
 
-### Wikilink convention (v1.1.0)
+### Migration
 
-Absolute slug paths with display aliases: `[[03_Frameworks/iso-42001|ISO 42001]]`.
-Short-form `[[ISO 42001]]` silently produces zero graph edges in GBrain's regex
-inference cascade.
+For pre-v4.1 engagements:
 
-### Notes
+```bash
+node tools/migrate-engagement-to-gbrain.js --engagement <path> --dry-run --report-wikilinks
+node tools/migrate-engagement-to-gbrain.js --engagement <path>
+```
 
-- Bun (≥ 1.3.10) + GBrain CLI required for the memory-layer features. Hooks
-  soft-fail if absent — engagements still run, just without hybrid search and
-  the typed graph.
-- Embedding posture defaults to **off** in `gbrain.config.json` for client-data
-  sovereignty. Consultants enable per engagement after compliance review.
+For pre-v4.1 central:
+
+```bash
+node tools/migrate-central-to-slugs.js --central <path> --dry-run
+node tools/migrate-central-to-slugs.js --central <path>
+```
+
+Existing wikilinks in instincts are not auto-rewritten — convert incrementally as you touch each file. `validate-obsidian-brain.js` reports outstanding short-form links.
 
 ---
 
-## [`@omega/finance` 4.1.0-alpha.0] — 2026-05 — Analyst foundation layer
+## [2.0.1] — 2026-05-20 — Graphify code purge + vault-root central brain
+## [4.1.0] — 2026-04-29 — Knowledge graph enhancement + D3 interactive canvas
 
-Additive enhancement to the finance plugin — no breaking changes. Adds the
-analyst building blocks beneath the existing senior bankability suite. All v4.0
-functionality (`project-finance`, `sensitivity-analysis`, `financial-modeling`
-skills; `financial-analyst`, `deal-financing-advisor` agents; sensitivity /
-montecarlo / scenarios / breakeven commands; all 7 original scripts) preserved.
+### Added — `@omega/kg-enhance` plugin (`plugins/kg-enhance/`)
 
-### Added — skills (+3)
+New capability plugin that closes 5 gaps in the knowledge graph layer.
+Client documents were previously ungraphed — only instincts were tracked.
+All command logic runs via Claude using existing tools; no new scripts or
+dependencies required. Uses Python's built-in `sqlite3` module (no CLI binary
+needed).
 
-- **`accounting-fundamentals`** — double-entry, journal entries, trial balance,
-  Egyptian VAT/PDC conventions. References: double-entry cheatsheet, 30+ journal
-  patterns.
-- **`financial-statement-analysis`** — three-statement construction, the four
-  ratio families, common-size and trend, red-flag checklist. References: ratio
-  formula sheet (with DuPont), common-size/trend templates.
-- **`analyst-toolkit`** — Excel craft, loan amortization theory, presentation
-  craft. References: 20 Excel techniques, amortization variants, 12-slide deck
-  skeleton.
+- `/omega:doc-ingest <path>` — extract entities from a client MD document,
+  write to `graph.db` via Python `sqlite3`, detect version supersession
+  automatically; idempotent (`INSERT OR IGNORE`)
+- `/omega:graph-query <question>` — translate natural-language questions to SQL
+  against the 3-table schema; read-only (`mode=ro` URI); refuses writes
+- `/omega:version-diff <doc-title>` — show full version chain with diff
+  narratives and in-progress deliverable warnings
+- `/omega:alias-merge` — propose and apply EN/AR bilingual entity merges;
+  never auto-applies without consultant confirmation
+- `/omega:brain-html [--scope per-project|central]` — wrap Graphify to produce
+  a self-contained `brain.html` with Leiden community clustering and Omega
+  isolation banner (yellow per-project, blue central)
+- `skills/kg-enhance/SKILL.md` — auto-triggers from natural language
+- `rules/kg-quality-standards.md` — Checks 8/9/10 additive scoring on
+  `/omega:verify-quality`
+- `assets/seed-entity-aliases.json` — 15 canonical EN/AR pairs
+  (ISO 42001, MARPOL, SOLAS, IMO, HIPAA, GDPR, AAST, …)
+- 6 `node:test` smoke tests; aggregate suite: **149 passing, 0 failing**
+  (was 143)
+- Registered in `.claude-plugin/marketplace.json`
 
-### Added — agent (+1)
+New edge types (use existing `edges.edge TEXT` column — no schema change):
+`EXTRACTED_FROM`, `MENTIONS`, `SUPERSEDES`
 
-- **`associate-analyst`** — junior-to-mid persona with a routing table that hands
-  off to the senior `financial-analyst` for bankability / DCF / LBO synthesis.
+### Added — D3 force-directed graph canvas in AGUI (`plugins/core/scripts/agui/`)
 
-### Added — commands (+3)
+- `components/GraphCanvas.tsx` — `'use client'` React component:
+  - D3 v7 force simulation (link + charge + center + collision)
+  - Zoom/pan via `d3.zoom` (scale 0.05–8×)
+  - Directed edge arrowhead markers
+  - Node drag; node colours by kind matching Omega design tokens
+  - Hover tooltip (node id + kind); click-to-highlight neighbourhood
+  - Auto-generated legend from kinds present in payload
+  - Edge cap: >1 000 edges → top-50-degree-node subset (browser safety)
+  - Optional isolation banner prop (yellow per-project, blue central)
+- `app/graph/page.tsx` — dynamic import + `<GraphCanvas>` inserted between
+  stat cards and NodesByKind/EdgesByKind sections
+- TypeScript: clean (0 errors)
 
-- **`/omega-fin:ratios`** — four ratio families from a `statements.json`, with
-  DuPont, markdown report, and 4 Omega-branded charts.
-- **`/omega-fin:amortization`** — loan schedule across 5 variants (level, principal,
-  bullet, grace, sculpted PF with DSCR target).
-- **`/omega-fin:statements`** — three-statement construction + audit mode (6
-  integrity tests).
+### Added — `engagement-template/.brain/04_Versions/`
 
-### Added — scripts (+2, both tested)
+New directory for version diff narratives written by `/omega:doc-ingest` when
+a superseded document is detected. Was missing from the scaffolded template.
 
-- **`scripts/ratio_analysis.py`** — 4 ratio families + DuPont, calibratable
-  thresholds, auto headline observations, 4 charts.
-- **`scripts/amortization_schedule.py`** — 5 variants; sculpted reverse-engineers
-  principal to hold a target DSCR given CFADS.
+### Updated — Obsidian documentation
+
+- **Omega v4 Consultant Handbook** (v1.3): new edge types in Concept 7;
+  D3 canvas note in Concept 11; document ingestion subsection in Part 7;
+  Interactive Graph Canvas subsection + updated Graph tab in Part 8
+- **Omega v4 System Manual** (v1.1): nine edge types in Part 7; D3 canvas in
+  Surface 4; document layer paragraph in Pillar 3; new Appendix A.5 with
+  5 kg-enhance commands (old A.5 → A.6)
+
+---
+
+## [4.0.0-alpha.0] — 2026-04-28 — Phases 0–6 shipped
+
+After cleanup (Phase 0), v4 transforms the monolithic v3 template into a
+composable plugin-based platform with 23 plugins, executable hooks, brain
+isolation, knowledge graph, and AGUI portfolio dashboard.
+
+### Phase 1 — `@omega/core` foundation + executable hooks
+- 6 executable JS hooks: session-start, session-end, secret-scan,
+  branding-check, stale-blocker-alert, quality-gate (BLOCKING)
+- Hook profiles: `OMEGA_HOOK_PROFILE=advisory|standard|banking`
+- Disable individual: `OMEGA_DISABLED_HOOKS=hook1,hook2` or `=all`
+- 5 modular rules extracted from monolithic `CLAUDE.md` (absolute-rules,
+  quality-frameworks, session-protocol, document-standards, protected-fields)
+- 12 universal skills moved to `plugins/core/skills/`
+- 2 agents created: `quality-reviewer`, `document-generator`
+- `engagement-template/` populated (CLAUDE.md, AGENTS.md, .brain/, phase folders)
+- Token optimization: `model: sonnet`, `MAX_THINKING_TOKENS: 10000`,
+  `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE: 50`, `CLAUDE_CODE_SUBAGENT_MODEL: haiku`
+
+### Phase 2 — `@omega/finance` standalone plugin
+- 7 Python scripts (tornado, montecarlo, spider, scenario, breakeven, run-all, config)
+- 3 skills (project-finance, sensitivity-analysis, financial-modeling)
+- 4 commands (`/omega-fin:sensitivity|montecarlo|scenarios|breakeven`)
+- 1 agent (`financial-analyst`)
+- 2 banking references (P80 conventions, DSCR thresholds)
+
+### Phase 3 — 11 service-line + 10 industry plugins
+- `@omega/aai|aig|coe|dig|edu|esi|gov|hlt|iso|mar|str` (service-line)
+- `@omega/ind-healthcare|maritime|education|government|finserv|manufacturing|retail|energy|realestate|telecom`
+- 130+ commands across all plugins
+- Service-line-specific quality-standards rules per plugin
+- Marketplace manifest registers all 23 plugins
+- Removed v3 `.claude/skills`, `.claude/subagents`, `.claude/docs`, `.claude/hooks`
+
+### Phase 4 — Continuous learning + Obsidian Second Brain
+- Per-project `.brain/` (raw client data) + central
+  `/mnt/d/Obsidian Notes Taken/Omega_Second_Brain/` (sanitized)
+- `instinct-writer.js` — auto-extracts at session-end
+- `sanitizer.js` — strips client identifiers, buckets USD figures, replaces
+  named persons with role placeholders, strips project codes
+- `confidence-tracker.js` — Jaccard similarity + cross-project recurrence
+  (1.5x weight); ladder 0.25 → 0.50 → 0.75 → 0.92
+- 5 commands: `/omega:brain-sync`, `/omega:evolve`, `/omega:learn`,
+  `/omega:instinct-export`, `/omega:instinct-import`
+- `tools/seed-central-brain.js`, `tools/init-project-brain.js`,
+  `tools/scaffold-engagement.sh`
+- Universal Instinct Schema v1.0 (`docs/instinct-schema.md`) with 7 schema tests
+
+### Phase 5 — Graphify + AGUI dashboard
+- Per-project: `entity_extractor.py`, `graph_builder.py`, `api.py`,
+  `dashboard.py` (Streamlit)
+- Central: `central_builder.py`, `central_api.py` (port 8800)
+- NetworkX → SQLite + GraphML, FastAPI auto-allocated ports (8765+)
+- Edge semantics: OBSERVES, MITIGATES, APPLIES, INFORMS, OBSERVED_IN, GENERALIZES_TO
+- Next.js 15 + React 19 + AG-UI Protocol AGUI dashboard
+  (`plugins/core/scripts/agui/`) with 4 routes (Portfolio, Graph, Instincts,
+  Engagement) and Omega branding palette
+- `tools/launch-agui.sh` — one-command launcher
+
+### Phase 6 — Marketplace + cross-platform + docs
+- `engagement-template/.cursor/` — Cursor IDE adapter (translates Cursor
+  events to Omega hook input format) + mirrored rules
+- `engagement-template/.codex/` — Codex CLI config + agent TOMLs
+- 6 documentation files: `tutorial.md` (story-driven), `migration-framework.md`,
+  `plugin-development.md`, `obsidian-graphify.md`, `agui-dashboard.md`,
+  `instinct-schema.md`
+- Root `README.md` rewritten for v4 platform
+
+
+
+**Architectural break.** v4 transforms the monolithic v3 template into a composable
+plugin-based platform. v3 monolithic engagements continue to work; new engagements
+should use v4 once Phase 1 ships executable hooks and the `@omega/core` plugin.
+
+### Added
+- `package.json` declares npm workspaces (`workspaces: ["plugins/*"]`)
+- `plugins/_template/` — scaffolding template for new `@omega/<code>` plugins
+- `engagement-template/` — placeholder for the engagement workspace template (Phase 1 populates)
+- `tools/` — placeholder for migration & developer utilities (Phase 1+ populates)
+- `docs/` — placeholder for v4 documentation (Phase 4–6 populates)
+- `.claude-plugin/marketplace.json` — marketplace manifest stub (plugins added incrementally)
+- Bumped `engines.node` from `>=16.0.0` to `>=18.0.0` (built-in `node:test` + `fetch`)
+
+### Removed
+- 20 client-specific scripts (Red Sea Marine / Jazan / EBEIDO / Al Adabiya / MRCC leftovers):
+  - `generate_ebeido_requirements.js`, `generate_fee_estimate.js`,
+    `generate_client_email_docx.js`, `generate_client_requirements.js`,
+    `generate_pha01_unified.py`, `analyze_boqs.py`, `audit_against_reference.py`,
+    `generate_all_reports.js`, `generate_docx_report.js`, `generate_excel_report.js`,
+    `generate_pdf_report.js`, `generate_pptx_report.js`, `generate_risk_documents.js`,
+    `generate_example_documents.js`, `apply_cps_template_format.py`,
+    `TEMPLATE_unified_docx_generator.py`, `generate_expert_briefing_docx.js`,
+    `generate_financial_briefing_docx.js`, `convert_all_drawings.py`,
+    `FORMATTING_IMPROVEMENTS.md`
+- 5 v3-era Jazan-specific config docs (replaced in Phase 1 by modular `plugins/core/rules/`):
+  - `.claude/README.md`, `.claude/QUICK_START.md`, `.claude/MEMORY_SCOPE.md`,
+    `.claude/PROJECT_ISOLATION.md`, `.claude/memory/README.md`
+- Top-level `dependencies` block from `package.json` will move to `plugins/core/package.json` in Phase 1 (kept transitionally for now)
+- Format-specific scripts (`generate_docx_report.js` etc.); the unified
+  `scripts/cps-document-generator.js` covers the same functionality generically
+
+### Changed
+- `package.json` `name`/`version`/`description` reflect the v4 monorepo structure
+- `package.json` `scripts` block streamlined; v3 per-script entrypoints removed
+  (will be re-exposed via `@omega/core` commands in Phase 1)
+- `.gitignore` updated for v4: Next.js (AGUI), pytest cache, per-project
+  `.brain/graph.db` exclusions, defensive guards for accidental client data
+
+### Kept (carry into v4 unchanged or via plugin migration)
+- `assets/cps-branding.json`, `assets/BIG3_*.json`, `assets/CPS_METHODOLOGY.md`, logos
+- `scripts/cps-document-generator.js`, `cps-methodology.js`, `session-manager.js`,
+  `deliverable-manager.js`, `risk-manager.js`, `setup-new-engagement.js`,
+  `sync_to_dashboard.py`, all `read_*` scripts, `pdf_to_images.py`,
+  `convert_pdf_to_images.js`, `create-engagement.bat`
+- `.claude/skills/` (40+ skills, decomposed into plugins in Phases 1 + 3)
+- `.claude/subagents/` (24 subagents, decomposed into plugins in Phase 3)
+- `00_Engagement_Management/` template files (move to `engagement-template/` in Phase 1)
+- `sensitivity_analysis/` (Python suite, becomes `@omega/finance` in Phase 2)
+
+### Migration notes
+- Existing v3 engagements continue working — they don't see plugin commands
+- Phase 1 ships `@omega/core` + executable hooks + `engagement-template/`
+- Phase 6 ships `tools/migrate-v3-to-v4.js` for opt-in legacy migration
+
+### Reference
+- Implementation plan: `~/.claude/plans/cps-v4-the-zesty-lantern.md`
+- Project tracking (Obsidian): `05 Projects/Omega v4/Omega v4 MOC.md`
+- Consultant handbook (Obsidian): `02 Omega/Omega v4 Consultant Handbook.md`
+
+---
+
+## [3.1.0] — 2026-03-17 — Reset to clean template, activate skills as slash commands
+
+Per commit `3b05d1a`. Reset KVR to clean template; activated all 60 skills as slash commands.
+
+## [3.0.0] — Earlier — Enhanced consulting engagement framework
+---
+
+## [2.0.1] — 2026-05-20 — Graphify code purge + vault-root central brain
+
+### Removed
+
+- `plugins/core/scripts/graphify/` — entire Python pipeline (entity extractor, graph builder, dashboard, activity log, central API/builder, requirements)
+- `plugins/core/scripts/agui/components/Graph*.tsx`, `CommunityListPanel.tsx`, `NodeDetailPanel.tsx` — AGUI Graph tab components
+- `plugins/core/scripts/agui/app/graph/`, `app/api/` — AGUI graph routes
+- `plugins/core/scripts/agui/lib/brain-pulse.ts`, `community-colors.ts`
+- `plugins/core/tests/scripts/graphify-files.test.js`
+- `plugins/kg-enhance/commands/brain-html.md`, `graph-query.md`
+- `docs/obsidian-graphify.md`
+- `engagement-template/.brain/03_Subgraph/` — graphify subgraph snapshot folder
+- `.gitignore` entries for `**/.brain/graph.db`, `**/.brain/graph.db-journal`, `**/.brain/03_Subgraph/snapshots/`
 
 ### Changed
 
-- `package.json` → `4.1.0-alpha.0`; description reflects the analyst+bankability
-  dual mission. `.claude-plugin/plugin.json` description and keywords expanded to
-  cover the analyst layer (manifest version held at 1.0.0).
-- `README.md` updated to 7 commands · 6 skills · 3 agents · 9 scripts.
-- `tests/run-all.js` extended to assert presence of the new v4.1 components.
+- Central brain path: `D:/Obsidian Notes Taken/` (vault root, direct scan) — **no** `Omega_Second_Brain/` subfolder. Per-engagement central folder pattern: `01 Clients/_Active/<Engagement Name>/` with MOC + `_Knowledge/`.
+- README v2.0 paragraph rewritten to reflect graphify-free architecture.
+- AGUI dashboard retains Portfolio + Instincts + Engagement tabs (Graph tab gone).
 
-### Fixed
+### Preserved
 
-- `amortization_schedule.py` `--annual-rate` help string escaped (`10%%`) so
-  `--help` no longer crashes under Python 3.14's argparse `%`-formatting.
+- `plugins/kg-enhance/` plugin and its 4 v2.0 commands: `doc-ingest`, `fact-check`, `version-diff`, `alias-merge`.
+- All 49 plugins, 21 bundles, 24 hooks (6 core + 18 plugin-scoped), sanitizer, confidence ladder, brain isolation contract.
+- Markdown-first `.brain/` per engagement (Obsidian sub-vault).
 
 ---
 

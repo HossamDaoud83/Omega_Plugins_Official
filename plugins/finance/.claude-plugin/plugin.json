@@ -2,7 +2,7 @@
   "$schema": "https://claude.com/schemas/plugin.json",
   "name": "omega-finance",
   "version": "1.0.0",
-  "description": "Omega Consulting — Financial Analysis & Project Finance. Analyst foundation (accounting, three-statement, ratios, amortization) plus banking-grade bankability suite (tornado, Monte Carlo, spider, scenario, break-even) for infrastructure and feasibility work.",
+  "description": "Omega Consulting — Project Finance & Sensitivity Analysis. Banking-grade tornado, Monte Carlo, spider, scenario, and break-even analyses for infrastructure and bankability work.",
   "author": {
     "name": "Omega Consulting",
     "url": "https://omega-consulting.local"
@@ -12,11 +12,6 @@
   "keywords": [
     "consulting",
     "omega",
-    "financial-analysis",
-    "accounting",
-    "financial-statements",
-    "ratio-analysis",
-    "amortization",
     "project-finance",
     "sensitivity-analysis",
     "monte-carlo",

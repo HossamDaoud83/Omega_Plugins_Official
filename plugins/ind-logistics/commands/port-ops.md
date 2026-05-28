@@ -14,7 +14,7 @@ When the engagement scope explicitly calls for port operations review work in th
 ## Inputs you should gather first
 
 - The engagement `project.json` (industry, service line, regulatory frameworks)
-- Relevant client documents already ingested into the brain (run `/omega:graph-query` to find them)
+- Relevant client documents already ingested into the brain (browse `.brain/02_Entities/` or ask Claude)
 - Any prior Omega Logistics & 3PL deliverables for cross-reference (central brain)
 
 ## Steps

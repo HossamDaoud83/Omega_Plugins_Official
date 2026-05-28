@@ -1,22 +1,19 @@
 # Omega AGUI Dashboard
 
-Polished portfolio surface on top of the per-project + central graphify FastAPI endpoints. Built with Next.js 15, React 19, AG-UI Protocol for live event streaming, and D3 for graph rendering.
+Polished portfolio surface for Omega engagements. Built with Next.js 15 and React 19.
+
+**v2.0 — Obsidian-Primary.** The dashboard reads instinct markdown and engagement config directly from disk; there is no FastAPI process, no SQL graph layer. For visual brain exploration, open the engagement folder (or `Omega_Second_Brain/`) in Obsidian — its built-in graph view renders the wikilink relationships natively.
 
 ## Tabs
 
-- **Portfolio** (`/portfolio`) — Cards for each engagement: health, deliverable progress, recent instincts, graph thumbnail
-- **Graph** (`/graph`) — Interactive central graph with filters (service_line, industry, confidence ≥ X); per-project drill-down with isolation banner
-- **Instincts** (`/instincts`) — Searchable instinct browser; confidence ladder visible; supports `/omega:evolve` trigger
-- **Engagement** (`/engagement/[id]`) — Per-project deep view: deliverables tracker, risks, isolated graph, instincts
+- **Portfolio** (`/portfolio`) — Cards for each engagement: health, deliverable progress, instinct counts
+- **Instincts** (`/instincts`) — Searchable instinct browser; confidence ladder visible; per-engagement breakdown
+- **Engagement** (`/engagement/[id]`) — Per-project deep view: deliverables tracker, payments, recent instincts, pointer to the markdown `.brain/`
 
-## Endpoints consumed
+## Data sources
 
-- **Per-project FastAPI** — discovered from `~/Omega_Projects/*/.brain/config.json` (one per engagement, ports 8765+)
-- **Central FastAPI** — `localhost:8800` (started via `python plugins/core/scripts/graphify/central_api.py --port 8800`)
-
-## Live updates
-
-`session-end.js` writes a new instinct → triggers `graph_builder.py` → AGUI's AG-UI client receives the event and updates the relevant tab within ~5 seconds.
+- **Per-engagement**: `~/Omega_Projects/<name>/.brain/config.json` (commercials + deliverables) and `~/Omega_Projects/<name>/.brain/01_Instincts/*.md` (instinct frontmatter)
+- **Central**: `${Omega_CENTRAL_BRAIN:-/mnt/d/Obsidian Notes Taken/Omega_Second_Brain}/01_Instincts_Aggregated/*.md`
 
 ## Launch
 
@@ -33,11 +30,3 @@ cd plugins/core/scripts/agui
 npm install     # one-time
 npm run dev     # serves on http://localhost:3030
 ```
-
-## Status
-
-Skeleton scaffolded in Phase 5 (April 2026). Run `npm install` and the AGUI app boots; per-project + central API integration is wired via `lib/agent-bridge.ts` and `lib/project-registry.ts`. D3 graph rendering and AG-UI event streams are wired but visual polish (logo, custom palette, chart treatments) lands as iteration on real engagements.
-
-## Why AG-UI
-
-AG-UI gives bidirectional event streaming so the dashboard reflects engagement state in real time as `session-end.js` writes new instincts. Streamlit dashboards (`scripts/graphify/dashboard.py`) remain for headless / no-Node environments.

@@ -14,8 +14,9 @@ Merges a YAML bundle exported by another consultant via `/omega:instinct-export`
    - Check if `id` already exists in the central brain
    - If new → write the instinct file, set `imported_from: <consultant>` in frontmatter
    - If existing → skip (or `--force` to overwrite, with a backup)
-3. Run `node plugins/core/scripts/graphify/central_builder.py` to rebuild the central graph.
-4. Report: imported / skipped / overwritten counts.
+3. Report: imported / skipped / overwritten counts.
+
+The central brain is markdown — Obsidian re-indexes on next open; no graph rebuild step needed.
 
 ## Conflict handling
 

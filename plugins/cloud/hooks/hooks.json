@@ -1,17 +1,15 @@
 {
   "$schema": "https://claude.com/schemas/hooks.json",
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "(tool == \"Edit\" || tool == \"Write\") && (tool_input.file_path matches \"cloud-architecture\" || tool_input.file_path matches \"cloud_design\" || tool_input.file_path matches \"well-architected\")",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/cost-guard.js",
-            "timeout": 5000
-          }
-        ]
-      }
-    ]
-  }
+  "hooks": [
+    {
+      "matcher": "(tool == \"Edit\" || tool == \"Write\") && (tool_input.file_path matches \"cloud-architecture\" || tool_input.file_path matches \"cloud_design\" || tool_input.file_path matches \"well-architected\")",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/cost-guard.js",
+          "timeout": 5000
+        }
+      ]
+    }
+  ]
 }

@@ -1,30 +1,31 @@
-# @omega/kg-enhance — Knowledge Brain Enhancement (Markdown-First)
+# @omega/kg-enhance — Knowledge Brain Enhancement
 
-Closes the loop between client documents, the engagement brain, and deliverable verification through 4 slash commands. v2.0 markdown-first: no SQL, no graph layer, no external graph engine.
+Closes gaps between client documents and the engagement brain through four slash commands. v2.0 — markdown-first; no SQL, no FastAPI, no ML libraries.
 
 ## Commands
 
 | Command | Purpose |
 |---|---|
-| `/omega:doc-ingest <path>` | Extract entities from a client document and write them to `.brain/02_Entities/<DOC-ID>/` as markdown files |
-| `/omega:fact-check [<deliverable-path>]` | Adversarial-critique loop: verify factual claims against engagement + central markdown brain (supported / contradicted / unverifiable) |
-| `/omega:version-diff <doc-title>` | Show the version chain via `supersedes:` frontmatter and `.brain/04_Versions/` narratives |
-| `/omega:alias-merge` | Propose and apply EN/AR bilingual entity merges (consultant confirms each) |
+| `/omega:doc-ingest <path>` | Extract entities from a client document and write them as markdown to `.brain/02_Entities/<DOC-ID>/` |
+| `/omega:fact-check [<path>]` | Adversarially verify factual claims in a deliverable against engagement + central brain (read-only; 5-iteration stable-verdict loop) |
+| `/omega:version-diff <doc-title>` | Show version chain and diff narrative from frontmatter + `04_Versions/` |
+| `/omega:alias-merge` | Propose and apply EN/AR bilingual entity merges on the markdown brain |
 
 ## Gaps addressed
 
 | Gap | Command |
 |---|---|
-| Client documents ungraphed | `/omega:doc-ingest` (writes entity markdown) |
-| Claim-level fabrication risk in deliverables | `/omega:fact-check` (5-iteration stable-verdict loop) |
-| No temporal versioning between document drops | `/omega:version-diff` |
+| Client documents not in the brain | `/omega:doc-ingest` |
+| No temporal versioning | `/omega:version-diff` |
+| Risk of fabricated claims in deliverables | `/omega:fact-check` |
 | No cross-language entity resolution | `/omega:alias-merge` |
+| Mid-session brain queries | _ask Claude_ — Claude reads `.brain/` markdown directly |
+| Visual brain view | _open the folder in Obsidian_ — built-in graph view |
 
 ## Design
 
-- Consultants type slash commands. Claude does the thinking. Markdown vault handles persistence.
-- Entities, instincts, and versions are plain `.md` files under `.brain/`.
-- Typed relationships expressed via Obsidian wikilinks (`applies: [[Framework: ISO 42001]]`) and frontmatter properties (`supersedes:`, `mitigates:`, `observed_in:`).
+- Consultants type slash commands. Claude does the thinking. Outputs are plain markdown.
+- Entity relationships are expressed via Obsidian wikilinks (`[[Target]]`) and typed frontmatter (`extracted_from:`, `supersedes:`, `mentions:`).
 - Depends on `@omega/core`.
 
 ## Tests

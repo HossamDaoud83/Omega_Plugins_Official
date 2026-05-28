@@ -1,8 +1,8 @@
 {
   "name": "@omega/finance",
-  "version": "4.1.0-alpha.0",
+  "version": "4.0.0-alpha.0",
   "private": true,
-  "description": "Omega Financial Analysis & Project Finance plugin — analyst foundation (accounting, statements, ratios, amortization) plus bankability suite (sensitivity, Monte Carlo, DSCR)",
+  "description": "Omega Project Finance & Sensitivity Analysis plugin",
   "scripts": {
     "test": "node tests/run-all.js"
   }

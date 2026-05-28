@@ -4,7 +4,7 @@ import {
   deliverableProgress,
   formatMoney,
 } from '@/lib/project-registry';
-import { fetchProjectMeta } from '@/lib/agent-bridge';
+import { readEngagementInstincts } from '@/lib/agent-bridge';
 
 const ACCENTS: Array<[string, string]> = [
   ['#1B4F72', '#0EA5A4'],
@@ -24,15 +24,10 @@ function pickAccent(seed: string): [string, string] {
 export default async function PortfolioPage() {
   const projects = discoverProjects();
 
-  const cards = await Promise.all(
-    projects.map(async p => {
-      let meta: any = null;
-      try { meta = await fetchProjectMeta(p.api_url); } catch { /* offline */ }
-      return { ...p, meta, online: !!meta };
-    })
-  );
-
-  const onlineCount = cards.filter(c => c.online).length;
+  const cards = projects.map(p => {
+    const instinctCount = readEngagementInstincts(p.engagement_path).length;
+    return { ...p, instinct_count: instinctCount };
+  });
 
   // Portfolio totals
   const totalValue = cards.reduce((s, c) => s + (c.commercials.engagement_value ?? 0), 0);
@@ -48,8 +43,7 @@ export default async function PortfolioPage() {
         <div>
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-2 gradient-text">Portfolio</h1>
           <p className="text-sm text-omega-muted">
-            {cards.length} engagement{cards.length === 1 ? '' : 's'} ·{' '}
-            <span className="text-emerald-600 font-medium">{onlineCount} live</span>
+            {cards.length} engagement{cards.length === 1 ? '' : 's'}
           </p>
         </div>
         <div className="accent-bar w-32" />
@@ -112,31 +106,19 @@ export default async function PortfolioPage() {
                     <div className="text-[11px] text-omega-muted font-mono truncate">{c.project_id}</div>
                   </div>
                 </div>
-                <span
-                  className="chip shrink-0"
-                  style={
-                    c.online
-                      ? { background: '#ECFDF5', color: '#047857' }
-                      : { background: '#F1F5F9', color: '#64748B' }
-                  }
-                >
-                  <span
-                    className="chip-dot"
-                    style={{ background: c.online ? '#10B981' : '#94A3B8' }}
-                  />
-                  {c.online ? 'live' : 'offline'}
-                </span>
               </div>
 
-              <div className="flex items-center gap-2 text-[11px] text-omega-muted mb-3 font-mono">
-                <span>port {c.api_port}</span>
-                {c.commercials.phase && (
-                  <>
-                    <span>·</span>
-                    <span className="capitalize">{c.commercials.phase}</span>
-                  </>
-                )}
-              </div>
+              {c.commercials.phase && (
+                <div className="flex items-center gap-2 text-[11px] text-omega-muted mb-3 font-mono">
+                  <span className="capitalize">{c.commercials.phase}</span>
+                  {c.commercials.billing_model && (
+                    <>
+                      <span>·</span>
+                      <span>{c.commercials.billing_model}</span>
+                    </>
+                  )}
+                </div>
+              )}
 
               {/* Fee row */}
               <div className="rounded-lg border border-omega-border bg-slate-50/60 p-3 mb-3">
@@ -180,23 +162,12 @@ export default async function PortfolioPage() {
                     }}
                   />
                 </div>
-                <div className="flex items-center justify-between text-[11px] mt-1">
-                  <span className="text-omega-muted">{prog.pct}% complete</span>
-                  {c.graph_html_path && (
-                    <span className="inline-flex items-center gap-1 text-violet-700">
-                      <span className="chip-dot" style={{ background: '#7C3AED' }} />
-                      brain
-                    </span>
-                  )}
-                </div>
+                <div className="text-[11px] text-omega-muted mt-1">{prog.pct}% complete</div>
               </div>
 
-              {c.meta && (
-                <div className="grid grid-cols-2 gap-3 pt-3 border-t border-omega-border mt-auto">
-                  <Metric label="Instincts" value={c.meta.instinct_count ?? 0} color={from} />
-                  <Metric label="Graph nodes" value={c.meta.graph?.node_count ?? '—'} color={to} />
-                </div>
-              )}
+              <div className="grid grid-cols-1 gap-3 pt-3 border-t border-omega-border mt-auto">
+                <Metric label="Instincts" value={c.instinct_count} color={from} />
+              </div>
             </Link>
           );
         })}

@@ -29,14 +29,14 @@ Always work bottom-up. Never invent a verdict before locating a source; never sk
 
 1. **Extract claims.** Read the target deliverable. Enumerate every factual assertion. A factual assertion is anything that could be checked against an external source — numbers, dates, named entities, regulatory citations, attributions, causal claims tied to specific actors. Output as a numbered list before doing anything else.
 
-2. **Locate canonical source — three-tier markdown fallback.**
-   - Tier 1: grep `.brain/01_Instincts/*.md` for content matching the claim
-   - Tier 2: grep `.brain/02_Entities/**/*.md` extracted from ingested client documents
-   - Tier 3: grep the central vault (`D:/Obsidian Notes Taken/02 Omega/_Instincts/` and framework references) for sanitized cross-engagement patterns
+2. **Locate canonical source — three-tier markdown fallback (v2.0).**
+   - Tier 1: grep `.brain/01_Instincts/*.md` for the entity or assertion (use canonical entity names from `assets/seed-entity-aliases.json`)
+   - Tier 2: grep `.brain/02_Entities/**/*.md` for the matching entity frontmatter and surrounding context
+   - Tier 3: grep `${Omega_CENTRAL_BRAIN:-/mnt/d/Obsidian Notes Taken/Omega_Second_Brain}/05_Frameworks_Library/` and `01_Instincts_Aggregated/`
    - If all three turn up nothing, mark **unverifiable** for this iteration
 
 3. **Critique.** For each (claim, source) pair:
-   - **supported** — the source explicitly contains the claim. Cite the supporting passage.
+   - **supported** — the source explicitly contains the claim. Cite the supporting passage or the graph edge.
    - **contradicted** — the source contradicts the claim. Cite the contradicting passage. This is the most valuable verdict — flag prominently.
    - **unverifiable** — no source located in any tier. Absence of contradiction is **not** support.
 
@@ -49,16 +49,16 @@ Always work bottom-up. Never invent a verdict before locating a source; never sk
 
 5. **Refuse on thin brain.** If >50% of claims remain unverifiable after termination, abort. Tell the consultant the engagement brain is too thin and recommend `/omega:doc-ingest` on additional sources. Returning a partial table creates false confidence — don't do it.
 
-6. **Output.** Markdown table with columns `# | Claim | Verdict | Source | Confidence`. Confidence is `high` when the source is a primary document, `medium` when it's the graph, `low` when it's the central brain (because central is sanitized — entity-level, not passage-level). Append a `## Must fix` section for every contradicted claim with a one-line suggested correction.
+6. **Output.** Markdown table with columns `# | Claim | Verdict | Source | Confidence`. Confidence is `high` when the source is a primary engagement document or entity passage, `medium` when only an instinct mentions it, `low` when sourced from central (because central is sanitized — entity-level, not passage-level). Append a `## Must fix` section for every contradicted claim with a one-line suggested correction.
 
 ## Confidence calibration
 
 | Verdict source | Confidence | Why |
 |---|---|---|
-| Primary engagement document, exact passage match | high | Direct evidence |
-| Graph edge with named source | high | Edge was extracted from a primary doc |
-| Graph edge without named source | medium | Edge inferred during ingestion |
-| Central brain edge (cross-engagement) | low | Central is sanitized; lacks passage-level grounding |
+| Primary engagement document or entity passage match | high | Direct evidence in `.brain/02_Entities/` |
+| Engagement instinct that cites a primary doc | high | Instinct frontmatter links back to the source |
+| Engagement instinct without a primary doc citation | medium | Observation without primary evidence |
+| Central brain entry (cross-engagement) | low | Central is sanitized; lacks passage-level grounding |
 | No source found | n/a (unverifiable) | Don't fabricate confidence |
 
 ## Coding hygiene
@@ -86,7 +86,7 @@ Always work bottom-up. Never invent a verdict before locating a source; never sk
 ## Integration
 
 - **Input:** any `.md` deliverable in the engagement
-- **Calls:** Grep against the engagement's `.brain/01_Instincts/` and `.brain/02_Entities/` markdown vault, plus the central `02 Omega/_Instincts/` vault
+- **Calls:** Grep across `.brain/01_Instincts/`, `.brain/02_Entities/`, and `Omega_Second_Brain/{05_Frameworks_Library, 01_Instincts_Aggregated}/`
 - **Output:** structured fact-check table in the chat; optionally the consultant pastes it into the deliverable's review section
 - **Follows:** `/omega:verify-quality` (structural checks)
 - **Precedes:** `/omega:client-communication` (delivery)

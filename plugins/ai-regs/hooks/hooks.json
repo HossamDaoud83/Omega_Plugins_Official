@@ -1,16 +1,15 @@
 {
   "$schema": "https://claude.com/schemas/hooks.json",
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/gazette-freshness.js",
-            "timeout": 5000
-          }
-        ]
-      }
-    ]
-  }
+  "hooks": [
+    {
+      "event": "SessionStart",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/gazette-freshness.js",
+          "timeout": 5000
+        }
+      ]
+    }
+  ]
 }

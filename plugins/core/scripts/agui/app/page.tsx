@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import type { Route } from 'next';
-import { discoverProjects, centralApiUrl } from '@/lib/project-registry';
+import { discoverProjects } from '@/lib/project-registry';
+import { defaultCentralPath } from '@/lib/agent-bridge';
 
 export default async function Home() {
   const projects = discoverProjects();
-  const central = centralApiUrl();
+  const centralPath = defaultCentralPath();
 
   const features: Array<{ href: Route; title: string; icon: string; desc: string; from: string; to: string }> = [
     {
@@ -13,13 +14,6 @@ export default async function Home() {
       icon: '◧',
       desc: 'All engagements at a glance — health, deliverables, instincts.',
       from: '#1B4F72', to: '#0EA5A4',
-    },
-    {
-      href: '/graph',
-      title: 'Knowledge Graph',
-      icon: '◇',
-      desc: 'Central + per-project graphs. Filter by service line, industry, confidence.',
-      from: '#7C3AED', to: '#0EA5E9',
     },
     {
       href: '/instincts',
@@ -48,28 +42,28 @@ export default async function Home() {
         <div className="relative">
           <div className="inline-flex items-center gap-2 chip mb-5" style={{ background: 'rgba(27,79,114,0.08)', color: '#1B4F72' }}>
             <span className="chip-dot" style={{ background: '#0EA5A4' }} />
-            Omega v4 Platform
+            Omega v2.0 · Obsidian-Primary
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-3">
             <span className="gradient-text">Portfolio Dashboard</span>
           </h1>
           <p className="text-omega-muted max-w-2xl text-[15px]">
             {projects.length} engagement{projects.length === 1 ? '' : 's'} discovered · central brain at{' '}
-            <code className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 text-[12px]">{central}</code>
+            <code className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 text-[12px]">{centralPath}</code>
           </p>
 
           {/* Inline KPI strip */}
           <div className="mt-7 grid grid-cols-2 md:grid-cols-4 gap-3">
             <Kpi label="Engagements" value={projects.length} accent="#1B4F72" />
             <Kpi label="Service lines" value={11} accent="#0EA5A4" />
-            <Kpi label="Industries" value={10} accent="#7C3AED" />
-            <Kpi label="Phase" value="5" accent="#F59E0B" />
+            <Kpi label="Industries" value={19} accent="#7C3AED" />
+            <Kpi label="Plugins" value={49} accent="#F59E0B" />
           </div>
         </div>
       </section>
 
       {/* Feature grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
         {features.map(f => (
           <Link
             key={f.href}
@@ -108,8 +102,8 @@ export default async function Home() {
             <dd className="font-semibold">{projects.length}</dd>
           </div>
           <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50/70 border border-omega-border gap-3">
-            <dt className="text-omega-muted">Central API</dt>
-            <dd className="font-mono text-[12px] truncate">{central}</dd>
+            <dt className="text-omega-muted">Central brain</dt>
+            <dd className="font-mono text-[12px] truncate">{centralPath}</dd>
           </div>
         </dl>
       </div>

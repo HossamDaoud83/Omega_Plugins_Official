@@ -23,12 +23,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               </span>
               <span className="flex flex-col leading-tight">
                 <span className="text-[15px] font-bold tracking-tight gradient-text">Omega Portfolio</span>
-                <span className="text-[10px] uppercase tracking-[0.18em] text-omega-muted">Omega Consulting · v4</span>
+                <span className="text-[10px] uppercase tracking-[0.18em] text-omega-muted">Omega Consulting · v2.0</span>
               </span>
             </Link>
             <nav className="flex items-center gap-7 text-sm">
               <Link href="/portfolio" className="nav-link">Portfolio</Link>
-              <Link href="/graph" className="nav-link">Graph</Link>
               <Link href="/instincts" className="nav-link">Instincts</Link>
               <span className="hidden md:inline-flex chip" style={{ background: '#ECFDF5', color: '#047857' }}>
                 <span className="chip-dot" style={{ background: '#10B981' }} />
@@ -44,9 +43,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <div className="mx-auto max-w-7xl px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-omega-muted">
             <div className="flex items-center gap-2">
               <span className="accent-bar w-10" />
-              <span>Omega Consulting · Omega v4 · AGUI Dashboard</span>
+              <span>Omega Consulting · Omega v2.0 · AGUI Dashboard</span>
             </div>
-            <div className="font-mono text-[11px]">phase 5 · ag-ui protocol</div>
+            <div className="font-mono text-[11px]">obsidian-primary</div>
           </div>
         </footer>
       </body>

@@ -1,27 +1,25 @@
 {
   "$schema": "https://claude.com/schemas/hooks.json",
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "(tool == \"Edit\" || tool == \"Write\") && (tool_input.file_path matches \"02_Documents\" || tool_input.file_path matches \"05_Deliverables_Final\")",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/data-classification.js",
-            "timeout": 5000
-          }
-        ]
-      },
-      {
-        "matcher": "(tool == \"Edit\" || tool == \"Write\") && (tool_input.file_path matches \"data-architecture\" || tool_input.file_path matches \"data_lineage\" || tool_input.file_path matches \"data-platform\")",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/lineage-check.js",
-            "timeout": 5000
-          }
-        ]
-      }
-    ]
-  }
+  "hooks": [
+    {
+      "matcher": "(tool == \"Edit\" || tool == \"Write\") && (tool_input.file_path matches \"02_Documents\" || tool_input.file_path matches \"05_Deliverables_Final\")",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/data-classification.js",
+          "timeout": 5000
+        }
+      ]
+    },
+    {
+      "matcher": "(tool == \"Edit\" || tool == \"Write\") && (tool_input.file_path matches \"data-architecture\" || tool_input.file_path matches \"data_lineage\" || tool_input.file_path matches \"data-platform\")",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/lineage-check.js",
+          "timeout": 5000
+        }
+      ]
+    }
+  ]
 }
