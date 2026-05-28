@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Omega @omega/core — Stop hook (session end)
+// Omega @cps/core — Stop hook (session end)
 // Verifies state files updated, persists session_state.json delta,
 // triggers instinct extraction (Phase 4), creates git commit (if configured).
 // Non-blocking advisory — never aborts the session.
@@ -40,17 +40,7 @@ if (fs.existsSync(brainConfig) && fs.existsSync(writerScript)) {
   }
 }
 
-// 3. Trigger graph rebuild (Phase 5 — only runs if graphify present)
-const graphBuilder = path.join(__dirname, '..', 'graphify', 'graph_builder.py');
-if (fs.existsSync(graphBuilder) && fs.existsSync(path.join(PROJECT_ROOT, '.brain'))) {
-  try {
-    execFileSync('python3', [graphBuilder, '--incremental'], { stdio: 'inherit', cwd: PROJECT_ROOT });
-  } catch (e) {
-    logToStderr(`⚠️ Graph rebuild failed (non-fatal): ${e.message}`);
-  }
-}
-
-// 4. Audit trail — append a session-end marker to engagement_progress.md if missing
+// 3. Audit trail — append a session-end marker to engagement_progress.md if missing
 const progressPath = '00_Engagement_Management/engagement_progress.md';
 if (exists(progressPath)) {
   const progress = readText(progressPath) || '';
@@ -58,6 +48,22 @@ if (exists(progressPath)) {
   const marker = `<!-- session-end-hook ${state.last_updated} session=${sessionN} -->`;
   if (!progress.includes(marker)) {
     appendText(progressPath, `\n\n${marker}\n`);
+  }
+}
+
+// 4. GBrain: sync new instincts + re-extract typed graph (v4.1, soft-fail)
+// Runs AFTER instinct-writer.js wrote new markdown to .brain/01_Instincts/.
+// Soft-fails if Bun/GBrain not installed — never block session-end.
+if (!isHookDisabled('gbrain-sync')) {
+  try {
+    const brain = path.join(PROJECT_ROOT, '.brain');
+    if (fs.existsSync(path.join(brain, 'gbrain.db'))) {
+      execFileSync('gbrain', ['sync'], { cwd: brain, stdio: 'ignore', timeout: 10000 });
+      execFileSync('gbrain', ['extract', 'links', '--source', 'db'], { cwd: brain, stdio: 'ignore', timeout: 10000 });
+      logToStderr('🧠 GBrain: synced + typed graph refreshed');
+    }
+  } catch (e) {
+    // Soft-fail — GBrain absent or sync errored. Markdown stays canonical.
   }
 }
 

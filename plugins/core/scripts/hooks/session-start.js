@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Omega @omega/core — SessionStart hook
+// Omega @cps/core — SessionStart hook
 // Validates engagement artifacts, surfaces stale blockers, alerts on milestones,
 // loads handoff notes from session_state.json. Non-blocking (always exits 0).
 
@@ -74,6 +74,42 @@ if (fs.existsSync(tracker2) && fs.existsSync(path.join(PROJECT_ROOT, '.brain')))
   } catch (e) {
     // Non-fatal — confidence tracking is advisory
   }
+}
+
+// 7. GBrain: incremental re-import of central as read-only (v4.1, soft-fail)
+// Respects gbrain.config.json: central_refresh.on_session_start = true.
+// Soft-fails if Bun/GBrain not installed — does NOT block session.
+if (!isHookDisabled('gbrain-refresh-central')) {
+  try {
+    const brain = path.join(PROJECT_ROOT, '.brain');
+    const gbCfgPath = path.join(brain, 'gbrain.config.json');
+    if (fs.existsSync(gbCfgPath) && fs.existsSync(path.join(brain, 'gbrain.db'))) {
+      const gbCfg = readJSON('.brain/gbrain.config.json') || {};
+      const wantRefresh = gbCfg.central_refresh && gbCfg.central_refresh.on_session_start !== false;
+      const centralSrc = (gbCfg.sources || []).find(s => s.mode === 'ro');
+      if (wantRefresh && centralSrc && centralSrc.path && fs.existsSync(centralSrc.path)) {
+        execFileSync('gbrain', ['import', centralSrc.path, '--read-only', '--no-embed'], {
+          cwd: brain, stdio: 'ignore', timeout: 5000,
+        });
+        logToStderr('🧠 GBrain: central re-imported (read-only)');
+      }
+    }
+  } catch (e) {
+    // Soft-fail: GBrain not installed, or import errored. Never block session.
+  }
+}
+
+// 8. GBrain inbox triage advisory (v4.1) — surface unprocessed quick-captures
+if (!isHookDisabled('gbrain-inbox-triage')) {
+  try {
+    const inbox = path.join(PROJECT_ROOT, '.brain', 'inbox');
+    if (fs.existsSync(inbox)) {
+      const items = fs.readdirSync(inbox).filter(f => f.endsWith('.md') && !f.startsWith('README'));
+      if (items.length > 0) {
+        logToStderr(`📥 GBrain inbox: ${items.length} unprocessed item${items.length === 1 ? '' : 's'} — triage at session-end or run /omega:gbrain status`);
+      }
+    }
+  } catch (e) { /* advisory */ }
 }
 
 logToStderr('✅ Session validation complete');

@@ -31,6 +31,11 @@
             "type": "command",
             "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/secret-scan.js",
             "timeout": 5000
+          },
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/hooks/gbrain-sync.js",
+            "timeout": 7000
           }
         ]
       },

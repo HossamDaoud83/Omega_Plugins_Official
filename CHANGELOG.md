@@ -7,6 +7,79 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.0] — 2026-05-28 — GBrain memory layer + consultant-grade quality pass
+
+Distribution release. Adds GBrain (https://github.com/garrytan/gbrain) as the
+per-engagement memory layer in `omega-core`, plus a consultant-grade enrichment
+pass on the highest-frequency commands. Sister-release of CPS v4.1.0 — Omega
+plugins follow the same architectural contract but with the `omega-*` namespace
+and Omega Consulting branding.
+
+### Added
+
+- **GBrain skill** at `plugins/core/skills/gbrain/SKILL.md` — operational reference
+  for the per-engagement memory layer (PGLite-embedded Postgres 17, typed graph
+  via regex inference cascade, hybrid BM25 + vector + RRF search, 74 MCP tools,
+  write-lane discipline, troubleshooting matrix).
+- **`/omega:gbrain` dispatcher** at `plugins/core/commands/gbrain.md` with
+  subcommands: `status`, `capture`, `search`, `query`, `refresh-central`,
+  `init`, `import`, `extract-links`.
+- **New core hook `gbrain-sync.js`** — PostToolUse on `Edit|Write|NotebookEdit`
+  matching `.brain/**/*.md`. Runs `gbrain sync` incrementally to keep PGLite
+  in lock-step with disk. Soft-fails if Bun (≥ 1.3.10) or GBrain CLI absent.
+  Core hook count: **6 → 7**.
+
+### Changed
+
+- **`session-start.js`** — added incremental `gbrain import <central> --read-only`
+  (when `gbrain.config.json` requests it) and inbox-triage advisory.
+- **`session-end.js`** — added post-extraction `gbrain sync` + `gbrain extract-links`
+  so new instincts are immediately indexed and graph-typed.
+- **Consultant-grade command enrichment** on the highest-frequency commands:
+  - `plugins/kg-enhance/commands/doc-ingest.md` — full rewrite to a consistent
+    template (When-to-run, Inputs, Steps, Output table, worked example,
+    Banking-profile rules, GBrain awareness).
+  - `plugins/kg-enhance/commands/fact-check.md` — Tier 3 fallback prefers
+    `gbrain search`/`query` over grep (BM25 + hybrid). Worked example with
+    verdict table + Must-Fix block. Banking-profile blocking on any
+    contradicted claim.
+  - `plugins/kg-enhance/commands/version-diff.md` — argument-hint, worked
+    example, GBrain cross-link for hybrid retrieval over diff narratives.
+  - `plugins/kg-enhance/commands/alias-merge.md` — worked example, output
+    destination table, post-merge `gbrain extract-links`, Banking-profile
+    double-confirmation for Person-entity merges (PII drift prevention).
+  - `plugins/aig/commands/iso42001-gap.md` — service-line exemplar. Was a
+    5-step stub (16 lines); now 173 lines consultant-grade with
+    clause-by-clause scoring, MECE + Pyramid Principle, full quality gate +
+    fact-check integration, Banking profile escalation (threshold 85,
+    peer review required, Opus auto-escalation, additional hooks),
+    GBrain awareness.
+
+### Preserved (invariants, unchanged)
+
+- Sanitizer rules + `/omega:brain-sync` as the only writer to central Omega Second Brain.
+- `visibility: project-only` ratchet — sanitizer refuses to promote flagged instincts.
+- Quality Gate Check 8 (markdown-traceable claims).
+- Confidence ladder (0.25 / 0.50 / 0.75 / 0.92) + 1.5× cross-project weighting.
+- All 49 plugins + 21 bundles + 18 plugin-scoped hooks (24 total: 7 core + 18).
+- Hook profiles (`advisory` / `standard` / `banking`) + `OMEGA_DISABLED_HOOKS`.
+
+### Wikilink convention (v1.1.0)
+
+Absolute slug paths with display aliases: `[[03_Frameworks/iso-42001|ISO 42001]]`.
+Short-form `[[ISO 42001]]` silently produces zero graph edges in GBrain's regex
+inference cascade.
+
+### Notes
+
+- Bun (≥ 1.3.10) + GBrain CLI required for the memory-layer features. Hooks
+  soft-fail if absent — engagements still run, just without hybrid search and
+  the typed graph.
+- Embedding posture defaults to **off** in `gbrain.config.json` for client-data
+  sovereignty. Consultants enable per engagement after compliance review.
+
+---
+
 ## [`@omega/finance` 4.1.0-alpha.0] — 2026-05 — Analyst foundation layer
 
 Additive enhancement to the finance plugin — no breaking changes. Adds the
