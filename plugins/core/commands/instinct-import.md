@@ -5,7 +5,7 @@ allowed-tools: Bash, Read, Write
 
 # /omega:instinct-import
 
-Merges a YAML bundle exported by another consultant via `/omega:instinct-export` into this consultant's central brain at `/mnt/d/Obsidian Notes Taken/Omega_Second_Brain/01_Instincts_Aggregated/`.
+Merges a YAML bundle exported by another consultant via `/omega:instinct-export` into this consultant's central brain at `/mnt/d/Obsidian Notes Taken/01_Instincts_Aggregated/`.
 
 ## Steps
 

@@ -15,7 +15,7 @@ When 5+ related instincts cluster around the same pattern in the central brain, 
 
 ## Steps
 
-1. Open the central brain: `/mnt/d/Obsidian Notes Taken/Omega_Second_Brain/01_Instincts_Aggregated/`
+1. Open the central brain: `/mnt/d/Obsidian Notes Taken/01_Instincts_Aggregated/`
 2. Cluster instincts by `service_line` + `industry` + frontmatter `tags`
 3. For each cluster of 5+ instincts:
    - Identify the common surface pattern

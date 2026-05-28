@@ -29,7 +29,7 @@ The detailed loop logic lives in the co-located skill: `skills/fact-check/SKILL.
 3. **Locate canonical source per claim.** For each claim, search in this order (three-tier fallback):
    - **Tier 1 — engagement instincts**: grep `.brain/01_Instincts/*.md` for the entity or assertion (use canonical entity names from `assets/seed-entity-aliases.json`). If GBrain is installed, prefer `gbrain search "<claim keywords>"` — BM25-ranked, faster than grep.
    - **Tier 2 — engagement entities**: grep `.brain/02_Entities/**/*.md` for the matching entity frontmatter and surrounding context, OR `gbrain query "<paraphrased claim>" --preset conservative` for hybrid match.
-   - **Tier 3 — central frameworks + instincts**: search `${CPS_CENTRAL_BRAIN:-/mnt/d/Obsidian Notes Taken/Omega_Second_Brain}/06_Frameworks_Library/` and `01_Instincts_Aggregated/`. GBrain reads central as a read-only source, so `gbrain search` here covers both project + central in one call.
+   - **Tier 3 — central frameworks + instincts**: search `${CPS_CENTRAL_BRAIN:-/mnt/d/Obsidian Notes Taken}/06_Frameworks_Library/` and `01_Instincts_Aggregated/`. GBrain reads central as a read-only source, so `gbrain search` here covers both project + central in one call.
    - If no source can be found anywhere, mark the claim **unverifiable** for this iteration
 
 4. **Critique each claim.** For every (claim, source) pair, judge:

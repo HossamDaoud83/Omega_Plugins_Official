@@ -32,7 +32,7 @@ Always work bottom-up. Never invent a verdict before locating a source; never sk
 2. **Locate canonical source — three-tier markdown fallback (v2.0).**
    - Tier 1: grep `.brain/01_Instincts/*.md` for the entity or assertion (use canonical entity names from `assets/seed-entity-aliases.json`)
    - Tier 2: grep `.brain/02_Entities/**/*.md` for the matching entity frontmatter and surrounding context
-   - Tier 3: grep `${Omega_CENTRAL_BRAIN:-/mnt/d/Obsidian Notes Taken/Omega_Second_Brain}/05_Frameworks_Library/` and `01_Instincts_Aggregated/`
+   - Tier 3: grep `${Omega_CENTRAL_BRAIN:-/mnt/d/Obsidian Notes Taken}/05_Frameworks_Library/` and `01_Instincts_Aggregated/`
    - If all three turn up nothing, mark **unverifiable** for this iteration
 
 3. **Critique.** For each (claim, source) pair:

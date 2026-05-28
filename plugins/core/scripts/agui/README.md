@@ -13,7 +13,7 @@ Polished portfolio surface for Omega engagements. Built with Next.js 15 and Reac
 ## Data sources
 
 - **Per-engagement**: `~/Omega_Projects/<name>/.brain/config.json` (commercials + deliverables) and `~/Omega_Projects/<name>/.brain/01_Instincts/*.md` (instinct frontmatter)
-- **Central**: `${Omega_CENTRAL_BRAIN:-/mnt/d/Obsidian Notes Taken/Omega_Second_Brain}/01_Instincts_Aggregated/*.md`
+- **Central**: `${Omega_CENTRAL_BRAIN:-/mnt/d/Obsidian Notes Taken}/01_Instincts_Aggregated/*.md`
 
 ## Launch
 

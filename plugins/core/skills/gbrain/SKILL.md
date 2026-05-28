@@ -33,7 +33,7 @@ Each engagement has **one** GBrain instance. It indexes two sources into one pro
 | Source | Path | Mode | Purpose |
 |---|---|---|---|
 | Project | `<engagement>/.brain/` | Read/write | Active engagement knowledge |
-| Central | `D:\Obsidian Notes Taken\Omega_Second_Brain\` | Read-only | Sanitized cross-engagement patterns |
+| Central | `D:\Obsidian Notes Taken\` | Read-only | Sanitized cross-engagement patterns |
 
 GBrain is never installed at the central brain. Central stays a plain Obsidian vault; `/omega:brain-sync` remains the only writer to it (sanitizer-gated).
 
@@ -167,7 +167,7 @@ GBrain's hybrid `query` optionally calls an external embedding provider (OpenAI 
 {
   "sources": [
     { "path": ".brain", "mode": "rw" },
-    { "path": "D:/Obsidian Notes Taken/Omega_Second_Brain", "mode": "ro" }
+    { "path": "D:/Obsidian Notes Taken", "mode": "ro" }
   ],
   "embedding": "off",
   "scope": "project-only"

@@ -20,7 +20,7 @@ const path = require('path');
 
 const ARGS = parseArgs(process.argv.slice(2));
 const ENGAGEMENT = ARGS.engagement || process.env.CLAUDE_PROJECT_DIR || process.cwd();
-const CENTRAL = ARGS.central || '/mnt/d/Obsidian Notes Taken/Omega_Second_Brain';
+const CENTRAL = ARGS.central || '/mnt/d/Obsidian Notes Taken';
 
 function parseArgs(argv) {
   const out = {};

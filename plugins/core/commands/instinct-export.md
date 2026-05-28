@@ -9,7 +9,7 @@ Bundles the consultant's sanitized central-brain instincts into a single YAML fi
 
 ## Steps
 
-1. Default scope: all instincts in `/mnt/d/Obsidian Notes Taken/Omega_Second_Brain/01_Instincts_Aggregated/` with `central_sync: synced`.
+1. Default scope: all instincts in `/mnt/d/Obsidian Notes Taken/01_Instincts_Aggregated/` with `central_sync: synced`.
 2. Optional filter: `--service-line AIG`, `--industry healthcare`, `--since 2025-01-01`.
 3. Output: `omega-instincts-export-YYYY-MM-DD.yaml` in the current directory.
 4. Bundle includes frontmatter + body for each instinct, with a manifest header (count, date, exporter).

@@ -82,7 +82,7 @@ Read these before starting work — they carry forward lessons learned without r
 
 ## Hand-off to central brain
 
-`/omega:brain-sync` runs the sanitizer over all `central_sync: pending` instincts that aren't `visibility: project-only`, and writes sanitized copies to `/mnt/d/Obsidian Notes Taken/Omega_Second_Brain/01_Instincts_Aggregated/`. The source instinct's `central_sync` flag flips to `synced`. The sanitized copy strips client name, project code, named persons, and rounds USD figures to buckets.
+`/omega:brain-sync` runs the sanitizer over all `central_sync: pending` instincts that aren't `visibility: project-only`, and writes sanitized copies to `/mnt/d/Obsidian Notes Taken/01_Instincts_Aggregated/`. The source instinct's `central_sync` flag flips to `synced`. The sanitized copy strips client name, project code, named persons, and rounds USD figures to buckets.
 
 ## See also
 
