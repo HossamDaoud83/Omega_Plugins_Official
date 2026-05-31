@@ -94,7 +94,7 @@ Work completed:
 - [Key accomplishment 1]
 - [Key accomplishment 2]
 
-Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>"
 
 git push origin main
 ```
