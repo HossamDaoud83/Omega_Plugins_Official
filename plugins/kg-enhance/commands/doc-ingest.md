@@ -1,33 +1,149 @@
 ---
-description: Ingest a client document, extract typed entities, write them as markdown to the engagement brain, and detect supersession of prior versions
+description: Ingest a client document in any format (PDF, DOCX, PPTX, MD, image), auto-convert to markdown via Marker OCR, extract typed entities, write them to the engagement brain, and detect supersession of prior versions
 allowed-tools: Read, Bash, Write, Edit, Grep
-argument-hint: "<path-to-markdown-document>"
+argument-hint: "<path-to-document>  (PDF, DOCX, PPTX, MD, JPG, PNG)"
 ---
 
 # /omega:doc-ingest
 
-Ingest a client-document MD file into the engagement brain. Extracts entities (Client, Framework, Regulation, Person, Deliverable, Risk, Money, Date, System, Document), writes each as markdown to `.brain/02_Entities/<DOC-ID>/`, detects supersession of prior versions via frontmatter scan, and writes an audit trail. Idempotent — same file produces the same `DOC-ID`.
+Ingest a client document in **any format** into the engagement brain. Auto-converts PDF/DOCX/PPTX to markdown using Marker (GPU OCR, Arabic-capable) when available, falling back to pandoc. Extracts entities (Client, Framework, Regulation, Person, Deliverable, Risk, Money, Date, System, Document), writes each as markdown to `.brain/02_Entities/<DOC-ID>/`, detects supersession of prior versions via frontmatter scan, and writes an audit trail. Idempotent — same file produces the same `DOC-ID`.
 
-Junior-friendly summary: *"This is how the brain learns what's in a client document. After this runs, you can ask Claude 'what does DOC-XXXX affect?' and get a useful answer."*
+Junior-friendly summary: *"Pass any document — PDF, Word, PowerPoint, even Arabic scans. The skill converts it automatically and teaches the brain what's inside."*
 
 ## When to run
 
-- Client sends a new briefing, RFP, or requirements document
+- Client sends a new briefing, RFP, requirements document, or scanned contract (any format)
 - A revised version of a prior document arrives — supersession is auto-detected
-- Reviewing a regulation, standard, or framework PDF (convert to MD first via `pandoc`)
+- Reviewing a regulation, standard, or framework PDF (no manual pre-conversion needed)
 - Mid-engagement, before `/omega:verify-quality` on a deliverable that cites this document (Check 8 needs the entities indexed)
 
 ## Inputs
 
 **Required:**
-- A markdown file (UTF-8) of the document, with at minimum the frontmatter `doc_title:` and the body text. Convert from DOCX/PDF first if needed (`pandoc input.docx -o documents/<name>.md`).
+- Any document file: `.md`, `.pdf`, `.docx`, `.pptx`, `.xlsx`, `.jpg`, `.png` — conversion is automatic.
 - A scaffolded engagement workspace (`.brain/config.json` must exist).
 
 **Optional:**
-- `version:` and `received_date:` in document frontmatter (recommended for supersession detection).
-- `.brain/alias_overrides.json` — engagement-specific EN/AR aliases (used by step 4).
+- `version:` and `received_date:` in document frontmatter (recommended for supersession detection, auto-added to converted files).
+- `.brain/alias_overrides.json` — engagement-specific EN/AR aliases (used by step 5).
+
+## Converter availability
+
+| Tool | Formats | Arabic OCR | Install |
+|---|---|---|---|
+| **Marker** (preferred) | PDF, images (via 1-page-PDF) | ✅ GPU-accelerated Surya | `py -3.13 -m pip install marker-pdf` |
+| **python-docx** | DOCX | ❌ text layer only | `pip install python-docx` |
+| **python-pptx** | PPTX | ❌ text layer only | `pip install python-pptx` |
+| **PIL/Pillow** | PNG/JPG → 1-page PDF (feeds Marker) | ✅ via Marker | `pip install Pillow` |
+| **pandoc** (fallback) | DOCX, PPTX, MD | ❌ No OCR | system package |
+| **Direct read** | MD only | n/a | built-in |
+
+> **Reality check:** most `marker-pdf` installs ship **only** the PDF converter — `marker.converters.docx`, `.pptx`, and `.image` are frequently absent (`ModuleNotFoundError`), and `pandoc` is often not installed. So this skill does **not** rely on Marker for non-PDF types. It reads docx/pptx with python-docx/python-pptx and OCRs images by rendering them to a 1-page PDF (PIL) and feeding Marker's PDF path. Each converter is independent — a missing one only disables its own type.
+
+See `plugins/kg-enhance/docs/marker-setup.md` for full installation guide.
 
 ## Steps
+
+0. **Auto-convert to markdown** (skip if input is already `.md`):
+
+   Detect the file extension of the argument path and route by type. Each branch is
+   independent — a missing converter only disables its own type, never the whole run.
+
+   | Ext | Converter | Notes |
+   |---|---|---|
+   | `.md` | direct read | no conversion |
+   | `.pdf` | Marker `PdfConverter` `force_ocr=True` | Arabic embedded-font PDFs decoded via Surya OCR, not the corrupt text layer |
+   | `.docx` | Marker `DocxConverter` → **fallback** python-docx | DocxConverter usually absent; python-docx extracts paragraphs (heading styles → `#`) + tables |
+   | `.pptx` | python-pptx | one `## Slide N` per slide; shape text + tables |
+   | `.png` `.jpg` `.jpeg` | PIL → 1-page PDF → Marker `force_ocr` | reuses the proven PDF OCR path since `marker.converters.image` is typically absent |
+
+   Single robust snippet (load Marker models **once**, then route):
+   ```bash
+   py -3.13 -c "
+   import os, hashlib
+   path = r'<input_path>'
+   ext  = os.path.splitext(path)[1].lower()
+   out  = os.path.splitext(path)[0] + '_converted.md'
+
+   def marker_pdf(p):
+       from marker.converters.pdf import PdfConverter
+       from marker.models import create_model_dict
+       from marker.config.parser import ConfigParser
+       from marker.output import text_from_rendered
+       cfg = ConfigParser({'output_format':'markdown','languages':'ar,en','force_ocr':True})
+       conv = PdfConverter(config=cfg.generate_config_dict(), artifact_dict=create_model_dict())
+       md,_,_ = text_from_rendered(conv(p)); return md
+
+   if ext == '.pdf':
+       body = marker_pdf(path)
+   elif ext in ('.png','.jpg','.jpeg'):
+       from PIL import Image
+       tmp = os.path.splitext(path)[0] + '_tmp.pdf'
+       Image.open(path).convert('RGB').save(tmp, 'PDF')
+       try: body = marker_pdf(tmp)
+       finally:
+           try: os.remove(tmp)
+           except OSError: pass
+   elif ext == '.docx':
+       try:
+           from marker.converters.docx import DocxConverter   # rarely present
+           from marker.models import create_model_dict
+           from marker.config.parser import ConfigParser
+           from marker.output import text_from_rendered
+           cfg = ConfigParser({'output_format':'markdown'})
+           conv = DocxConverter(config=cfg.generate_config_dict(), artifact_dict=create_model_dict())
+           body,_,_ = text_from_rendered(conv(path))
+       except Exception:                                       # fallback: python-docx
+           import docx
+           d = docx.Document(path); lines = []
+           for para in d.paragraphs:
+               t = para.text.strip()
+               if not t: continue
+               s = (para.style.name or '').lower()
+               if s.startswith('heading'):
+                   n = ''.join(c for c in s if c.isdigit()); lines.append('#'*min(int(n or 2),6)+' '+t)
+               else: lines.append(t)
+           for tbl in d.tables:
+               for row in tbl.rows:
+                   lines.append('| ' + ' | '.join(c.text.strip().replace(chr(10),' ') for c in row.cells) + ' |')
+               lines.append('')
+           body = '\n\n'.join(lines)
+   elif ext == '.pptx':
+       from pptx import Presentation
+       prs = Presentation(path); lines = []
+       for i, sl in enumerate(prs.slides, 1):
+           lines.append('## Slide %d' % i)
+           for sh in sl.shapes:
+               if sh.has_text_frame:
+                   for pa in sh.text_frame.paragraphs:
+                       t = ''.join(r.text for r in pa.runs).strip()
+                       if t: lines.append(t)
+               if getattr(sh, 'has_table', False):
+                   for row in sh.table.rows:
+                       lines.append('| ' + ' | '.join(c.text.strip().replace(chr(10),' ') for c in row.cells) + ' |')
+       body = '\n\n'.join(lines)
+   else:
+       raise SystemExit('Unsupported extension: ' + ext)
+
+   open(out, 'w', encoding='utf-8').write(body)
+   print(out)
+   "
+   ```
+   Use the printed `_converted.md` path for all subsequent steps. If even python-docx /
+   python-pptx / Pillow are missing, fall back to `pandoc "<input>" -o "<stem>_pandoc.md"`
+   (DOCX/PPTX only, no OCR); if that is also unavailable, abort:
+   *"Cannot convert `<ext>` — install `marker-pdf` + `python-docx` + `python-pptx` + `Pillow`, or `pandoc`. See `plugins/kg-enhance/docs/marker-setup.md`."*
+
+   **At scale (whole-directory ingest):** loading Marker models per file is wasteful
+   (~50 s each). Use a batch driver that loads models once and loops with a resumable
+   manifest — reference implementation bundled at `plugins/kg-enhance/scripts/brain_batch_ingest.py`
+   (copy to your engagement `scripts/`; staged converted md under `.brain/_ingest_staging/`). Note Arabic OCR is slow (~20–90 s/page); a 90-file
+   PDF corpus can run for hours — run it in the background.
+
+   **Arabic PDF note:** OCR requires Marker. Pandoc cannot read PDFs; without Marker, abort
+   for `.pdf` rather than emit a corrupt text layer.
+
+   Log the converter used in the Step 11 summary output.
 
 1. **Verify context.** Read `.brain/config.json` to confirm we are in an engagement workspace. If missing, abort with: *"Not a Omega engagement — run `/omega:engagement-setup` first."*
 
@@ -122,6 +238,7 @@ Junior-friendly summary: *"This is how the brain learns what's in a client docum
 11. **Print summary:**
     ```
     ✓ Ingested <DOC-ID>
+      Source: <original_path>  →  Converter: <Marker (force_ocr) | python-docx | python-pptx | PIL→Marker | pandoc | direct>
       Title: <title>  Version: <version>
       Entities written: <N> (<K> new)  →  .brain/02_Entities/<DOC-ID>/
       Supersedes: <old_DOC-ID|none> (<significance>)
@@ -145,27 +262,48 @@ Junior-friendly summary: *"This is how the brain learns what's in a client docum
 | `.brain/04_Versions/<new>_supersedes_<old>.md` | Diff narrative when supersession detected |
 | `.brain/audit.log` | Append-only audit trail |
 
-## Worked example
+## Worked examples
 
+**English DOCX (direct):**
 ```
 $ /omega:doc-ingest documents/AlNoor_AI_Strategy_Brief_v2.md
 
 ✓ Ingested DOC-7E3F9A2B11
+  Source: documents/AlNoor_AI_Strategy_Brief_v2.md  →  Converter: direct
   Title: Al-Noor AI Strategy Brief  Version: 2.0
   Entities written: 27 (4 new)  →  .brain/02_Entities/DOC-7E3F9A2B11/
-    Clients: Al-Noor Health Group (en), مجموعة النور الصحية (ar)
-    Frameworks: ISO 42001, HIPAA, JAWDA  (stubs at .brain/03_Frameworks/)
-    Systems: Oracle HIS, Cerner EMR, PACS
-    Risks: Data residency, Model explainability  (stubs at .brain/05_Risks/)
-    Persons: Dr. Khalid Al-Rashed (CIO), Eng. Sara Younes (IT Lead)  (project-only)
   Supersedes: DOC-4A7B2C1D09 (significance: medium — 18% lines changed)
-  Diff narrative: .brain/04_Versions/DOC-7E3F9A2B11_supersedes_DOC-4A7B2C1D09.md
   ⚠ 1 deliverable in progress references content that changed. Re-verify quality.
+```
+
+**Arabic PDF (Marker force_ocr):**
+```
+$ /omega:doc-ingest 01_Discovery/data_collected/client_brief_arabic.pdf
+
+  Converting: client_brief_arabic.pdf → Marker (force_ocr=True, languages=ar,en)...
+✓ Ingested DOC-3C8A1F5D22
+  Source: client_brief_arabic.pdf  →  Converter: Marker (force_ocr)
+  Title: ملخص استراتيجية الذكاء الاصطناعي  Version: 1.0
+  Entities written: 19 (19 new)  →  .brain/02_Entities/DOC-3C8A1F5D22/
+  Supersedes: none
+```
+
+**Client DOCX received mid-engagement:**
+```
+$ /omega:doc-ingest 01_Discovery/data_collected/RFP_Phase2.docx
+
+  Converting: RFP_Phase2.docx → Marker (languages=ar,en)...
+✓ Ingested DOC-9B2E7C4F31
+  Source: RFP_Phase2.docx  →  Converter: Marker
+  Title: Phase 2 RFP — Digital Transformation  Version: 2.1
+  Entities written: 34 (11 new)  →  .brain/02_Entities/DOC-9B2E7C4F31/
+  Supersedes: DOC-1A4D8E2C07 (significance: high — 41% lines changed)
+  ⚠ 3 deliverables in progress reference content that changed. Re-verify quality.
 
 Next steps:
-  /omega:version-diff "Al-Noor AI Strategy Brief"
-  /omega:verify-quality 05_Deliverables_Final/D002_ISO42001_Gap_Report.md
-  /omega:fact-check 05_Deliverables_Final/D002_ISO42001_Gap_Report.md
+  /omega:version-diff "Phase 2 RFP — Digital Transformation"
+  /omega:verify-quality 05_Deliverables_Final/D003_Roadmap.md
+  /omega:fact-check 05_Deliverables_Final/D003_Roadmap.md
 ```
 
 ## Quality criteria
@@ -187,9 +325,9 @@ After `/omega:doc-ingest`:
 ## Banking profile
 
 In banking profile (`OMEGA_HOOK_PROFILE=banking`):
-- The `omega-cyber/pii-scan.js` hook runs on the ingested document — fails if SSN/passport/IBAN patterns are not in entity context.
-- Person entities also trigger `omega-people/pii-people.js` — fails if role isn't named.
-- The `omega-risk/control-check.js` hook validates any extracted Risk entities have a `control_mapping` field.
+- The `cps-cyber/pii-scan.js` hook runs on the ingested document — fails if SSN/passport/IBAN patterns are not in entity context.
+- Person entities also trigger `cps-people/pii-people.js` — fails if role isn't named.
+- The `cps-risk/control-check.js` hook validates any extracted Risk entities have a `control_mapping` field.
 
 ## Related
 

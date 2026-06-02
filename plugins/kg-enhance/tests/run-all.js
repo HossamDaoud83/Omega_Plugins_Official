@@ -32,6 +32,28 @@ test('removed v1.x commands are gone', () => {
   }
 });
 
+test('all 3 v2.2 engagement-intelligence commands present', () => {
+  const expected = ['trace', 'emerge', 'challenge'];
+  for (const c of expected) {
+    assert.ok(
+      fs.existsSync(path.join(ROOT, 'commands', c + '.md')),
+      `missing command: ${c}.md`
+    );
+  }
+});
+
+test('engagement-intelligence commands are read-only (no Write/Edit)', () => {
+  for (const c of ['trace', 'emerge', 'challenge']) {
+    const text = fs.readFileSync(path.join(ROOT, 'commands', c + '.md'), 'utf8');
+    const fm = text.match(/allowed-tools:\s*(.+)/);
+    assert.ok(fm, `${c}.md missing allowed-tools`);
+    assert.ok(
+      !/\b(Write|Edit|NotebookEdit)\b/.test(fm[1]),
+      `${c}.md must be read-only — allowed-tools lists a write tool: ${fm[1]}`
+    );
+  }
+});
+
 test('fact-check skill present and valid frontmatter', () => {
   const skillPath = path.join(ROOT, 'skills', 'fact-check', 'SKILL.md');
   assert.ok(fs.existsSync(skillPath), 'fact-check SKILL.md missing');

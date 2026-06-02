@@ -1,8 +1,8 @@
 {
   "$schema": "https://claude.com/schemas/plugin.json",
   "name": "omega-kg-enhance",
-  "version": "2.0.0",
-  "description": "Knowledge brain enhancement (v2.0 markdown-first): document ingestion to markdown entities, version tracking via frontmatter, bilingual entity resolution, adversarial fact-checking.",
+  "version": "2.2.0",
+  "description": "Knowledge brain enhancement (v2.2 any-format ingestion + engagement intelligence): per-type document conversion (PDF via Marker OCR, DOCX via python-docx, PPTX via python-pptx, images via PIL→Marker) to markdown entities, version tracking via frontmatter, bilingual entity resolution, adversarial fact-checking, plus read-only brain mining — trace theme evolution, surface evidenced-but-unaddressed gaps, and adversarially challenge a recommendation's premise.",
   "author": {
     "name": "Omega Consulting",
     "url": "https://omega-consulting.local"

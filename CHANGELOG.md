@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased] — kg-enhance synced to 2.2.0 (per-type ingestion + engagement intelligence)
+
+Brings the bundled `omega-kg-enhance` plugin up from v2.0 to v2.2.
+
+### Added
+
+- **Three read-only "engagement intelligence" commands** that mine the accumulated engagement
+  brain (quote sources verbatim, separate what the brain *says* from what Claude *infers*, refuse
+  to fabricate on a thin brain):
+  - **`/omega:trace <theme>`** — reconstructs how a theme/recommendation/client position evolved
+    across the engagement timeline (first appearance → framing shifts → turning points → current
+    standing). Theme-level companion to `/omega:version-diff`.
+  - **`/omega:emerge [focus]`** — engagement-wide gap finder: recurring themes (3+ sources) with no
+    deliverable, implied conclusions, unconnected patterns, circling questions — cross-checked
+    against the deliverables tracker. Cross-source companion to `/omega:interview-synthesis`.
+  - **`/omega:challenge <premise>`** — adversarially pressure-tests a recommendation's premise using
+    only engagement + central evidence; returns Holds / Holds-with-conditions / Weak.
+- **`scripts/brain_batch_ingest.py`** reference batch driver for at-scale `/omega:doc-ingest`.
+
+### Changed
+
+- **`/omega:doc-ingest` per-type conversion (v2.1)** — routes by file type with fault-isolated
+  branches (PDF→Marker OCR, DOCX→python-docx, PPTX→python-pptx, images→PIL→Marker).
+- kg-enhance `plugin.json` 2.0.0 → 2.2.0; SKILL.md, README, and tests updated.
+
+---
+
 ## [2.1.0] — 2026-05-28 — GBrain memory layer + view-only Obsidian + Claude Code only
 
 ### Added
